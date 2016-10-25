@@ -1,0 +1,19 @@
+{
+  "name": "nlp-app",
+  "version": "1.0.0",
+  "description": "App for comparing NLP APIs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lsimmons2/nlp-app.git"
+  },
+  "author": "Leo Simmons <leooscar.simmons@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lsimmons2/nlp-app/issues"
+  },
+  "homepage": "https://github.com/lsimmons2/nlp-app#readme"
+}
