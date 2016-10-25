@@ -1,0 +1,65 @@
+<h2>Stack NLP App</h2>
+<form name="form">
+
+  <div class="form-group">
+    <label>Input Text</label>
+    <input class="form-control" placeholder="Enter Text" type="text" ng-model="text"></input>
+  </div>
+
+  <div class="api-container form-group" ng-class="{'has-error': form.aylienCheck && !aylien.sentiment && !aylien.concepts && !aylien.classification}">
+    <div class="api-header">
+      <h3 class="api-title">Aylien</h3>
+      <input class="check" name="aylienCheck" type="checkbox" ng-model="aylienCheck">
+    </div>
+    <ul class="api-dropdown" ng-show="aylienCheck">
+      <li>Sentiment<input name="aylien.sentiment" type="checkbox" ng-model="aylien.sentiment"></li>
+      <li>Concepts<input name="aylien.concepts" type="checkbox" ng-model="aylien.concepts"></li>
+      <li>Classification<input name="aylien.classification" type="checkbox" ng-model="aylien.classification"></li>
+    </ul>
+  </div>
+
+  <div class="api-container form-group">
+    <div class="api-header">
+      <h3 class="api-title">Bitext</h3>
+      <input class="check" name="bitextCheck" type="checkbox" ng-model="bitextCheck">
+    </div>
+    <ul class="api-dropdown" ng-show="bitextCheck">
+      <li>Sentiment<input name="bitext.sentiment" type="checkbox" ng-model="bitext.sentiment"></li>
+      <li>Concepts<input name="bitext.concepts" type="checkbox" ng-model="bitext.concepts"></li>
+      <li>Classification<input name="bitext.classification" type="checkbox" ng-model="bitext.classification"></li>
+    </ul>
+  </div>
+
+  <div class="api-container form-group">
+    <div class="api-header">
+      <h3 class="api-title">Rosette</h3>
+      <input class="check" name="rosetteCheck" type="checkbox" ng-model="rosetteCheck">
+    </div>
+    <ul class="api-dropdown" ng-show="rosetteCheck">
+      <li>Sentiment<input name="rosette.sentiment" type="checkbox" ng-model="rosette.sentiment"></li>
+      <li>Concepts<input name="rosette.concepts" type="checkbox" ng-model="rosette.concepts"></li>
+      <li>Classification<input name="rosette.classification" type="checkbox" ng-model="rosette.classification"></li>
+    </ul>
+  </div>
+
+  <input class="form-control" value="Submit" type="submit" ng-click="submit()"></input>
+
+</form>
+
+
+<div class="api-results-container" ng-repeat="(api, data) in results track by $index">
+
+  <div ng-repeat="(type, content) in data track by $index">
+    <label ng-hide="type === 'error'">//type// analysis:</label>
+    <ul ng-hide="type === 'error'">
+      <li ng-repeat="(metric, value) in content track by $index">
+        <span>//metric//: </span><span>//value//</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="alert alert-info" ng-show="data.error">
+    <p>Error retrieving //api// results</p>
+  </div>
+
+</div>
