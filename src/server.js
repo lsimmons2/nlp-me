@@ -10,6 +10,10 @@ import routes from './server/routes';
 
 const app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/vnd.api+json'}));
+app.use(bodyParser.urlencoded({extended: true}));
+
 app.use('/', express.static(path.join(__dirname, '/public')));
 app.use('/vendor', express.static(path.join(__dirname, '../node_modules')));
 app.use('/nlp', routes);

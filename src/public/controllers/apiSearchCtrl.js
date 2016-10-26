@@ -13,7 +13,7 @@ angular.module('apiSearchController', [])
         text: $scope.text,
         analysis: $scope.aylien
       }
-      $http.post('/aylien', data)
+      $http.post('/nlp/aylien', data)
         .then(function(resp){
           $scope.aylienError = false;
           for(var key in resp.data){
@@ -33,7 +33,7 @@ angular.module('apiSearchController', [])
         text: $scope.text,
         analysis: $scope.bitext
       }
-      $http.post('/bitext', data)
+      $http.post('/nlp/bitext', data)
         .then(function(resp){
           for(var key in resp.data){
             resp.data[key] = JSON.parse(resp.data[key]);
@@ -52,7 +52,7 @@ angular.module('apiSearchController', [])
       text: $scope.text,
       analysis: $scope.rosette
     }
-    $http.post('/rosette', data)
+    $http.post('/nlp/rosette', data)
       .then(function(resp){
         for(var key in resp.data){
           resp.data[key] = JSON.parse(resp.data[key]);
