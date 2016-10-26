@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel -w server.js -d bin/ -s"
+    "build": "babel -w src/ -d dist/ -s",
+    "start": "sudo nodemon dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "method-override": "^2.3.6",
     "mongodb": "^2.2.11",
     "mongoose": "^4.6.5",
+    "path": "^0.12.7",
     "request": "^2.75.0"
   }
 }

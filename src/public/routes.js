@@ -2,10 +2,10 @@ angular.module('routes', ['ngRoute'])
 .config(['$routeProvider', function($routeProvider){
   $routeProvider
     .when('/', {
-      templateUrl: 'public/views/home.html'
+      templateUrl: 'views/home.html'
     })
     .when('/apis', {
-      templateUrl: 'public/views/apiSearch.html',
+      templateUrl: 'views/apiSearch.html',
       controller: 'ApiSearchController'
     })
     .otherwise({
