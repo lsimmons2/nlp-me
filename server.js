@@ -1,14 +1,15 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-var cookieParser = require('cookie-parser');
+
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import methodOverride from 'method-override';
+import cookieParser from 'cookie-parser';
 
 
-var app = express();
+const app = express();
 
-app.use('/', express.static('./'));
+app.use('/', express.static('../'));
 
-app.listen(9000, function(){
+app.listen(9000, () => {
   console.log('app here');
 });
