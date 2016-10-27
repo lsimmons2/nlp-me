@@ -1,0 +1,42 @@
+
+
+nav > ul{
+    list-style-type: none;
+}
+
+nav > ul > li {
+  display: inline;
+}
+
+
+nav > ul > li > a {
+  color: black;
+}
+
+
+.api-container {
+  float: left;
+  display: inline-block;
+  width: 33%;
+}
+
+
+.api-title {
+  display: inline;
+}
+
+
+.api-dropdown {
+  list-style-type: none;
+}
+
+
+.api-results-container {
+  float: left;
+  display: inline-block;
+  width: 33%;
+}
+
+.alert > p {
+  text-align: center;
+}

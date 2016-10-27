@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel -w src/ -d dist/ -s",
-    "start": "sudo nodemon dist/server.js"
+    "build": "babel -w src/ -d dist/ -s --copy-files",
+    "start": "sudo nodemon dist/server/app.js"
   },
   "repository": {
     "type": "git",
