@@ -8,6 +8,10 @@ angular.module('routes', ['ngRoute'])
       templateUrl: 'views/apiSearch.html',
       controller: 'ApiSearchController'
     })
+    .when('/chat', {
+      templateUrl: 'views/chat.html',
+      controller: 'ChatController'
+    })
     .otherwise({
       redirectTo: '/'
     });

@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="./chatStyle.css">
+<h4>Chat!</h4>
+<div class="message" ng-repeat="message in convo">
+  <span class="bubble" ng-class="{'aylien': message.who === 'aylien', 'user': message.who === 'user'}">{{message.text}}</span>
+</div>
+{{convo.length}}
+
+<div id="input-container">
+  <input type="text" ng-model="text">
+  <button type="submit" ng-click="chat()">Send</button>
+</div>

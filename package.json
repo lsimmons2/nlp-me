@@ -4,9 +4,9 @@
   "description": "App for comparing NLP APIs",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel -w src/ -d dist/ -s --copy-files",
-    "start": "sudo nodemon dist/server/app.js"
+    "build": "babel --watch src/ --out-dir dist/ --source-maps --copy-files",
+    "start": "sudo nodemon dist/server/app.js",
+    "debug": "node-debug dist/server/app.js"
   },
   "repository": {
     "type": "git",

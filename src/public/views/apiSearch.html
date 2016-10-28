@@ -1,4 +1,4 @@
-<h2>Stack NLP App</h2>
+<h2>Analyze Text</h2>
 <form name="form">
 
   <div class="form-group">
@@ -50,16 +50,16 @@
 <div class="api-results-container" ng-repeat="(api, data) in results track by $index">
 
   <div ng-repeat="(type, content) in data track by $index">
-    <label ng-hide="type === 'error'">//type// analysis:</label>
+    <label ng-hide="type === 'error'">{{type}} analysis:</label>
     <ul ng-hide="type === 'error'">
       <li ng-repeat="(metric, value) in content track by $index">
-        <span>//metric//: </span><span>//value//</span>
+        <span>{{metric}}: </span><span>{{value}}</span>
       </li>
     </ul>
   </div>
 
   <div class="alert alert-info" ng-show="data.error">
-    <p>Error retrieving //api// results</p>
+    <p>Error retrieving {{api}} results</p>
   </div>
 
 </div>

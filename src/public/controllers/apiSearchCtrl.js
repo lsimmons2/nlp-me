@@ -1,4 +1,4 @@
-angular.module('apiSearchController', [])
+angular.module('apiSearchCtrl', [])
 .controller('ApiSearchController', function($scope, $http){
 
   $scope.text = 'the owls are not what they seem';
@@ -36,6 +36,8 @@ angular.module('apiSearchController', [])
       $http.post('/nlp/bitext', data)
         .then(function(resp){
           for(var key in resp.data){
+            console.log(typeof resp.data[key]);
+            console.log(resp.data[key]);
             resp.data[key] = JSON.parse(resp.data[key]);
           }
           $scope.results.bitext = resp.data;

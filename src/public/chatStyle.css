@@ -1,0 +1,21 @@
+
+.bubble {
+  color: white;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin: 10px;
+}
+
+.aylien {
+  background-color: #be49c3;
+}
+
+.user {
+  background-color: #598bdc;
+  float: right;
+}
+
+#input-container {
+  position: fixed;
+  bottom: 0;
+}

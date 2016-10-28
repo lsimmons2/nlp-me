@@ -22,11 +22,12 @@ import config from '../../config/config';
 
 
 function hitApi(url, data, headers){
-  let options = JSON.stringify({
+
+  let options = {
     url: url,
     headers: headers,
     form: data
-  });
+  };
   return new Promise((resolve, reject) => {
     request.post(options, function(err, response, body){
       if(err){
@@ -35,6 +36,7 @@ function hitApi(url, data, headers){
       return resolve(body);
     })
   })
+
 };
 
 
@@ -52,7 +54,6 @@ function hitApi(url, data, headers){
 *   - unsupervised (semantic labeling)
 */
 function aylien(req, res, next){
-
   let base = 'https://api.aylien.com/api/v1/';
   let data = {
     'text' : req.body.text
@@ -63,7 +64,7 @@ function aylien(req, res, next){
 
   for (let type in types){
     if(types[type]){
-      callPromises.push(hitApi(base + type, data, headers));
+      callPromises.push(hitApi((base + type), data, headers));
     }
   }
 
@@ -72,6 +73,7 @@ function aylien(req, res, next){
       return res.status(200).send(results);
     })
     .catch(function(err){
+      console.log(err);
       return res.status(500).send(err);
     });
 

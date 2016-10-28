@@ -1,5 +1,6 @@
 angular.module('App', [
 	'ngRoute',
 	'routes',
-	'apiSearchController'
+	'apiSearchCtrl',
+	'chatCtrl'
 ]);
