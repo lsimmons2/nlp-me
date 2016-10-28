@@ -24,6 +24,7 @@ module.exports = function(config) {
       './src/public/controllers/apiSearchCtrl.js',
       './src/public/controllers/chatCtrl.js',
       './src/public/app.js',
+      './test/public/service.js',
       './test/public/navCtrl.spec.js',
       './test/public/apiSearchCtrl.spec.js',
       './test/public/chatCtrl.spec.js'
@@ -42,7 +43,7 @@ module.exports = function(config) {
 
 
     // test results reporter to use
-    // possible values: 'dots', 'progress'
+    // possible values: 'dots', 'progaress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['spec'],
 
