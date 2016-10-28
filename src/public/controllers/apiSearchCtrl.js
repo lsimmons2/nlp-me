@@ -8,7 +8,7 @@ angular.module('apiSearchCtrl', [])
   $scope.results = {};
 
 
-  function submitAylien(){
+  $scope.submitAylien = function(){
       var data = {
         text: $scope.text,
         analysis: $scope.aylien
@@ -28,7 +28,7 @@ angular.module('apiSearchCtrl', [])
         });
   };
 
-  function submitBitext(){
+  $scope.submitBitext = function(){
       var data = {
         text: $scope.text,
         analysis: $scope.bitext
@@ -49,7 +49,7 @@ angular.module('apiSearchCtrl', [])
         })
   };
 
-  function submitRosette(){
+  $scope.submitRosette = function(){
     var data = {
       text: $scope.text,
       analysis: $scope.rosette

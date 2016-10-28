@@ -6,7 +6,8 @@
   "scripts": {
     "build": "babel --watch src/ --out-dir dist/ --source-maps --copy-files",
     "start": "sudo nodemon dist/server/app.js",
-    "debug": "node-debug dist/server/app.js"
+    "debug": "node-debug dist/server/app.js",
+    "front-test": "karma start --single-run"
   },
   "repository": {
     "type": "git",
@@ -19,10 +20,18 @@
   },
   "homepage": "https://github.com/lsimmons2/nlp-app#readme",
   "devDependencies": {
+    "angular-mocks": "^1.5.8",
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-stage-0": "^6.16.0",
+    "chai": "^3.5.0",
+    "karma": "^1.3.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-mocha": "^1.2.0",
+    "karma-spec-reporter": "0.0.26",
+    "mocha": "^3.1.2",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
