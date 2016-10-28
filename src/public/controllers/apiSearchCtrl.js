@@ -16,8 +16,8 @@ angular.module('apiSearchCtrl', [])
       $http.post('/nlp/aylien', data)
         .then(function(resp){
           $scope.aylienError = false;
-          for(var key in resp.data){
-            resp.data[key] = JSON.parse(resp.data[key]);
+          for(var index in resp.data){
+            resp.data[index] = JSON.parse(resp.data[index]);
           }
           $scope.results.aylien = resp.data;
           $scope.results.aylien.error = false;
@@ -35,10 +35,8 @@ angular.module('apiSearchCtrl', [])
       }
       $http.post('/nlp/bitext', data)
         .then(function(resp){
-          for(var key in resp.data){
-            console.log(typeof resp.data[key]);
-            console.log(resp.data[key]);
-            resp.data[key] = JSON.parse(resp.data[key]);
+          for(var index in resp.data){
+            resp.data[index] = JSON.parse(resp.data[key]);
           }
           $scope.results.bitext = resp.data;
           $scope.results.bitext.error = false;
@@ -71,13 +69,13 @@ angular.module('apiSearchCtrl', [])
 
   $scope.submit = function(){
     if($scope.aylienCheck && $scope.aylien.sentiment || $scope.aylienCheck && $scope.aylien.concepts || $scope.aylienCheck && $scope.aylien.classification){
-      submitAylien();
+      $scope.submitAylien();
     }
     if($scope.bitextCheck && $scope.bitext.sentiment || $scope.bitextCheck && $scope.bitext.concepts || $scope.bitextCheck && $scope.bitext.classification){
-      submitBitext();
+      $scope.submitBitext();
     }
     if($scope.rosetteCheck && $scope.rosette.sentiment || $scope.rosetteCheck && $scope.rosette.concepts || $scope.rosetteCheck && $scope.rosette.classification){
-      submitRosette();
+      $scope.submitRosette();
     }
   };
 
