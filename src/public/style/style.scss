@@ -1,18 +1,24 @@
 
+.navbar-default .navbar-brand {
 
-nav > ul{
-    list-style-type: none;
+  color: #f9972c;
+  font-family: 'Gloria Hallelujah', cursive;
+
 }
 
-nav > ul > li {
-  display: inline;
+.navbar-default .navbar-nav > li > a {
+  color: #f9972c;
+  font-family: 'Gloria Hallelujah', cursive;
 }
 
 
-nav > ul > li > a {
-  color: black;
+.navbar-default {
+  background-color: #9776c1;
 }
 
+.navbar {
+  border-radius: 0;
+}
 
 .api-container {
   float: left;
