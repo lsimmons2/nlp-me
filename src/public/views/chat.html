@@ -4,7 +4,21 @@
 
 <div id="convo-container" schroll-bottom="convo">
   <div class="message" ng-class="message.who" ng-repeat="message in convo">
-    <p>{{message.text}}</p>
+    <p ng-show="message.who === 'user'">{{message.text}}</p>
+    <div ng-show="message.who !== 'user'">
+      <h5>Regarding your text, "{{message.text}}"</h5>
+      <ul>
+        <li ng-repeat="type in message.analysis track by $index">
+          <label>{{type.type}}</label>
+          <div ng-hide="type.type === 'classify'">{{type.data}}</div>
+          <div ng-show="type.type === 'classify'">I'm
+            <span ng-repeat="category in type.data.categories">
+              {{category.confidence}}% confident that "{{category.label}}" is a category
+            </span>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 

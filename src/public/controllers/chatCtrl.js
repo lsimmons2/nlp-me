@@ -2,7 +2,7 @@ angular.module('chatCtrl', [])
 .controller('ChatController', function($scope, $http){
 
   $scope.convo = [
-    {
+    /*{
       who: 'aylien',
       text: 'sup?'
     },
@@ -50,20 +50,32 @@ angular.module('chatCtrl', [])
       who:'user',
       text: 'def'
     }
+    */
   ];
 
-  $scope.text = '';
 
-  $scope.chat = function(){
+  $scope.text = 'apples and bananas are delicious';
+
+  //$scope.chat = function(){
     if($scope.text.length){
-    console.log($scope.text.length);
       $scope.convo.push({
         who: 'user',
         text: $scope.text
       });
-      $http.get('/chat/aylien')
+      var data = {
+        text: $scope.text
+      }
+      $http.post('/chat/aylien', data)
         .then(function(resp){
-
+          console.log(resp.data);
+          //var analysis = JSON.parse(resp.data);
+          console.log(typeof resp.data[0]);
+          $scope.convo.push({
+            who: 'aylien',
+            text: $scope.text,
+            analysis: resp.data
+          });
+          $scope.text = '';
         })
         .catch(function(err){
           $scope.convo.push({
@@ -72,7 +84,7 @@ angular.module('chatCtrl', [])
           })
         });
     };
-  };
+  //};
 
 })
 .directive('schrollBottom', function () {

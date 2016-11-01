@@ -1,6 +1,6 @@
 import request from 'request';
 import rp from 'request-promise';
-import config from '../../config/config';
+import config from '../../../config/config';
 
 /*
 *
@@ -21,7 +21,7 @@ import config from '../../config/config';
 
 
 
-function hitApi(url, data, headers){
+function hitApi(url, type, data, headers){
 
   let options = {
     url: url,
@@ -30,10 +30,17 @@ function hitApi(url, data, headers){
   };
   return new Promise((resolve, reject) => {
     request.post(options, function(err, response, body){
-      if(err){
-        return reject(err);
+      if(err || response.statusCode > 200){
+        return resolve({
+          type: type,
+          data: 'error'
+        });
       }
-      return resolve(body);
+      console.log(JSON.parse(body));
+      return resolve({
+        type: type,
+        data: JSON.parse(body)
+      });
     })
   })
 
@@ -54,26 +61,32 @@ function hitApi(url, data, headers){
 *   - unsupervised (semantic labeling)
 */
 function aylien(req, res, next){
+
+
   let base = 'https://api.aylien.com/api/v1/';
-  let data = {
-    'text' : req.body.text
-  };
-  let types = req.body.analysis;
   let headers = config.aylien.headers;
+  let types = [
+    'classify',
+    'sentiment',
+    'concepts',
+    'entities',
+    'summarize',
+    'hashtags',
+    'related',
+    'unsupervised'
+  ];
   let callPromises = [];
 
-  for (let type in types){
-    if(types[type]){
-      callPromises.push(hitApi((base + type), data, headers));
-    }
-  }
+  types.forEach(type => {
+    callPromises.push(hitApi((base + type), type, req.body, headers));
+  });
 
   Promise.all(callPromises)
     .then(function(results){
+      console.log(results);
       return res.status(200).send(results);
     })
     .catch(function(err){
-      console.log(err);
       return res.status(500).send(err);
     });
 
