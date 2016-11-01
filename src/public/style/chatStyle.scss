@@ -1,20 +1,74 @@
-
-#input-container {
-  position: fixed;
-  bottom: 0;
+#convo-container {
+  height: 80vh;
+  background-color: #a9aaa9;
+  overflow: scroll;
+  padding: 10px;
 }
 
+.message {
 
-.bubble {
-  color: white;
+  max-width: 400px;
   border-radius: 3px;
+
+  p {
+    padding: 10px;
+  }
+
 }
 
 .aylien {
-  background-color: #be49c3;
+  background-color: #b2d127;
 }
+
 
 .user {
   background-color: #598bdc;
-  float: right;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+
+form {
+  width: 100%;
+}
+
+
+#input-container {
+
+  position: relative;
+
+  input {
+    width: 100%;
+    padding: 5px;
+
+    &:focus {
+      outline-width: 0;
+    }
+
+  }
+
+  button {
+
+    color: white;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+
+    border: none;
+    background: #598bdc;
+    border-radius: 8px;
+    padding: 2px 16px;
+
+    &:hover {
+      background-color: #c338a9;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    &:focus {
+      outline-width: 0;
+    }
+
+  }
+
 }

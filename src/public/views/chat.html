@@ -1,11 +1,17 @@
 <link rel="stylesheet" href="./style/chatStyle.css">
 <h4>Chat!</h4>
-<div class="message" ng-repeat="message in convo">
-  <span class="bubble" ng-class="{'aylien': message.who === 'aylien', 'user': message.who === 'user'}">{{message.text}}</span>
-</div>
-{{convo.length}}
 
-<div id="input-container">
-  <input type="text" ng-model="text">
-  <button type="submit" ng-click="chat()">Send</button>
+
+<div id="convo-container" schroll-bottom="convo">
+  <div class="message" ng-class="message.who" ng-repeat="message in convo">
+    <p>{{message.text}}</p>
+  </div>
 </div>
+
+
+<form>
+  <div id="input-container">
+    <input type="text" ng-model="text"/>
+    <button type="submit" ng-click="chat()">Send</button>
+  </div>
+</form>
