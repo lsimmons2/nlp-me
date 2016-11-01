@@ -1,8 +1,40 @@
 <link rel="stylesheet" href="./style/chatStyle.css">
-<h4>Chat!</h4>
+<div class="header">
+  <h3>Chat!</h3>
+  <h5>Choose with APIs to chat with...</h5>
+
+  <div class="api-selection">
+    <div>
+      <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/aylien-logo">
+      <input type="checkbox" ng-model="aylienEnabled" />
+      <span class="glyphicon glyphicon-chevron-down" ng-click="showAylien = true" ng-hide="showAylien"></span>
+      <span class="glyphicon glyphicon-chevron-up" ng-click="showAylien = false" ng-show="showAylien"></span>
+    </div>
+  </div>
+
+  <div class="api-selection">
+    <div>
+      <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/rosette-logo">
+      <input type="checkbox" ng-model="rosetteEnabled" />
+      <span class="glyphicon glyphicon-chevron-down" ng-click="showRosette = true" ng-hide="showRosette"></span>
+      <span class="glyphicon glyphicon-chevron-up" ng-click="showRosette = false" ng-show="showRosette"></span>
+    </div>
+  </div>
+
+</div>
 
 
-<div id="convo-container" schroll-bottom="convo">
+
+
+<div id="convo-container" scroll-bottom="convo">
+
+  <div class="dropdown" id="aylien-dropdown" ng-show="showAylien">
+    Aylien options
+  </div>
+  <div class="dropdown" id="rosette-dropdown" ng-show="showRosette">
+    Rosette options
+  </div>
+
   <div class="message" ng-class="message.who" ng-repeat="message in convo">
     <p ng-show="message.who === 'user'">{{message.text}}</p>
     <div ng-show="message.who !== 'user'">

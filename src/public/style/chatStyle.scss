@@ -1,9 +1,46 @@
+
+.header {
+  font-family: 'Gloria Hallelujah', cursive;
+  width: 100%;
+}
+
+
+.api-logo {
+  height: 40px;
+}
+
+
+.api-selection {
+  display: inline-block;
+}
+
+
+.dropdown {
+  //position: absolute;
+  background-color: white;
+  border-width: 4px;
+  border-style: solid;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  margin: -10px;
+}
+
+#aylien-dropdown {
+  border-color: #b2d127;
+}
+
+#rosette-dropdown {
+  border-color: #eb3e0f;
+}
+
+
 #convo-container {
   height: 80vh;
   background-color: #a9aaa9;
   overflow: scroll;
   padding: 10px;
 }
+
 
 .message {
 
@@ -15,6 +52,7 @@
   }
 
 }
+
 
 .aylien {
   background-color: #b2d127;
@@ -37,7 +75,7 @@ form {
 
   position: relative;
   margin-bottom: 20px;
-  
+
   input {
     width: 100%;
     padding: 5px;

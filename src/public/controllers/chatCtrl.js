@@ -1,62 +1,12 @@
 angular.module('chatCtrl', [])
 .controller('ChatController', function($scope, $http){
 
-  $scope.convo = [
-    /*{
-      who: 'aylien',
-      text: 'sup?'
-    },
-    {
-      who:'user',
-      text: 'sup?'
-    },
-    {
-      who: 'aylien',
-      text: 'tryna rage?'
-    },
-    {
-      who:'user',
-      text: 'def?'
-    },
-    {
-      who:'user',
-      text: 'you tryna rage?'
-    },
-    {
-      who: 'aylien',
-      text: 'def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def'
-    },
-    {
-      who:'user',
-      text: 'tight'
-    },
-    {
-      who:'user',
-      text: 'def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def def'
-    },
-    {
-      who: 'aylien',
-      text: 'word'
-    },
-    {
-      who:'user',
-      text: 'sweet'
-    },
-    {
-      who: 'aylien',
-      text: 'let\'s rage then'
-    },
-    {
-      who:'user',
-      text: 'def'
-    }
-    */
-  ];
-
-
+  $scope.convo = [];
+  $scope.showAylien = true;
+  $scope.showRosette = false;
   $scope.text = 'apples and bananas are delicious';
 
-  //$scope.chat = function(){
+  $scope.chat = function(){
     if($scope.text.length){
       $scope.convo.push({
         who: 'user',
@@ -84,16 +34,16 @@ angular.module('chatCtrl', [])
           })
         });
     };
-  //};
+  };
 
 })
-.directive('schrollBottom', function () {
+.directive('scrollBottom', function () {
   return {
     scope: {
-      schrollBottom: "="
+      scrollBottom: "="
     },
     link: function (scope, element) {
-      scope.$watchCollection('schrollBottom', function (newValue) {
+      scope.$watchCollection('scrollBottom', function (newValue) {
         if (newValue)
         {
           $(element).scrollTop($(element)[0].scrollHeight);
