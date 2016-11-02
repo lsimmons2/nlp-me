@@ -1,57 +1,158 @@
 <link rel="stylesheet" href="./style/chatStyle.css">
+
+
 <div class="header">
+
   <h3>Chat!</h3>
-  <h5>Choose with APIs to chat with...</h5>
+  <h5>Choose which APIs to chat with...</h5>
 
   <div class="api-selection">
-    <div>
+    <div class="inner-api-selection">
       <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/aylien-logo">
-      <input type="checkbox" ng-model="aylienEnabled" />
-      <span class="glyphicon glyphicon-chevron-down" ng-click="showAylien = true" ng-hide="showAylien"></span>
-      <span class="glyphicon glyphicon-chevron-up" ng-click="showAylien = false" ng-show="showAylien"></span>
+      <div class="pretty inline success">
+        <input type="checkbox" ng-model="aylien.enabled" />
+        <label><i class="fa fa-check"></i></label>
+      </div>
+      <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="aylien.view = true" ng-hide="aylien.view"></span>
+      <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="aylien.view = false" ng-show="aylien.view"></span>
     </div>
   </div>
 
   <div class="api-selection">
-    <div>
+    <div class="inner-api-selection">
       <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/rosette-logo">
-      <input type="checkbox" ng-model="rosetteEnabled" />
-      <span class="glyphicon glyphicon-chevron-down" ng-click="showRosette = true" ng-hide="showRosette"></span>
-      <span class="glyphicon glyphicon-chevron-up" ng-click="showRosette = false" ng-show="showRosette"></span>
+      <div class="pretty inline danger">
+        <input type="checkbox" ng-model="rosette.enabled"/>
+        <label><i class="fa fa-check"></i></label>
+      </div>
+      <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="rosette.view = true" ng-hide="rosette.view"></span>
+      <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="rosette.view = false" ng-show="rosette.view"></span>
     </div>
   </div>
+
+  <div class="api-selection">
+    <div class="inner-api-selection">
+      <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/meaningcloud-logo">
+      <div class="pretty inline danger">
+        <input type="checkbox" ng-model="meaningcloud.enabled"/>
+        <label><i class="fa fa-check"></i></label>
+      </div>
+      <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="meaningcloud.view = true" ng-hide="meaningcloud.view"></span>
+      <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="meaningcloud.view = false" ng-show="meaningcloud.view"></span>
+    </div>
+  </div>
+
 
 </div>
 
 
-
-
 <div id="convo-container" scroll-bottom="convo">
 
-  <div class="dropdown" id="aylien-dropdown" ng-show="showAylien">
-    Aylien options
-  </div>
-  <div class="dropdown" id="rosette-dropdown" ng-show="showRosette">
-    Rosette options
+  <div class="dropdown" id="aylien-dropdown" ng-show="aylien.view">
+    <h3 class="dropdown-header">Analysis Options</h3>
+    <ul class="api-types-list">
+      <li>
+        <span>Classify</span>
+        <input type="checkbox" ng-model="aylien.types.classify">
+      </li>
+      <li>
+        <span>Sentiment</span>
+        <input type="checkbox" ng-model="aylien.types.sentiment">
+      </li>
+      <li>
+        <span>Concepts</span>
+        <input type="checkbox" ng-model="aylien.types.concepts">
+      </li>
+      <li>
+        <span>Entities</span>
+        <input type="checkbox" ng-model="aylien.types.entities">
+      </li>
+      <li>
+        <span>Summary</span>
+        <input type="checkbox" ng-model="aylien.types.summary">
+      </li>
+      <li>
+        <span>Hashtags</span>
+        <input type="checkbox" ng-model="aylien.types.hashtags">
+      </li>
+    </ul>
   </div>
 
-  <div class="message" ng-class="message.who" ng-repeat="message in convo">
-    <p ng-show="message.who === 'user'">{{message.text}}</p>
-    <div ng-show="message.who !== 'user'">
-      <h5>Regarding your text, "{{message.text}}"</h5>
-      <ul>
-        <li ng-repeat="type in message.analysis track by $index">
-          <label>{{type.type}}</label>
-          <div ng-hide="type.type === 'classify'">{{type.data}}</div>
-          <div ng-show="type.type === 'classify'">I'm
-            <span ng-repeat="category in type.data.categories">
-              {{category.confidence}}% confident that "{{category.label}}" is a category
-            </span>
-          </div>
-        </li>
-      </ul>
-    </div>
+  <div class="dropdown" id="rosette-dropdown" ng-show="rosette.view">
+    <h3 class="dropdown-header">Analysis Options</h3>
+    <ul class="api-types-list">
+      <li>
+        <span>Categories</span>
+        <input type="checkbox" ng-model="rosette.types.categories">
+      </li>
+      <li>
+        <span>Sentiment</span>
+        <input type="checkbox" ng-model="rosette.types.sentiment">
+      </li>
+      <li>
+        <span>Relationships</span>
+        <input type="checkbox" ng-model="rosette.types.relationships">
+      </li>
+      <li>
+        <span>Entities</span>
+        <input type="checkbox" ng-model="rosette.types.entities">
+      </li>
+    </ul>
   </div>
+
+  <div class="dropdown" id="meaningcloud-dropdown" ng-show="meaningcloud.view">
+    <h3 class="dropdown-header">Analysis Options</h3>
+    <ul class="api-types-list">
+      <li>
+        <span>Categories</span>
+        <input type="checkbox" ng-model="meaningcloud.types.categories">
+      </li>
+      <li>
+        <span>Sentiment</span>
+        <input type="checkbox" ng-model="meaningcloud.types.sentiment">
+      </li>
+      <li>
+        <span>Relationships</span>
+        <input type="checkbox" ng-model="meaningcloud.types.relationships">
+      </li>
+      <li>
+        <span>Entities</span>
+        <input type="checkbox" ng-model="meaningcloud.types.entities">
+      </li>
+    </ul>
+  </div>
+
+
+
+
+  <div class="message" ng-class="message.who" ng-repeat="message in convo">
+
+    <p ng-show="message.who === 'user'">{{message.text}}</p>
+
+    <div ng-show="message.who !== 'user'">
+
+      <h5 ng-show="message.analyses.length">Sup? My analyses for your input:</h5>
+      <div ng-repeat="analysis in message.analyses track by $index">
+        <label>{{analysis.type}}</label>
+        <div>
+          {{analysis.data}}
+        </div>
+      </div>
+
+      <div ng-show="message.errors.length">
+        <label>Errors for the following analyses:</label>
+        <span ng-repeat="error in message.errors track by $index">
+          {{error}}
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
 </div>
 
 

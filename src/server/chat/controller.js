@@ -28,6 +28,7 @@ function hitApi(url, type, data, headers){
     headers: headers,
     form: data
   };
+
   return new Promise((resolve, reject) => {
     request.post(options, function(err, response, body){
       if(err || response.statusCode > 200){
@@ -36,7 +37,6 @@ function hitApi(url, type, data, headers){
           data: 'error'
         });
       }
-      console.log(JSON.parse(body));
       return resolve({
         type: type,
         data: JSON.parse(body)
@@ -62,28 +62,20 @@ function hitApi(url, type, data, headers){
 */
 function aylien(req, res, next){
 
-
   let base = 'https://api.aylien.com/api/v1/';
   let headers = config.aylien.headers;
-  let types = [
-    'classify',
-    'sentiment',
-    'concepts',
-    'entities',
-    'summarize',
-    'hashtags',
-    'related',
-    'unsupervised'
-  ];
+  let types = req.body.types;
+  let text = {
+    text: req.body.text
+  };
   let callPromises = [];
 
   types.forEach(type => {
-    callPromises.push(hitApi((base + type), type, req.body, headers));
+    callPromises.push(hitApi((base + type), type, text, headers));
   });
 
   Promise.all(callPromises)
     .then(function(results){
-      console.log(results);
       return res.status(200).send(results);
     })
     .catch(function(err){
@@ -136,20 +128,17 @@ function bitext(req, res, next){
 *   - sentiment
 */
 function rosette(req, res, next){
-
   let base = 'https://api.rosette.com/rest/v1/';
-  let data = {
-    'content' : req.body.text
+  let text = {
+    "content" : JSON.stringify(req.body.text)
   };
-  let types = req.body.analysis;
+  let types = req.body.types;
   let headers = config.rosette.headers;
   let callPromises = [];
 
-  for (let type in types){
-    if(types[type]){
-      callPromises.push(hitApi(base + type, data, headers));
-    }
-  }
+  types.forEach(type => {
+    callPromises.push(hitApi((base + type), type, text, headers));
+  });
 
   Promise.all(callPromises)
     .then(function(results){

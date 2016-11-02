@@ -1,7 +1,19 @@
-
 .header {
   font-family: 'Gloria Hallelujah', cursive;
-  width: 100%;
+}
+
+//=================api-selection-container=================
+.api-selection {
+  //display: inline-block;
+  float: left;
+  width: 33%;
+}
+
+.inner-api-selection {
+  border-width: 1px;
+  border-style: solid;
+  display: inline-block;
+  margin: 0px auto;
 }
 
 
@@ -10,35 +22,77 @@
 }
 
 
-.api-selection {
-  display: inline-block;
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+
+//=================api-dropdowns=================
+.dropdown-header {
+  font-family: 'Gloria Hallelujah', cursive;
+  text-align: center;
+  font-size: 22px;
 }
 
 
 .dropdown {
-  //position: absolute;
+  display: inline-block;
+  float: left;
+  width: 33%;
   background-color: white;
-  border-width: 4px;
   border-style: solid;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  margin: -10px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  //margin: -10px;
+  padding-bottom: 30px;
+  text-align: center;
+  font-family: 'Gloria Hallelujah', cursive;
+  height: 170px;
 }
+
+.dropdown.ng-hide {
+  display: inline-block!important;
+  visibility: hidden;
+}
+
+
+.pretty.inline {
+  margin-right: 0px;
+}
+
 
 #aylien-dropdown {
   border-color: #b2d127;
 }
 
+
 #rosette-dropdown {
   border-color: #eb3e0f;
 }
 
+#meaningcloud-dropdown {
+  border-color: #5b86b5;
+}
 
+
+.api-types-list {
+  -moz-column-count: 2;
+  //-moz-column-gap: 20px;
+  -webkit-column-count: 2;
+  //-webkit-column-gap: 20px;
+  column-count: 2;
+  //column-gap: 20px;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+
+//=================convo-container=================
 #convo-container {
+  clear: left;
   height: 80vh;
   background-color: #a9aaa9;
   overflow: scroll;
-  padding: 10px;
 }
 
 
@@ -58,6 +112,10 @@
   background-color: #b2d127;
 }
 
+.rosette {
+  background-color: #eb3e0f;
+}
+
 
 .user {
   background-color: #598bdc;
@@ -70,7 +128,7 @@ form {
   width: 100%;
 }
 
-
+//=================input-container=================
 #input-container {
 
   position: relative;
