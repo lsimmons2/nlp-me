@@ -6,7 +6,7 @@
   "scripts": {
     "build": "babel --watch src/ --out-dir dist/ --source-maps --copy-files",
     "start": "sudo nodemon dist/server/app.js",
-    "debug": "bode-debug --debug-brk dist/server/app.js"
+    "debug": "node-debug --debug-brk dist/server/app.js"
   },
   "repository": {
     "type": "git",

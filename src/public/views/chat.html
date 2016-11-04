@@ -1,137 +1,193 @@
 <link rel="stylesheet" href="./style/chatStyle.css">
 
 
-<div class="header">
+<div id="chat">
 
-  <h3>Chat!</h3>
-  <h5>Choose which APIs to chat with...</h5>
+  <div id="header">
+    <h3>Chat!</h3>
+    <h5>Choose which APIs to chat with...</h5>
+  </div>
 
-  <div class="api-selection">
-    <div class="inner-api-selection">
-      <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/aylien-logo">
-      <div class="pretty inline success">
-        <input type="checkbox" ng-model="aylien.enabled" />
-        <label><i class="fa fa-check"></i></label>
+  <div id="selection-container">
+
+
+    <div class="api-selection">
+
+      <div class="inner-api-selection" id="aylien-selection">
+
+        <img class="api-logo" src="images/aylien-icon.png">
+        <span id="aylien-logo-text">AYLIEN</span>
+        <div class="api-checkbox cb1">
+            <input type="checkbox" id="cb1" ng-model="aylien.enabled">
+            <label for="cb1"></label>
+         </div>
+        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="aylien.view = true" ng-hide="aylien.view"></span>
+        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="aylien.view = false" ng-show="aylien.view"></span>
       </div>
-      <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="aylien.view = true" ng-hide="aylien.view"></span>
-      <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="aylien.view = false" ng-show="aylien.view"></span>
-    </div>
-  </div>
 
-  <div class="api-selection">
-    <div class="inner-api-selection">
-      <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/rosette-logo">
-      <div class="pretty inline danger">
-        <input type="checkbox" ng-model="rosette.enabled"/>
-        <label><i class="fa fa-check"></i></label>
+    </div>
+
+    <div class="api-selection" id="outer-rosette-selection">
+
+      <div class="inner-api-selection" id="rosette-selection">
+        <img class="api-logo" src="images/rosette-logo.png">
+        <div class="api-checkbox cb2">
+            <input type="checkbox" id="cb2" ng-model="rosette.enabled">
+            <label for="cb2"></label>
+         </div>
+        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="rosette.view = true" ng-hide="rosette.view"></span>
+        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="rosette.view = false" ng-show="rosette.view"></span>
       </div>
-      <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="rosette.view = true" ng-hide="rosette.view"></span>
-      <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="rosette.view = false" ng-show="rosette.view"></span>
-    </div>
-  </div>
 
-  <div class="api-selection">
-    <div class="inner-api-selection">
-      <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/meaningcloud-logo">
-      <div class="pretty inline danger">
-        <input type="checkbox" ng-model="meaningcloud.enabled"/>
-        <label><i class="fa fa-check"></i></label>
+    </div>
+
+    <div class="api-selection">
+
+      <div class="inner-api-selection" id="meaningcloud-selection">
+        <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/meaningcloud-logo">
+        <div class="api-checkbox cb3">
+            <input type="checkbox" id="cb3" ng-model="meaningcloud.enabled">
+            <label for="cb3"></label>
+         </div>
+        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="meaningcloud.view = true" ng-hide="meaningcloud.view"></span>
+        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="meaningcloud.view = false" ng-show="meaningcloud.view"></span>
       </div>
-      <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="meaningcloud.view = true" ng-hide="meaningcloud.view"></span>
-      <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="meaningcloud.view = false" ng-show="meaningcloud.view"></span>
+
     </div>
-  </div>
 
 
-</div>
-
-
-<div id="convo-container" scroll-bottom="convo">
-
-  <div class="dropdown" id="aylien-dropdown" ng-show="aylien.view">
-    <h3 class="dropdown-header">Analysis Options</h3>
-    <ul class="api-types-list">
-      <li>
-        <span>Classify</span>
-        <input type="checkbox" ng-model="aylien.types.classify">
-      </li>
-      <li>
-        <span>Sentiment</span>
-        <input type="checkbox" ng-model="aylien.types.sentiment">
-      </li>
-      <li>
-        <span>Concepts</span>
-        <input type="checkbox" ng-model="aylien.types.concepts">
-      </li>
-      <li>
-        <span>Entities</span>
-        <input type="checkbox" ng-model="aylien.types.entities">
-      </li>
-      <li>
-        <span>Summary</span>
-        <input type="checkbox" ng-model="aylien.types.summary">
-      </li>
-      <li>
-        <span>Hashtags</span>
-        <input type="checkbox" ng-model="aylien.types.hashtags">
-      </li>
-    </ul>
-  </div>
-
-  <div class="dropdown" id="rosette-dropdown" ng-show="rosette.view">
-    <h3 class="dropdown-header">Analysis Options</h3>
-    <ul class="api-types-list">
-      <li>
-        <span>Categories</span>
-        <input type="checkbox" ng-model="rosette.types.categories">
-      </li>
-      <li>
-        <span>Sentiment</span>
-        <input type="checkbox" ng-model="rosette.types.sentiment">
-      </li>
-      <li>
-        <span>Relationships</span>
-        <input type="checkbox" ng-model="rosette.types.relationships">
-      </li>
-      <li>
-        <span>Entities</span>
-        <input type="checkbox" ng-model="rosette.types.entities">
-      </li>
-    </ul>
-  </div>
-
-  <div class="dropdown" id="meaningcloud-dropdown" ng-show="meaningcloud.view">
-    <h3 class="dropdown-header">Analysis Options</h3>
-    <ul class="api-types-list">
-      <li>
-        <span>Categories</span>
-        <input type="checkbox" ng-model="meaningcloud.types.categories">
-      </li>
-      <li>
-        <span>Sentiment</span>
-        <input type="checkbox" ng-model="meaningcloud.types.sentiment">
-      </li>
-      <li>
-        <span>Relationships</span>
-        <input type="checkbox" ng-model="meaningcloud.types.relationships">
-      </li>
-      <li>
-        <span>Entities</span>
-        <input type="checkbox" ng-model="meaningcloud.types.entities">
-      </li>
-    </ul>
   </div>
 
 
 
 
-  <div class="message" ng-class="message.who" ng-repeat="message in convo">
+  <div id="dropdown-container">
 
+    <div class="dropdown" id="aylien-dropdown" ng-show="aylien.view">
+      <h3 class="dropdown-header">Analysis Options</h3>
+      <ul class="api-types-list">
+        <li>
+          <span>Classify</span>
+          <div class="api-checkbox cb1">
+              <input type="checkbox" id="acb-classify" ng-model="aylien.types.classify">
+              <label for="acb-classify"></label>
+           </div>
+        </li>
+        <li>
+          <span>Sentiment</span>
+          <div class="api-checkbox cb1">
+              <input type="checkbox" id="acb-sentiment" ng-model="aylien.types.sentiment">
+              <label for="acb-sentiment"></label>
+           </div>
+        </li>
+        <li>
+          <span>Concepts</span>
+          <div class="api-checkbox cb1">
+              <input type="checkbox" id="acb-concepts" ng-model="aylien.types.concepts">
+              <label for="acb-concepts"></label>
+           </div>
+        </li>
+        <li>
+          <span>Entities</span>
+          <div class="api-checkbox cb1">
+              <input type="checkbox" id="acb-entities" ng-model="aylien.types.entities">
+              <label for="acb-entities"></label>
+           </div>
+        </li>
+        <li>
+          <span>Summary</span>
+          <div class="api-checkbox cb1">
+              <input type="checkbox" id="acb-summary" ng-model="aylien.types.summary">
+              <label for="acb-summary"></label>
+           </div>
+        </li>
+        <li>
+          <span>Hashtags</span>
+          <div class="api-checkbox cb1">
+              <input type="checkbox" id="acb-hashtags" ng-model="aylien.types.hashtags">
+              <label for="acb-hashtags"></label>
+           </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="dropdown" id="rosette-dropdown" ng-show="rosette.view">
+      <h3 class="dropdown-header">Analysis Options</h3>
+      <ul class="api-types-list">
+        <li>
+          <span>Categories</span>
+          <div class="api-checkbox cb2">
+              <input type="checkbox" id="rcb-categories" ng-model="rosette.types.categories">
+              <label for="rcb-categories"></label>
+           </div>
+        </li>
+        <li>
+          <span>Sentiment</span>
+          <div class="api-checkbox cb2">
+              <input type="checkbox" id="rcb-sentiment" ng-model="rosette.types.sentiment">
+              <label for="rcb-sentiment"></label>
+           </div>
+        </li>
+        <li>
+          <span>Relationships</span>
+          <div class="api-checkbox cb2">
+              <input type="checkbox" id="rcb-relationships" ng-model="rosette.types.relationships">
+              <label for="rcb-relationships"></label>
+           </div>
+        </li>
+        <li>
+          <span>Entities</span>
+          <div class="api-checkbox cb2">
+              <input type="checkbox" id="rcb-entities" ng-model="rosette.types.entities">
+              <label for="rcb-entities"></label>
+           </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="dropdown" id="meaningcloud-dropdown" ng-show="meaningcloud.view">
+      <h3 class="dropdown-header">Analysis Options</h3>
+      <ul class="api-types-list">
+        <li>
+          <span>Categories</span>
+          <input type="checkbox" ng-model="meaningcloud.types.categories">
+        </li>
+        <li>
+          <span>Sentiment</span>
+          <input type="checkbox" ng-model="meaningcloud.types.sentiment">
+        </li>
+        <li>
+          <span>Relationships</span>
+          <input type="checkbox" ng-model="meaningcloud.types.relationships">
+        </li>
+        <li>
+          <span>Entities</span>
+          <input type="checkbox" ng-model="meaningcloud.types.entities">
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+
+
+
+  <div id="convo-container">
+
+
+
+<div  ng-repeat="message in convo">
+
+  <img class="avatar" ng-hide="message.who === 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}">
+
+  <!--<span class="user-avatar" ng-show="message.who === 'user'">You</span>-->
+
+  <div class="message" ng-class="message.who">
     <p ng-show="message.who === 'user'">{{message.text}}</p>
 
-    <div ng-show="message.who !== 'user'">
+    <div>
 
-      <h5 ng-show="message.analyses.length">Sup? My analyses for your input:</h5>
+      <h5 ng-hide="message.who === 'user'">Sup? My analyses for your input:</h5>
       <div ng-repeat="analysis in message.analyses track by $index">
         <label>{{analysis.type}}</label>
         <div>
@@ -147,18 +203,19 @@
       </div>
 
     </div>
-
   </div>
-
-
-
-
 </div>
 
 
-<form>
-  <div id="input-container">
-    <input type="text" ng-model="text"/>
-    <button type="submit" ng-click="chat()">Send</button>
+
+
   </div>
-</form>
+
+
+  <form>
+    <div id="input-container">
+      <input type="text" ng-model="text"/>
+      <button type="submit" ng-click="chat()">Send</button>
+    </div>
+  </form>
+</div>

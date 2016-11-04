@@ -1,15 +1,69 @@
 angular.module('chatCtrl', [])
 .controller('ChatController', function($scope, $http){
 
-  $scope.convo = [];
+  $scope.convo = [
+    {
+      who: 'user',
+      text: 'user user user sup sup'
+    },
+    {
+      who: 'rosette',
+      text: 'rosette rosette rosette sup sup'
+    },
+    {
+      who: 'aylien',
+      text: 'aylien aylien sup sup sup'
+    },
+    {
+      who: 'user',
+      text: 'sup sup sup sup sup'
+    },
+    {
+      who: 'rosette',
+      text: 'sup sup sup sup sup'
+    },
+    {
+      who: 'user',
+      text: 'sup sup sup sup sup'
+    },
+    {
+      who: 'rosette',
+      text: 'sup sup sup sup sup'
+    },
+    {
+      who: 'aylien',
+      text: 'sup sup sup sup sup'
+    },
+    {
+      who: 'user',
+      text: 'sup sup sup sup sup'
+    },
+    {
+      who: 'rosette',
+      text: 'sup sup sup sup sup'
+    },
+    {
+      who: 'user',
+      text: 'sup sup sup sup sup'
+    },
+    {
+      who: 'rosette',
+      text: 'sup sup sup sup sup'
+    },
+    {
+      who: 'aylien',
+      text: 'sup sup sup sup sup'
+    }
+  ];
+
   $scope.text = 'yo!! apples and bananas are delicious';
 
   $scope.aylien = {
-    view: false,
+    view: true,
     enabled: true,
     types: {
-      classify: true,
-      sentiment: true,
+      classify: false,
+      sentiment: false,
       concepts: false,
       entities: false,
       summary: false,
@@ -18,11 +72,11 @@ angular.module('chatCtrl', [])
   };
 
   $scope.rosette = {
-    view: false,
+    view: true,
     enabled: true,
     types: {
       categories: false,
-      sentiment: true,
+      sentiment: false,
       entities: false,
       relationships: false
     }
@@ -79,7 +133,7 @@ angular.module('chatCtrl', [])
   };
 
 
-  //$scope.chatWithRosette = function(){
+  $scope.chatWithRosette = function(){
     var types = [];
     for(var type in $scope.rosette.types){
       if($scope.rosette.types[type]){
@@ -115,7 +169,7 @@ angular.module('chatCtrl', [])
           text: 'error'
         })
       });
-  //};
+  };
 
 
   function checkAylien(){
@@ -189,7 +243,7 @@ angular.module('chatCtrl', [])
   };
 
 
-})
+})/*
 .directive('scrollBottom', function () {
   return {
     scope: {
@@ -204,4 +258,4 @@ angular.module('chatCtrl', [])
       });
     }
   }
-})
+})*/
