@@ -1,33 +1,27 @@
 import request from 'request';
 import rp from 'request-promise';
 import config from '../../../config/config';
+import indicoSdk from 'indico.io';
 
 /*
 *
 *   req.body is of the following structure:
 *
 *     {
-*       text: "text to be analyzed"
-*     },
-*     {
-*       analysis: {
-*         analysisType: boolean,
-*         analysisType2: boolean,
-*         analysisType3: boolean
-*       }
+*       text: "text to be analyzed",
+*       types: [
+*        'type1',
+*        'type2',
+*        'type3'
+*       ]
 *     }
 *
 */
 
 
 
-function hitApi(url, type, data, headers){
+function hitApi(options, type){
 
-  let options = {
-    url: url,
-    headers: headers,
-    form: data
-  };
 
   return new Promise((resolve, reject) => {
     request.post(options, function(err, response, body){
@@ -39,7 +33,7 @@ function hitApi(url, type, data, headers){
       }
       return resolve({
         type: type,
-        data: JSON.parse(body)
+        data: body
       });
     })
   })
@@ -63,19 +57,26 @@ function hitApi(url, type, data, headers){
 function aylien(req, res, next){
 
   let base = 'https://api.aylien.com/api/v1/';
-  let headers = config.aylien.headers;
   let types = req.body.types;
-  let text = {
-    text: req.body.text
+
+  let options = {
+    url: '',
+    headers: config.aylien.headers,
+    form: {
+      text: req.body.text
+    }
   };
+
   let callPromises = [];
 
   types.forEach(type => {
-    callPromises.push(hitApi((base + type), type, text, headers));
+    options.url = base + type;
+    callPromises.push(hitApi(options, type));
   });
 
   Promise.all(callPromises)
     .then(function(results){
+      console.log(results);
       return res.status(200).send(results);
     })
     .catch(function(err){
@@ -128,16 +129,23 @@ function bitext(req, res, next){
 *   - sentiment
 */
 function rosette(req, res, next){
+
   let base = 'https://api.rosette.com/rest/v1/';
-  let text = {
-    "content" : JSON.stringify(req.body.text)
-  };
   let types = req.body.types;
-  let headers = config.rosette.headers;
+
+  let options = {
+    url: '',
+    headers: config.rosette.headers,
+    json: {
+      'content': req.body.text
+    }
+  };
+
   let callPromises = [];
 
   types.forEach(type => {
-    callPromises.push(hitApi((base + type), type, text, headers));
+    options.url = base + type;
+    callPromises.push(hitApi(options, type));
   });
 
   Promise.all(callPromises)
@@ -151,5 +159,96 @@ function rosette(req, res, next){
 };
 
 
+indico.apiKey = config.indico.key;
+/*
+*  indico sdk uses following methods:
+*   - entities
+*   - relationships
+*   - categories
+*   - sentiment
+*/
+function indico(req, res, next){
 
-export {aylien, bitext, rosette}
+  let types = req.body.types;
+  let text = req.body.text;
+
+  let callPromises = [];
+  let method;
+
+  types.forEach(type => {
+    callPromises.push(indicoSdk[type](text));
+  });
+
+  Promise.all(callPromises)
+    .then(function(results){
+      return res.status(200).send(results);
+    })
+    .catch(function(err){
+      return res.status(500).send(err);
+    });
+
+};
+
+
+function mcOptions(type, text){
+  let options = {
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded'
+    },
+    form: {
+      key: config.meaningcloud.key,
+      lang: 'en',
+      txt: text
+    }
+  };
+  if (type === 'topics'){
+    options.url = 'http://api.meaningcloud.com/topics-2.0';
+    options.form.tt = 'a';
+    return options;
+  }
+  else if (type === 'sentiment'){
+    options.url = 'http://api.meaningcloud.com/sentiment-2.1';
+    return options;
+  }
+  else if (type === 'classification'){
+    options.url = 'http://api.meaningcloud.com/class-1.1';
+    options.form.model = 'IAB_en';
+    return options;
+  }
+  else {
+    throw new Error();
+  }
+};
+
+
+/*
+*  meaningcloud api takes following endpoints:
+*   - entities
+*   - relationships
+*   - categories
+*   - sentiment
+*/
+function meaningcloud(req, res, next){
+
+  let types = req.body.types;
+  let text = req.body.text;
+  let callPromises = [];
+  let options;
+
+  types.forEach(type => {
+    options = mcOptions(type, text);
+    callPromises.push(hitApi(options, type));
+  });
+  Promise.all(callPromises)
+    .then(function(results){
+      return res.status(200).send(results);
+    })
+    .catch(function(err){
+      return res.status(500).send(err);
+    });
+    
+};
+
+
+
+export {aylien, rosette, indico, meaningcloud}

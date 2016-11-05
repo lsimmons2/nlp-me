@@ -3,19 +3,15 @@ angular.module('chatCtrl', [])
 
   $scope.convo = [
     {
-      who: 'user',
-      text: 'user user user sup sup'
-    },
-    {
-      who: 'rosette',
-      text: 'rosette rosette rosette sup sup'
-    },
-    {
-      who: 'aylien',
-      text: 'aylien aylien sup sup sup'
+      who: 'indico',
+      text: 'sup sup sup sup sup'
     },
     {
       who: 'user',
+      text: 'sup sup sup sup sup'
+    },
+    {
+      who: 'meaningcloud',
       text: 'sup sup sup sup sup'
     },
     {
@@ -24,10 +20,6 @@ angular.module('chatCtrl', [])
     },
     {
       who: 'user',
-      text: 'sup sup sup sup sup'
-    },
-    {
-      who: 'rosette',
       text: 'sup sup sup sup sup'
     },
     {
@@ -35,11 +27,11 @@ angular.module('chatCtrl', [])
       text: 'sup sup sup sup sup'
     },
     {
-      who: 'user',
+      who: 'meaningcloud',
       text: 'sup sup sup sup sup'
     },
     {
-      who: 'rosette',
+      who: 'indico',
       text: 'sup sup sup sup sup'
     },
     {
@@ -58,9 +50,21 @@ angular.module('chatCtrl', [])
 
   $scope.text = 'yo!! apples and bananas are delicious';
 
+  function ready(){
+    if(!this.enabled){
+      return false;
+    }
+    for (var type in this.types) {
+      if (!this.types[type]){
+        return false;
+      }
+    }
+    return true;
+  };
+
   $scope.aylien = {
-    view: true,
-    enabled: true,
+    view: false,
+    enabled: false,
     types: {
       classify: false,
       sentiment: false,
@@ -68,21 +72,11 @@ angular.module('chatCtrl', [])
       entities: false,
       summary: false,
       hashtags: false
-    }
+    },
+    ready: ready
   };
 
   $scope.rosette = {
-    view: true,
-    enabled: true,
-    types: {
-      categories: false,
-      sentiment: false,
-      entities: false,
-      relationships: false
-    }
-  };
-
-  $scope.meaningcloud = {
     view: false,
     enabled: false,
     types: {
@@ -90,8 +84,36 @@ angular.module('chatCtrl', [])
       sentiment: false,
       entities: false,
       relationships: false
-    }
+    },
+    ready: ready
   };
+
+  $scope.indico = {
+    view: false,
+    enabled: false,
+    types: {
+      texttags: false,
+      sentiment: false,
+      personality: false,
+      people: false,
+      political: false,
+      personas: false,
+      emotion: false
+    },
+    ready: ready
+  };
+
+  $scope.meaningcloud = {
+    view: false,
+    enabled: false,
+    types: {
+      classification: false,
+      sentiment: false,
+      topics: false
+    },
+    ready: ready
+  };
+
 
 
   $scope.chatWithAylien = function(){
@@ -172,52 +194,92 @@ angular.module('chatCtrl', [])
   };
 
 
-  function checkAylien(){
-    let types = $scope.aylien.types;
-    if(types.classify){
-      return true;
-    }
-    if(types.sentiment){
-      return true;
-    }
-    if(types.concepts){
-      return true;
-    }
-    if(types.entities){
-      return true;
-    }
-    if(types.summary){
-      return true;
-    }
-    if(types.hashtags){
-      return true;
-    }
-    return false;
-  }
+  $scope.chatWithIndico = function(){
+    var types = [];
+    for(var type in $scope.indico.types){
+      if($scope.indico.types[type]){
+        types.push(type);
+      }
+    };
+    var data = {
+      types: types,
+      text: $scope.text
+    };
+    $http.post('/chat/indico', data)
+      .then(function(resp){
+        console.log(resp.data);
+        var analyses = [];
+        var errors = [];
+        for (var i = 0; i < resp.data.length; i++) {
+          if(resp.data[i].data === 'error'){
+            errors.push(resp.data[i].type);
+          } else {
+            analyses.push(resp.data[i]);
+          }
+        }
+        $scope.convo.push({
+          who: 'indico',
+          text: $scope.text,
+          analyses: analyses,
+          errors: errors
+        });
+        $scope.text = '';
+      })
+      .catch(function(err){
+        $scope.convo.push({
+          who: 'indico',
+          text: 'error'
+        })
+      });
+  };
 
-  function checkRosette(){
-    let types = $scope.rosette.types;
-    if(types.categories){
-      return true;
-    }
-    if(types.sentiment){
-      return true;
-    }
-    if(types.relationships){
-      return true;
-    }
-    if(types.entities){
-      return true;
-    }
-    return false;
-  }
+
+  $scope.chatWithMeaningcloud = function(){
+    var types = [];
+    for(var type in $scope.meaningcloud.types){
+      if($scope.meaningcloud.types[type]){
+        types.push(type);
+      }
+    };
+    var data = {
+      types: types,
+      text: $scope.text
+    };
+    $http.post('/chat/meaningcloud', data)
+      .then(function(resp){
+        console.log(resp.data);
+        var analyses = [];
+        var errors = [];
+        for (var i = 0; i < resp.data.length; i++) {
+          if(resp.data[i].data === 'error'){
+            errors.push(resp.data[i].type);
+          } else {
+            analyses.push(resp.data[i]);
+          }
+        }
+        $scope.convo.push({
+          who: 'indico',
+          text: $scope.text,
+          analyses: analyses,
+          errors: errors
+        });
+        $scope.text = '';
+      })
+      .catch(function(err){
+        $scope.convo.push({
+          who: 'indico',
+          text: 'error'
+        })
+      });
+  };
+
 
 
   $scope.chat = function(){
     var userInput = false;
     if($scope.text.length){
 
-      if($scope.aylien.enabled && checkAylien()){
+      if($scope.aylien.ready()){
         $scope.chatWithAylien();
         if(!userInput){
           $scope.convo.push({
@@ -228,8 +290,30 @@ angular.module('chatCtrl', [])
         }
       }
 
-      if($scope.rosette.enabled && checkRosette()){
+      if($scope.rosette.ready()){
         $scope.chatWithRosette();
+        if(!userInput){
+          $scope.convo.push({
+            who: 'user',
+            text: $scope.text
+          });
+          userInput = true;
+        }
+      }
+
+      if($scope.indico.ready()){
+        $scope.chatWithIndico();
+        if(!userInput){
+          $scope.convo.push({
+            who: 'user',
+            text: $scope.text
+          });
+          userInput = true;
+        }
+      }
+
+      if($scope.meaningcloud.ready()){
+        $scope.chatWithMeaningcloud();
         if(!userInput){
           $scope.convo.push({
             who: 'user',

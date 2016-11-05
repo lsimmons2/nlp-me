@@ -11,10 +11,9 @@
   <div id="selection-container">
 
 
-    <div class="api-selection">
+    <div class="api-selection-container" id="aylien-selection-container">
 
-      <div class="inner-api-selection" id="aylien-selection">
-
+      <div class="api-selection" id="aylien-selection">
         <img class="api-logo" src="images/aylien-icon.png">
         <span id="aylien-logo-text">AYLIEN</span>
         <div class="api-checkbox cb1">
@@ -27,9 +26,10 @@
 
     </div>
 
-    <div class="api-selection" id="outer-rosette-selection">
 
-      <div class="inner-api-selection" id="rosette-selection">
+    <div class="api-selection-container" id="rosette-selection-container">
+
+      <div class="api-selection" id="rosette-selection">
         <img class="api-logo" src="images/rosette-logo.png">
         <div class="api-checkbox cb2">
             <input type="checkbox" id="cb2" ng-model="rosette.enabled">
@@ -41,13 +41,29 @@
 
     </div>
 
-    <div class="api-selection">
 
-      <div class="inner-api-selection" id="meaningcloud-selection">
-        <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/meaningcloud-logo">
+    <div class="api-selection-container" id="indico-selection-container">
+
+      <div class="api-selection" id="indico-selection">
+        <img class="api-logo" src="images/indico-logo.png">
         <div class="api-checkbox cb3">
-            <input type="checkbox" id="cb3" ng-model="meaningcloud.enabled">
+            <input type="checkbox" id="cb3" ng-model="indico.enabled">
             <label for="cb3"></label>
+         </div>
+        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="indico.view = true" ng-hide="indico.view"></span>
+        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="indico.view = false" ng-show="indico.view"></span>
+      </div>
+
+    </div>
+
+
+    <div class="api-selection-container" id="meaningcloud-selection-container">
+
+      <div class="api-selection" id="meaningcloud-selection">
+        <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/meaningcloud-logo">
+        <div class="api-checkbox cb4">
+            <input type="checkbox" id="cb4" ng-model="meaningcloud.enabled">
+            <label for="cb4"></label>
          </div>
         <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="meaningcloud.view = true" ng-hide="meaningcloud.view"></span>
         <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="meaningcloud.view = false" ng-show="meaningcloud.view"></span>
@@ -63,6 +79,7 @@
 
   <div id="dropdown-container">
 
+    <!--=========  AYLIEN  =========-->
     <div class="dropdown" id="aylien-dropdown" ng-show="aylien.view">
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
@@ -111,6 +128,7 @@
       </ul>
     </div>
 
+    <!--=========  ROSETTE  =========-->
     <div class="dropdown" id="rosette-dropdown" ng-show="rosette.view">
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
@@ -145,24 +163,87 @@
       </ul>
     </div>
 
+    <!--=========  INDICO  =========-->
+    <div class="dropdown" id="indico-dropdown" ng-show="indico.view">
+      <h3 class="dropdown-header">Analysis Options</h3>
+      <ul class="api-types-list">
+        <li>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Text tags are similiar to categories. A confidence level is given for each tag given to your input. See the response in JSON format to see all 111 possible tags!" >Text Tags</span>
+          <div class="api-checkbox cb3">
+              <input type="checkbox" id="icb-texttags" ng-model="indico.types.texttags">
+              <label for="icb-texttags"></label>
+           </div>
+        </li>
+        <li>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Positive or negative input? This analysis will give a number between 0 and 1. Above 0.5 indicates positive sentiment, below 0.5 indicates negative sentiment." >Sentiment</span>
+          <div class="api-checkbox cb3">
+              <input type="checkbox" id="icb-sentiment" ng-model="indico.types.sentiment">
+              <label for="icb-sentiment"></label>
+           </div>
+        </li>
+        <li>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts personality traits of yours from your input" >Personality</span>
+          <div class="api-checkbox cb3">
+              <input type="checkbox" id="icb-personality" ng-model="indico.types.personality">
+              <label for="icb-personality"></label>
+           </div>
+        </li>
+        <li>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts the people referenced in your input." >People</span>
+          <div class="api-checkbox cb3">
+              <input type="checkbox" id="icb-people" ng-model="cindico.types.people">
+              <label for="icb-people"></label>
+           </div>
+        </li>
+        <li>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Will output a number between 0 and 1 that represents the likelihood that your input expresses a leaning to the 'liberal', 'green', 'conservative', and 'libertarian' political affiliations." >Political Analysis</span>
+          <div class="api-checkbox cb3">
+              <input type="checkbox" id="icb-political" ng-model="indico.types.political">
+              <label for="icb-political"></label>
+           </div>
+        </li>
+        <li>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Gives confidence levels for what your Myers Briggs Personality Type (MBTI) is." >Personas</span>
+          <div class="api-checkbox cb3">
+              <input type="checkbox" id="icb-personas" ng-model="indico.types.personas">
+              <label for="icb-personas"></label>
+           </div>
+        </li>
+        <li>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Predicts if your input express anger, joy, fear, surprise, or sadness." >Emotion</span>
+          <div class="api-checkbox cb3">
+              <input type="checkbox" id="icb-emotion" ng-model="indico.types.emotion">
+              <label for="icb-emotion"></label>
+           </div>
+        </li>
+      </ul>
+    </div>
+
+
+    <!--=========  MEANING CLOUD  =========-->
     <div class="dropdown" id="meaningcloud-dropdown" ng-show="meaningcloud.view">
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
         <li>
-          <span>Categories</span>
-          <input type="checkbox" ng-model="meaningcloud.types.categories">
+          <span tooltip-placement="left" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts the categories in your input." >Classification</span>
+          <div class="api-checkbox cb4">
+              <input type="checkbox" id="mccb-classification" ng-model="meaningcloud.types.classification">
+              <label for="mccb-classification"></label>
+           </div>
         </li>
         <li>
-          <span>Sentiment</span>
-          <input type="checkbox" ng-model="meaningcloud.types.sentiment">
+          <span tooltip-placement="left" tooltip-class="meaningcloud-tooltip" uib-tooltip="Detects the polarity, subjectivity, irony, and emotional agreement in your input.">Sentiment</span>
+          <div class="api-checkbox cb4">
+              <input type="checkbox" id="mccb-sentiment" ng-model="meaningcloud.types.sentiment">
+              <label for="mccb-sentiment"></label>
+           </div>
         </li>
         <li>
-          <span>Relationships</span>
-          <input type="checkbox" ng-model="meaningcloud.types.relationships">
-        </li>
-        <li>
-          <span>Entities</span>
-          <input type="checkbox" ng-model="meaningcloud.types.entities">
+          <span tooltip-placement="left" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts the topics in your input.">Topics</span>
+          <div class="api-checkbox cb4">
+              <input type="checkbox" id="mccb-topics" ng-model="meaningcloud.types.topics">
+              <label for="mccb-topics"></label>
+           </div>
         </li>
       </ul>
     </div>
@@ -180,7 +261,6 @@
 
   <img class="avatar" ng-hide="message.who === 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}">
 
-  <!--<span class="user-avatar" ng-show="message.who === 'user'">You</span>-->
 
   <div class="message" ng-class="message.who">
     <p ng-show="message.who === 'user'">{{message.text}}</p>

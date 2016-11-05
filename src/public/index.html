@@ -13,6 +13,9 @@
   	<script type='text/javascript' src='./vendor/angular-route/angular-route.js'></script>
     <script type='text/javascript' src='./vendor/bootstrap/dist/js/bootstrap.js'></script>
 	  <link rel='stylesheet' href='./vendor/bootstrap/dist/css/bootstrap.css'>
+    <script type='text/javascript' src='./vendor/angular-ui-bootstrap/dist/ui-bootstrap.js'></script>
+    <script type='text/javascript' src='./vendor/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js'></script>
+    <link rel='stylesheet' href='./vendor/angular-ui-bootstrap/dist/ui-bootstrap-csp.css'>
 
 
     <script type='text/javascript' src='./controllers/navCtrl.js'></script>
@@ -30,7 +33,7 @@
   </head>
 
   <body ng-app="App">
-    
+
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -40,13 +43,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#/">
-            <!--<img src="" alt="home logo">-->
-            NLP ME
-          </a>
+
         </div>
+        <a class="navbar-brand" href="#/">
+          <!--<img src="" alt="home logo">-->
+          NLP ME
+        </a>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a id="nav-brand-extension">-- chat with natural language processing APIs</a></li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a class="nav-item" href="#/about">About</a>
+            </li>
             <li>
               <a class="nav-item" href="#/apis">Search APIs</a>
             </li>
