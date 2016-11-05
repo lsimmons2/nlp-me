@@ -1,7 +1,7 @@
 import request from 'request';
 import rp from 'request-promise';
 import config from '../../../config/config';
-import indicoSdk from 'indico.io';
+//import indicoSdk from 'indico.io';
 
 /*
 *
@@ -76,7 +76,6 @@ function aylien(req, res, next){
 
   Promise.all(callPromises)
     .then(function(results){
-      console.log(results);
       return res.status(200).send(results);
     })
     .catch(function(err){
@@ -159,24 +158,35 @@ function rosette(req, res, next){
 };
 
 
-indico.apiKey = config.indico.key;
+//indicoSdk.apiKey = config.indico.key;
 /*
 *  indico sdk uses following methods:
-*   - entities
-*   - relationships
-*   - categories
+*   - texttags
 *   - sentiment
+*   - personality
+*   - people
+*   - political
+*   - personas
+*   - emotion
 */
 function indico(req, res, next){
 
   let types = req.body.types;
   let text = req.body.text;
 
+  let options = {
+    headers: config.indico.headers,
+    json: {
+      'data': text
+    }
+  };
+
   let callPromises = [];
-  let method;
 
   types.forEach(type => {
-    callPromises.push(indicoSdk[type](text));
+    options.url = 'https://apiv2.indico.io/' + type;
+    //callPromises.push(indicoSdk[type](text));
+    callPromises.push(hitApi(options, type))
   });
 
   Promise.all(callPromises)
@@ -246,7 +256,7 @@ function meaningcloud(req, res, next){
     .catch(function(err){
       return res.status(500).send(err);
     });
-    
+
 };
 
 
