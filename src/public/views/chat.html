@@ -4,7 +4,7 @@
 <div id="chat">
 
   <div id="header">
-    <h3>Chat!</h3>
+    <!--<h3>Chat!</h3>-->
     <h5>Choose which APIs to chat with...</h5>
   </div>
 
@@ -104,6 +104,7 @@
               <label for="acb-concepts"></label>
            </div>
         </li>
+        <!--
         <li>
           <span>Entities</span>
           <div class="api-checkbox cb1">
@@ -118,6 +119,7 @@
               <label for="acb-summary"></label>
            </div>
         </li>
+        -->
         <li>
           <span>Hashtags</span>
           <div class="api-checkbox cb1">
@@ -253,43 +255,159 @@
 
 
 
+
   <div id="convo-container">
 
 
+    <div  ng-repeat="message in convo track by $index">
 
-<div  ng-repeat="message in convo">
-
-  <img class="avatar" ng-hide="message.who === 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}">
+      <img class="avatar" ng-hide="message.who === 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}">
 
 
-  <div class="message" ng-class="message.who">
-    <p ng-show="message.who === 'user'">{{message.text}}</p>
+      <div class="message user" ng-if="message.who === 'user'">
+        <p>Sup it's you!</p>
+      </div>
 
-    <div>
+      <div class="message aylien" ng-if="message.who === 'aylien'">
 
-      <h5 ng-hide="message.who === 'user'">Sup? My analyses for your input:</h5>
-      <div ng-repeat="analysis in message.analyses track by $index">
-        <label>{{analysis.type}}</label>
-        <div>
-          {{analysis.data}}
+        <b>Hello! Here are my analyses of your input</b>
+
+        <div ng-if="message.analyses.classify">
+          <h5>Classify</h5>
+          <p>
+            I'm
+            <span ng-repeat="category in message.analyses.classify.categories track by $index">
+              <span ng-if="$last">and</span>
+              <strong>{{category.confidence | Perc}}%</strong>
+              confident that
+              <strong>{{category.label}}</strong>
+              is a category
+              <span class="comma-period" ng-if="!$last">,</span>
+              <span class="comma-period" ng-if="$last">.</span>
+            </span>
+          </p>
         </div>
+
+        <div ng-if="message.analyses.sentiment">
+          <h5>Sentiment</h5>
+          <p>
+            I'm
+            <strong>{{message.analyses.sentiment.subjectivity_confidence | Perc}}%</strong>
+            confident that the subjectivity is
+            <strong>{{message.analyses.sentiment.subjectivity}}</strong>
+            and
+            <strong>{{message.analyses.sentiment.polarity_confidence | Perc}}%</strong>
+            confident that the polarity is
+            <strong>{{message.analyses.sentiment.polarity}}</strong>
+            <span class="comma-period">.</span>
+          </p>
+        </div>
+
+        <div ng-if="message.analyses.concepts">
+          <h5>Concepts</h5>
+            <p ng-if="only(message.analyses.concepts.concepts)">
+              The only concept I could find was
+              <strong ng-repeat="(key, value) in message.analyses.concepts.concepts">
+                <a ng-href="{{key}}" target="_blank">{{value.surfaceForms[0].string}}</a>
+              </strong>
+              <span class="comma-period">.</span>
+            </p>
+            <p ng-if="!only(message.analyses.concepts.concepts)">
+              The concepts I found were
+              <span ng-repeat="(key, value) in message.analyses.concepts.concepts">
+                <span ng-if="$last">and</span>
+                <strong>
+                  <a ng-href="{{key}}" target="_blank">{{value.surfaceForms[0].string}}</a>
+                </strong>
+                <span class="comma-period" ng-if="!$last">,</span>
+                <span class="comma-period" ng-if="$last">.</span>
+              </span>
+            </p>
+        </div>
+<!--
+        <div ng-if="message.analyses.entities">
+          <h5>Entities</h5>
+            <p ng-if="only(message.analyses.concepts.concepts)">
+              The only concept I could find was
+              <strong ng-repeat="(key, value) in message.analyses.concepts.concepts">
+                <a ng-href="{{key}}" target="_blank">{{value.surfaceForms[0].string}}</a>
+              </strong>
+              <span class="comma-period">.</span>
+            </p>
+            <p ng-if="!only(message.analyses.concepts.concepts)">
+              The concepts I found were
+              <span ng-repeat="(key, value) in message.analyses.concepts.concepts">
+                <strong>
+                  <a ng-href="{{key}}" target="_blank">{{value.surfaceForms[0].string}}</a>
+                </strong>
+                <span class="comma-period" ng-if="!$last">,</span>
+                <span class="comma-period" ng-if="$last">.</span>
+              </span>
+            </p>
+        </div>
+-->
+        <div ng-if="message.analyses.hashtags">
+          <h5>Hashtags</h5>
+            <p ng-if="message.analyses.hashtags.hashtags.length === 1">
+              The only hashtag I could find was
+              <strong>
+                {{message.analyses.hashtags.hashtags[0]}}
+              </strong>
+              <span class="comma-period">.</span>
+            </p>
+            <p ng-if="message.analyses.hashtags.hashtags.length > 1">
+              The hashtags I found were
+              <span ng-repeat="hashtag in message.analyses.hashtags.hashtags">
+                <span ng-if="$last">and</span>
+                <strong>
+                  {{hashtag}}
+                </strong>
+                <span class="comma-period" ng-if="!$last">,</span>
+                <span class="comma-period" ng-if="$last">.</span>
+              </span>
+            </p>
+        </div>
+
+        <div ng-if="message.errors">
+          <h5>Errors</h5>
+            <p ng-if="message.errors.length === 1">
+              Error retrieving the <strong>{{message.errors[0]}}</strong> analysis.
+            </p>
+            <p ng-if="message.errors.length > 1">
+              Error retriveing the
+              <span ng-repeat="error in message.errors">
+                <span ng-if="$last">and</span>
+                <strong>{{error}}</strong>
+                <span class="comma-period" ng-if="!$last">,</span>
+              </span>
+              analyses.
+            </p>
+        </div>
+
       </div>
 
-      <div ng-show="message.errors.length">
-        <label>Errors for the following analyses:</label>
-        <span ng-repeat="error in message.errors track by $index">
-          {{error}}
-        </span>
+
+      <div class="message rosette" ng-if="message.who === 'rosette'">
+        <p>Sup from rosette</p>
       </div>
+
+
+      <div class="message indico" ng-if="message.who === 'indico'">
+        <p>yooo it's indico</p>
+      </div>
+
+
+      <div class="message meaningcloud" ng-if="message.who === 'meaningcloud'">
+        <p>meaningcloud! I suck!</p>
+      </div>
+
 
     </div>
-  </div>
-</div>
-
-
 
 
   </div>
+
+
 
 
   <form>

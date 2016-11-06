@@ -3,7 +3,7 @@ angular.module('chatCtrl', [])
 
   $scope.convo = [
     {
-      who: 'indico',
+      who: 'rosette',
       text: 'sup sup sup sup sup'
     },
     {
@@ -15,38 +15,111 @@ angular.module('chatCtrl', [])
       text: 'sup sup sup sup sup'
     },
     {
-      who: 'rosette',
-      text: 'sup sup sup sup sup'
-    },
-    {
-      who: 'user',
-      text: 'sup sup sup sup sup'
-    },
-    {
-      who: 'aylien',
-      text: 'sup sup sup sup sup'
-    },
-    {
-      who: 'meaningcloud',
-      text: 'sup sup sup sup sup'
-    },
-    {
       who: 'indico',
       text: 'sup sup sup sup sup'
     },
     {
-      who: 'user',
-      text: 'sup sup sup sup sup'
-    },
-    {
-      who: 'rosette',
-      text: 'sup sup sup sup sup'
-    },
-    {
       who: 'aylien',
-      text: 'sup sup sup sup sup'
+      analyses: {
+        classify: {
+          text: 'yo bananas are flipping awesome, and I also love hiking. Calvin and Hobbes are homies!',
+          language: 'en',
+          categories:
+           [
+             {
+               label: 'health treatment - diet',
+               code: '07003003',
+               confidence: 0.999999920957461
+             },
+             {
+               label: 'sports',
+               code: '07003003',
+               confidence: 0.5845345645
+             },
+             {
+               label: 'politics',
+               code: '07003003',
+               confidence: 0.449504443
+             }
+          ]
+        },
+        sentiment: {
+         polarity:'positive',
+         subjectivity:'subjective',
+         text:'yo bananas are flipping awesome, and I also love hiking. Calvin and Hobbes are homies!',
+         polarity_confidence:0.999940037727356,
+         subjectivity_confidence:1
+       },
+       concepts: {
+        text:'yo bananas are flipping awesome, and I also love hiking. Calvin and Hobbes are homies!',
+        language:'en',
+        concepts:{
+          'http://dbpedia.org/resource/Calvin_and_Hobbes':{
+            surfaceForms:[
+              {
+                string:'Calvin and Hobbes',
+                score:1,
+                offset:57
+              }
+            ],
+            types:[
+              'http://dbpedia.org/ontology/Agent',
+              'http://www.wikidata.org/entity/Q215627',
+              'http://schema.org/Person',
+              'http://xmlns.com/foaf/0.1/Person',
+              'http://www.wikidata.org/entity/Q5',
+              'http://dbpedia.org/ontology/Person',
+              'http://www.wikidata.org/entity/Q95074',
+              'http://dbpedia.org/ontology/FictionalCharacter'
+            ],
+            support:320
+          },
+          'http://dbpedia.org/resource/Calvin_and_Shobbes':{
+            surfaceForms:[
+              {
+                string:'Calvin and Shobbes',
+                score:1,
+                offset:57
+              }
+            ],
+            types:[
+              'http://dbpedia.org/ontology/Agent',
+              'http://www.wikidata.org/entity/Q215627',
+              'http://schema.org/Person',
+              'http://xmlns.com/foaf/0.1/Person',
+              'http://www.wikidata.org/entity/Q5',
+              'http://dbpedia.org/ontology/Person',
+              'http://www.wikidata.org/entity/Q95074',
+              'http://dbpedia.org/ontology/FictionalCharacter'
+            ],
+            support:320
+          }
+        },
+        },
+        hashtags: {
+          text: 'yo bananas are flipping awesome, and I also love hiking. Calvin and Hobbes are homies!',
+          language: 'en',
+          hashtags: [ '#CalvinAndHobbes', '#Apples' ]
+          //hashtags: ['#calvinandhobbes']
+        }
+      },
+      errors: [
+        //'error1',
+        'error2'
+      ]
     }
   ];
+
+
+  //make this a watched flag instead
+  $scope.only = function(input){
+    if(Object.keys(input).length === 1){
+      return true;
+    }
+    return false;
+  }
+
+
 
   $scope.text = 'yo!! apples and bananas are delicious';
 
@@ -63,14 +136,13 @@ angular.module('chatCtrl', [])
   };
 
   $scope.aylien = {
-    view: false,
+    view: true,
     enabled: false,
     types: {
       classify: false,
       sentiment: false,
       concepts: false,
       entities: false,
-      summary: false,
       hashtags: false
     },
     ready: ready
@@ -123,24 +195,26 @@ angular.module('chatCtrl', [])
         types.push(type);
       }
     };
+
     var data = {
       types: types,
       text: $scope.text
     };
     $http.post('/chat/aylien', data)
       .then(function(resp){
-        var analyses = [];
+        var analyses = {};
         var errors = [];
+        var type;
         for (var i = 0; i < resp.data.length; i++) {
           if(resp.data[i].data === 'error'){
             errors.push(resp.data[i].type);
           } else {
-            analyses.push(resp.data[i]);
+            type = resp.data[i].type;
+            analyses[type] = resp.data[i].data;
           }
         }
         $scope.convo.push({
           who: 'aylien',
-          text: $scope.text,
           analyses: analyses,
           errors: errors
         });
@@ -162,6 +236,7 @@ angular.module('chatCtrl', [])
         types.push(type);
       }
     };
+
     var data = {
       types: types,
       text: $scope.text
@@ -201,13 +276,13 @@ angular.module('chatCtrl', [])
         types.push(type);
       }
     };
+
     var data = {
       types: types,
       text: $scope.text
     };
     $http.post('/chat/indico', data)
       .then(function(resp){
-        console.log(resp.data);
         var analyses = [];
         var errors = [];
         for (var i = 0; i < resp.data.length; i++) {
@@ -247,7 +322,6 @@ angular.module('chatCtrl', [])
     };
     $http.post('/chat/meaningcloud', data)
       .then(function(resp){
-        console.log(resp.data);
         var analyses = [];
         var errors = [];
         for (var i = 0; i < resp.data.length; i++) {
@@ -327,7 +401,21 @@ angular.module('chatCtrl', [])
   };
 
 
-})/*
+})
+.filter('Perc', function($filter){
+  return function(input){
+    if(input === 1 || parseInt(input) === 1){
+      return 100;
+    }
+    if (typeof input !== 'string'){
+      input = input.toString();
+    }
+    input = input.match(/^-?\d+(?:\.\d{0,4})?/)[0];
+    return (input * 100);
+  }
+})
+
+/*
 .directive('scrollBottom', function () {
   return {
     scope: {

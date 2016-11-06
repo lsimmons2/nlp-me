@@ -2,7 +2,9 @@
 #chat {
 
   position: relative;
-  margin-bottom: 65px;
+  //margin-bottom: 65px;
+  bottom: 0px;
+
 
   #header {
     font-family: 'Gloria Hallelujah', cursive;
@@ -19,6 +21,7 @@
       border-style: solid;
       border-color: #989898;
       border-top-width: 2px;
+      border-bottom-width: 0;
       float: left;
       width: 25%;
       text-align: center;
@@ -203,7 +206,8 @@
 
     .message {
 
-      max-width: 400px;
+      width: 45%;
+      //max-width: 400px;
       background-color: #b8b9b8;
       margin: 10px;
       box-shadow: 0px 5px 5px grey;
@@ -212,6 +216,10 @@
 
       p {
         padding: 10px;
+      }
+
+      .comma-period {
+        margin-left: -4px;
       }
 
     }
