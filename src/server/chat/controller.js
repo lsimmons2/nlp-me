@@ -76,40 +76,7 @@ function aylien(req, res, next){
 
   Promise.all(callPromises)
     .then(function(results){
-      return res.status(200).send(results);
-    })
-    .catch(function(err){
-      return res.status(500).send(err);
-    });
 
-};
-
-
-/*
-*  bitext api takes following endpoints:
-*   - sentiment
-*   - concepts
-*   - entities
-*/
-function bitext(req, res, next){
-
-  let base = 'https://svc02.api.bitext.com/';
-  let data = {
-    'language': 'eng',
-    'text' : req.body.text
-  };
-  let types = req.body.analysis;
-  let headers = config.bitext.headers;
-  let callPromises = [];
-
-  for (let type in types){
-    if(types[type]){
-      callPromises.push(hitApi(base + type, data, headers));
-    }
-  }
-
-  Promise.all(callPromises)
-    .then(function(results){
       return res.status(200).send(results);
     })
     .catch(function(err){
