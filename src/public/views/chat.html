@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="./style/chatStyle.css">
 
 
-<div id="chat">
+<div id="chat" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
 
   <div id="header">
     <!--<h3>Chat!</h3>-->
@@ -79,7 +79,7 @@
 
   <div id="dropdown-container">
 
-    <!--=========  AYLIEN  =========-->
+    <!--=========  AYLIEN DROPDOWN =========-->
     <div class="dropdown" id="aylien-dropdown" ng-show="aylien.view">
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
@@ -130,7 +130,7 @@
       </ul>
     </div>
 
-    <!--=========  ROSETTE  =========-->
+    <!--=========  ROSETTE DROPDOWN  =========-->
     <div class="dropdown" id="rosette-dropdown" ng-show="rosette.view">
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
@@ -165,7 +165,7 @@
       </ul>
     </div>
 
-    <!--=========  INDICO  =========-->
+    <!--=========  INDICO DROPDOWN  =========-->
     <div class="dropdown" id="indico-dropdown" ng-show="indico.view">
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
@@ -222,7 +222,7 @@
     </div>
 
 
-    <!--=========  MEANING CLOUD  =========-->
+    <!--=========  MEANING CLOUD DROPDOWN  =========-->
     <div class="dropdown" id="meaningcloud-dropdown" ng-show="meaningcloud.view">
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
@@ -256,21 +256,29 @@
 
 
 
-  <div id="convo-container">
+  <div id="convo-container" scroll-bottom="convo">
 
 
     <div  ng-repeat="message in convo track by $index">
 
-      <img class="avatar" ng-hide="message.who === 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}">
+      <img class="avatar" ng-if="message.who !== 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}">
 
 
       <div class="message user" ng-if="message.who === 'user'">
         <p>Sup it's you!</p>
       </div>
 
-      <div class="message aylien" ng-if="message.who === 'aylien'">
+      <!--=========  AYLIEN MESSAGE  =========-->
+      <div class="message aylien" ng-if="message.who === 'aylien'" ng-show="message.view === 'json'">
+        <b>Here are my analyses of your input in JSON format</b><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
+        <div ng-repeat="(type, analysis) in message.analyses">
+          <h5>{{type | cap}}</h5>
+          <pre>{{analysis | json}}</pre>
+        </div>
+      </div>
+      <div class="message aylien" ng-if="message.who === 'aylien'" ng-show="message.view === 'pretty'">
 
-        <b>Hello! Here are my analyses of your input</b>
+        <b>Hello! Here are my analyses of your input</b><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
 
         <div ng-if="message.analyses.classify">
           <h5>Classify</h5>
@@ -303,16 +311,19 @@
           </p>
         </div>
 
+
         <div ng-if="message.analyses.concepts">
           <h5>Concepts</h5>
-            <p ng-if="only(message.analyses.concepts.concepts)">
+            <!--<p ng-if="only(message.analyses.concepts.concepts)">-->
+            <p ng-if="keys(message.analyses.concepts.concepts).length === 1">
               The only concept I could find was
               <strong ng-repeat="(key, value) in message.analyses.concepts.concepts">
                 <a ng-href="{{key}}" target="_blank">{{value.surfaceForms[0].string}}</a>
               </strong>
               <span class="comma-period">.</span>
             </p>
-            <p ng-if="!only(message.analyses.concepts.concepts)">
+            <!--<p ng-show="!only(message.analyses.concepts.concepts)">-->
+            <p ng-if="keys(message.analyses.concepts.concepts).length > 1">
               The concepts I found were
               <span ng-repeat="(key, value) in message.analyses.concepts.concepts">
                 <span ng-if="$last">and</span>
@@ -324,7 +335,8 @@
               </span>
             </p>
         </div>
-<!--
+
+
         <div ng-if="message.analyses.entities">
           <h5>Entities</h5>
             <p ng-if="only(message.analyses.concepts.concepts)">
@@ -345,7 +357,7 @@
               </span>
             </p>
         </div>
--->
+
         <div ng-if="message.analyses.hashtags">
           <h5>Hashtags</h5>
             <p ng-if="message.analyses.hashtags.hashtags.length === 1">
@@ -386,17 +398,17 @@
 
       </div>
 
-
+      <!--=========  ROSETTE MESSAGE  =========-->
       <div class="message rosette" ng-if="message.who === 'rosette'">
         <p>Sup from rosette</p>
       </div>
 
-
+      <!--=========  INDICO MESSAGE  =========-->
       <div class="message indico" ng-if="message.who === 'indico'">
         <p>yooo it's indico</p>
       </div>
 
-
+      <!--=========  MEANING CLOUD MESSAGE  =========-->
       <div class="message meaningcloud" ng-if="message.who === 'meaningcloud'">
         <p>meaningcloud! I suck!</p>
       </div>
@@ -413,7 +425,7 @@
   <form>
     <div id="input-container">
       <input type="text" ng-model="text"/>
-      <button type="submit" ng-click="chat()">Send</button>
+      <button type="submit" ng-click="add()">Send</button>
     </div>
   </form>
 </div>

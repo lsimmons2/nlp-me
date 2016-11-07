@@ -1,124 +1,23 @@
 angular.module('chatCtrl', [])
 .controller('ChatController', function($scope, $http){
 
-  $scope.convo = [
-    {
-      who: 'rosette',
-      text: 'sup sup sup sup sup'
-    },
-    {
-      who: 'user',
-      text: 'sup sup sup sup sup'
-    },
-    {
-      who: 'meaningcloud',
-      text: 'sup sup sup sup sup'
-    },
-    {
-      who: 'indico',
-      text: 'sup sup sup sup sup'
-    },
-    {
-      who: 'aylien',
-      analyses: {
-        classify: {
-          text: 'yo bananas are flipping awesome, and I also love hiking. Calvin and Hobbes are homies!',
-          language: 'en',
-          categories:
-           [
-             {
-               label: 'health treatment - diet',
-               code: '07003003',
-               confidence: 0.999999920957461
-             },
-             {
-               label: 'sports',
-               code: '07003003',
-               confidence: 0.5845345645
-             },
-             {
-               label: 'politics',
-               code: '07003003',
-               confidence: 0.449504443
-             }
-          ]
-        },
-        sentiment: {
-         polarity:'positive',
-         subjectivity:'subjective',
-         text:'yo bananas are flipping awesome, and I also love hiking. Calvin and Hobbes are homies!',
-         polarity_confidence:0.999940037727356,
-         subjectivity_confidence:1
-       },
-       concepts: {
-        text:'yo bananas are flipping awesome, and I also love hiking. Calvin and Hobbes are homies!',
-        language:'en',
-        concepts:{
-          'http://dbpedia.org/resource/Calvin_and_Hobbes':{
-            surfaceForms:[
-              {
-                string:'Calvin and Hobbes',
-                score:1,
-                offset:57
-              }
-            ],
-            types:[
-              'http://dbpedia.org/ontology/Agent',
-              'http://www.wikidata.org/entity/Q215627',
-              'http://schema.org/Person',
-              'http://xmlns.com/foaf/0.1/Person',
-              'http://www.wikidata.org/entity/Q5',
-              'http://dbpedia.org/ontology/Person',
-              'http://www.wikidata.org/entity/Q95074',
-              'http://dbpedia.org/ontology/FictionalCharacter'
-            ],
-            support:320
-          },
-          'http://dbpedia.org/resource/Calvin_and_Shobbes':{
-            surfaceForms:[
-              {
-                string:'Calvin and Shobbes',
-                score:1,
-                offset:57
-              }
-            ],
-            types:[
-              'http://dbpedia.org/ontology/Agent',
-              'http://www.wikidata.org/entity/Q215627',
-              'http://schema.org/Person',
-              'http://xmlns.com/foaf/0.1/Person',
-              'http://www.wikidata.org/entity/Q5',
-              'http://dbpedia.org/ontology/Person',
-              'http://www.wikidata.org/entity/Q95074',
-              'http://dbpedia.org/ontology/FictionalCharacter'
-            ],
-            support:320
-          }
-        },
-        },
-        hashtags: {
-          text: 'yo bananas are flipping awesome, and I also love hiking. Calvin and Hobbes are homies!',
-          language: 'en',
-          hashtags: [ '#CalvinAndHobbes', '#Apples' ]
-          //hashtags: ['#calvinandhobbes']
-        }
-      },
-      errors: [
-        //'error1',
-        'error2'
-      ]
-    }
-  ];
+  angular.element('#convo-container').bind('mousewheel', function (e) {
+    angular.element(this).scrollTop(angular.element(this).scrollTop() - e.originalEvent.wheelDeltaY);
+
+    return false;
+
+  });
 
 
+
+  $scope.keys = Object.keys;
   //make this a watched flag instead
   $scope.only = function(input){
     if(Object.keys(input).length === 1){
       return true;
     }
     return false;
-  }
-
+  };
 
 
   $scope.text = 'yo!! apples and bananas are delicious';
@@ -128,22 +27,21 @@ angular.module('chatCtrl', [])
       return false;
     }
     for (var type in this.types) {
-      if (!this.types[type]){
-        return false;
+      if (this.types[type]){
+        return true;
       }
     }
-    return true;
+    return false;
   };
 
   $scope.aylien = {
-    view: true,
-    enabled: false,
+    view: false,
+    enabled: true,
     types: {
-      classify: false,
-      sentiment: false,
-      concepts: false,
-      entities: false,
-      hashtags: false
+      classify: true,
+      sentiment: true,
+      concepts: true,
+      hashtags: true
     },
     ready: ready
   };
@@ -210,7 +108,7 @@ angular.module('chatCtrl', [])
             errors.push(resp.data[i].type);
           } else {
             type = resp.data[i].type;
-            analyses[type] = resp.data[i].data;
+            analyses[type] = JSON.parse(resp.data[i].data);
           }
         }
         $scope.convo.push({
@@ -350,7 +248,9 @@ angular.module('chatCtrl', [])
 
 
   $scope.chat = function(){
+
     var userInput = false;
+
     if($scope.text.length){
 
       if($scope.aylien.ready()){
@@ -398,36 +298,8 @@ angular.module('chatCtrl', [])
       }
 
     }
+
   };
 
 
-})
-.filter('Perc', function($filter){
-  return function(input){
-    if(input === 1 || parseInt(input) === 1){
-      return 100;
-    }
-    if (typeof input !== 'string'){
-      input = input.toString();
-    }
-    input = input.match(/^-?\d+(?:\.\d{0,4})?/)[0];
-    return (input * 100);
-  }
-})
-
-/*
-.directive('scrollBottom', function () {
-  return {
-    scope: {
-      scrollBottom: "="
-    },
-    link: function (scope, element) {
-      scope.$watchCollection('scrollBottom', function (newValue) {
-        if (newValue)
-        {
-          $(element).scrollTop($(element)[0].scrollHeight);
-        }
-      });
-    }
-  }
-})*/
+});
