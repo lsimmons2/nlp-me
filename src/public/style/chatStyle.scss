@@ -2,29 +2,33 @@
 #chat {
 
   position: relative;
-  //margin-bottom: 65px;
-  bottom: 0px;
+  margin-bottom: 0;
+  bottom: 0;
 
 
   #header {
-    font-family: 'Gloria Hallelujah', cursive;
+
+    h5 {
+      text-align: center;
+    }
+
   }
 
 
   #selection-container {
 
-    font-family: 'Gloria Hallelujah', cursive;
-
 
     .api-selection-container {
 
       border-style: solid;
-      border-color: #989898;
+      //border-color: #989898;
       border-top-width: 2px;
-      border-bottom-width: 0;
+      border-bottom-width: 2px;
+      // border-bottom-width: 0;
       float: left;
       width: 25%;
       text-align: center;
+      cursor: pointer;
 
       &#aylien-selection-container {
         border-left-width: 2px;
@@ -126,32 +130,35 @@
   }
 
   #dropdown-container {
-    clear: left;
 
+    clear: left;
 
     .dropdown {
       position: absolute;
+      border-top-width: 0;
       float: left;
       width: 25%;
+      padding: 0 10px;
       background-color: white;
       border-style: solid;
       text-align: center;
-      font-family: 'Gloria Hallelujah', cursive;
       height: 170px;
+      z-index: 3;
 
       .dropdown-header {
-        font-family: 'Gloria Hallelujah', cursive;
+        color: #333;
         text-align: center;
         font-size: 22px;
       }
 
+
       .api-types-list {
         -moz-column-count: 2;
-        //-moz-column-gap: 20px;
+        // -moz-column-gap: 1px;
         -webkit-column-count: 2;
-        //-webkit-column-gap: 20px;
+        // -webkit-column-gap: 1px;
         column-count: 2;
-        //column-gap: 20px;
+        //column-gap: 1px;
         list-style-type: none;
         padding-left: 0;
       }
@@ -186,13 +193,12 @@
   #convo-container {
 
     clear: left;
-
     height: 80vh;
     background-color: #989898;
     overflow: scroll;
 
     .avatar {
-      margin: 10px 10px 0px 10px;
+      margin: 0px 10px;
       width: 30px;
     }
 
@@ -207,42 +213,153 @@
     .message {
 
       width: 45%;
-      //max-width: 400px;
       background-color: #b8b9b8;
-      margin: 10px;
+      margin: 5px 30px 20px;
       box-shadow: 0px 5px 5px grey;
       border-width: 3px;
       border-style: solid;
+      padding: 0 10px;
+
+      .message-header {
+
+         position: relative;
+         bottom: 10px;
+
+        strong {
+          font-size: 17px;
+        }
+
+        .json-link {
+
+          font-size: 10px;
+          vertical-align: middle;
+
+          a {
+            cursor: pointer;
+            color: inherit;
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+
+      }
+
+
+      pre {
+        background-color: #b8b9b8;
+        border-width: 0;
+        font-size: 11px;
+      }
 
       p {
-        padding: 10px;
+        padding: 0 10px;
       }
 
       .comma-period {
         margin-left: -4px;
       }
 
-    }
+      .outer-triangle {
+        position: relative;
+        top:18px;
+        right: 35px;
+        border: 22px solid;
+      }
 
-    .aylien {
-      border-color: #b2d127;
-    }
+      .inner-triangle {
+        position: relative;
+        top: 22px;
+        right: 71px;
+        border: 23px solid;
+        border-color: #b8b9b8 transparent transparent transparent;
+      }
 
-    .rosette {
-      border-color: #eb3e0f;
-    }
+      &.aylien {
+        border-color: #b2d127;
+        .outer-triangle {
+          border-color: #b2d127 transparent transparent transparent;
+        }
+      }
 
-    .indico {
-      border-color: #333333;
-    }
+      &.rosette {
+        border-color: #eb3e0f;
+        .outer-triangle {
+          border-color: #eb3e0f transparent transparent transparent;
+        }
+      }
 
-    .meaningcloud {
-      border-color: #fe6601;
-    }
+      &.indico {
 
-    .user {
-      margin-left: auto;
-      border-color: #598bdc;
+        border-color: #333333;
+        .outer-triangle {
+          border-color: #333333 transparent transparent transparent;
+        }
+
+        .texttags {
+          h5 {
+            display: inline;
+          }
+          span {
+            font-size: 11px;
+            &:hover {
+              cursor: pointer;
+              text-decoration: underline;
+            }
+          }
+          span:first-of-type {
+            display: inline;
+          }
+          span:nth-of-type(2) {
+            display: none;
+          }
+          ul {
+            display: none;
+          }
+        }
+
+      }
+
+      &.meaningcloud {
+        border-color: #fe6601;
+        .outer-triangle {
+          border-color: #fe6601 transparent transparent transparent;
+        }
+      }
+
+      &.user {
+
+        margin-left: auto;
+        border-color: #598bdc;
+        padding: 10px 10px 0;
+
+        .outer-triangle {
+          display: block;
+          width: 44px;
+          top: -13px;
+          right: -34px;
+          margin-left: auto;
+          border-color: #598bdc transparent transparent transparent;
+        }
+
+        .inner-triangle {
+          display: block;
+          width: 46px;
+          top: -54px;
+          right: -26px;
+          margin-left: auto;
+          border-color: #b8b9b8 transparent transparent transparent;
+        }
+
+        p {
+          text-align: right;
+          position: relative;
+          bottom: 90px;
+          right: 5px;
+        }
+
+      }
+
     }
 
   }

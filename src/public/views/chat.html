@@ -1,73 +1,70 @@
-<link rel="stylesheet" href="./style/chatStyle.css">
 
 
 <div id="chat" onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';">
 
   <div id="header">
-    <!--<h3>Chat!</h3>-->
-    <h5 style="display:inline">Choose which APIs to chat with...</h5>
-    <button style="display:inline" type="submit" ng-click="add()">Add</button>
+    <h5>Choose which APIs to chat with and what analyses you would like each to perform</h5>
   </div>
 
   <div id="selection-container">
 
 
-    <div class="api-selection-container" id="aylien-selection-container">
+    <div class="api-selection-container" id="aylien-selection-container" ng-click="aylien.view = !aylien.view">
 
       <div class="api-selection" id="aylien-selection">
         <img class="api-logo" src="images/aylien-icon.png">
         <span id="aylien-logo-text">AYLIEN</span>
-        <div class="api-checkbox cb1">
+        <!--<div class="api-checkbox cb1">
             <input type="checkbox" id="cb1" ng-model="aylien.enabled">
             <label for="cb1"></label>
-         </div>
-        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="aylien.view = true" ng-hide="aylien.view"></span>
-        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="aylien.view = false" ng-show="aylien.view"></span>
+         </div>-->
+        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="aylien.view"></span>
+        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="aylien.view"></span>
       </div>
 
     </div>
 
 
-    <div class="api-selection-container" id="rosette-selection-container">
+    <div class="api-selection-container" id="rosette-selection-container" ng-click="rosette.view = !rosette.view">
 
       <div class="api-selection" id="rosette-selection">
         <img class="api-logo" src="images/rosette-logo.png">
-        <div class="api-checkbox cb2">
+        <!--<div class="api-checkbox cb2">
             <input type="checkbox" id="cb2" ng-model="rosette.enabled">
             <label for="cb2"></label>
-         </div>
-        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="rosette.view = true" ng-hide="rosette.view"></span>
-        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="rosette.view = false" ng-show="rosette.view"></span>
+         </div>-->
+        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="rosette.view"></span>
+        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="rosette.view"></span>
       </div>
 
     </div>
 
 
-    <div class="api-selection-container" id="indico-selection-container">
+    <div class="api-selection-container" id="indico-selection-container" ng-click="indico.view = !indico.view">
 
       <div class="api-selection" id="indico-selection">
         <img class="api-logo" src="images/indico-logo.png">
-        <div class="api-checkbox cb3">
+        <!--<div class="api-checkbox cb3">
             <input type="checkbox" id="cb3" ng-model="indico.enabled">
             <label for="cb3"></label>
-         </div>
-        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="indico.view = true" ng-hide="indico.view"></span>
-        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="indico.view = false" ng-show="indico.view"></span>
+         </div>-->
+        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="indico.view"></span>
+        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="indico.view"></span>
       </div>
 
     </div>
 
 
-    <div class="api-selection-container" id="meaningcloud-selection-container">
+    <div class="api-selection-container" id="meaningcloud-selection-container" ng-click="meaningcloud.view = !meaningcloud.view">
 
       <div class="api-selection" id="meaningcloud-selection">
-        <img class="api-logo" src="https://s3.amazonaws.com/leosimmons-nlp/meaningcloud-logo">
-        <div class="api-checkbox cb4">
+        <img class="api-logo" src="images/meaningcloud-logo.png">
+        <!--<div class="api-checkbox cb4">
             <input type="checkbox" id="cb4" ng-model="meaningcloud.enabled">
             <label for="cb4"></label>
-         </div>
-        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-click="meaningcloud.view = true" ng-hide="meaningcloud.view"></span>
-        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-click="meaningcloud.view = false" ng-show="meaningcloud.view"></span>
+         </div>-->
+        <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="meaningcloud.view"></span>
+        <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="meaningcloud.view"></span>
       </div>
 
     </div>
@@ -85,21 +82,21 @@
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
         <li>
-          <span>Classify</span>
+          <span tooltip-placement="right" tooltip-class="indico-tooltip" uib-tooltip="Produces confidence scores for different categories in your input.">Classify</span>
           <div class="api-checkbox cb1">
               <input type="checkbox" id="acb-classify" ng-model="aylien.types.classify">
               <label for="acb-classify"></label>
            </div>
         </li>
         <li>
-          <span>Sentiment</span>
+          <span tooltip-placement="right" tooltip-class="indico-tooltip" uib-tooltip="Produces scores for the polarity and subjectivity your input expresses.">Sentiment</span>
           <div class="api-checkbox cb1">
               <input type="checkbox" id="acb-sentiment" ng-model="aylien.types.sentiment">
               <label for="acb-sentiment"></label>
            </div>
         </li>
         <li>
-          <span>Concepts</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different concepts from your input.">Concepts</span>
           <div class="api-checkbox cb1">
               <input type="checkbox" id="acb-concepts" ng-model="aylien.types.concepts">
               <label for="acb-concepts"></label>
@@ -115,7 +112,7 @@
         </li>
         -->
         <li>
-          <span>Hashtags</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different hashtags from your input.">Hashtags</span>
           <div class="api-checkbox cb1">
               <input type="checkbox" id="acb-hashtags" ng-model="aylien.types.hashtags">
               <label for="acb-hashtags"></label>
@@ -129,31 +126,31 @@
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
         <li>
-          <span>Categories</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different categories from your input.">Categories</span>
           <div class="api-checkbox cb2">
               <input type="checkbox" id="rcb-categories" ng-model="rosette.types.categories">
               <label for="rcb-categories"></label>
            </div>
         </li>
         <li>
-          <span>Sentiment</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different entities from your input.">Entities</span>
+          <div class="api-checkbox cb2">
+              <input type="checkbox" id="rcb-entities" ng-model="rosette.types.entities">
+              <label for="rcb-entities"></label>
+           </div>
+        </li>
+        <li>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces a confidence score for whether the overall sentiment of your input is positive or negative and individual confidence scores for whether each detected entity is correlated with positive or negative sentiment.">Sentiment</span>
           <div class="api-checkbox cb2">
               <input type="checkbox" id="rcb-sentiment" ng-model="rosette.types.sentiment">
               <label for="rcb-sentiment"></label>
            </div>
         </li>
         <li>
-          <span>Relationships</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Detects relationships between different entities in your input.">Relationships</span>
           <div class="api-checkbox cb2">
               <input type="checkbox" id="rcb-relationships" ng-model="rosette.types.relationships">
               <label for="rcb-relationships"></label>
-           </div>
-        </li>
-        <li>
-          <span>Entities</span>
-          <div class="api-checkbox cb2">
-              <input type="checkbox" id="rcb-entities" ng-model="rosette.types.entities">
-              <label for="rcb-entities"></label>
            </div>
         </li>
       </ul>
@@ -164,21 +161,21 @@
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Text tags are similiar to categories. A confidence level is given for each tag given to your input. See the response in JSON format to see all 111 possible tags!" >Text Tags</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces confidence scores for the correlation between 111 text tags (similar to categories) and your input." >Text Tags</span>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-texttags" ng-model="indico.types.texttags">
               <label for="icb-texttags"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Positive or negative input? This analysis will give a number between 0 and 1. Above 0.5 indicates positive sentiment, below 0.5 indicates negative sentiment." >Sentiment</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces a sentiment score between 0 and 1 for your input. Above 0.5 indicates positive sentiment, below 0.5 indicates negative sentiment." >Sentiment</span>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-sentiment" ng-model="indico.types.sentiment">
               <label for="icb-sentiment"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts personality traits of yours from your input" >Personality</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces scores for how strongly your input expresses openness, extraversion, agreeableness, and conscientiousness." >Personality</span>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-personality" ng-model="indico.types.personality">
               <label for="icb-personality"></label>
@@ -192,21 +189,21 @@
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Will output a number between 0 and 1 that represents the likelihood that your input expresses a leaning to the 'liberal', 'green', 'conservative', and 'libertarian' political affiliations." >Political Analysis</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces scores that represent the likelihood that your input expresses a leaning to the liberal, green, conservative, and libertarian political affiliations." >Political</span>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-political" ng-model="indico.types.political">
               <label for="icb-political"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Gives confidence levels for what your Myers Briggs Personality Type (MBTI) is." >Personas</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces confidence scores for how likely you are to be one of the 16 Myers Briggs Personality Types (MBTI)." >Personas</span>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-personas" ng-model="indico.types.personas">
               <label for="icb-personas"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Predicts if your input express anger, joy, fear, surprise, or sadness." >Emotion</span>
+          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces scores for how much your input expresses anger, joy, fear, surprise, and sadness." >Emotion</span>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-emotion" ng-model="indico.types.emotion">
               <label for="icb-emotion"></label>
@@ -221,21 +218,21 @@
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
         <li>
-          <span tooltip-placement="left" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts the categories in your input." >Classification</span>
+          <span tooltip-placement="top" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts categories in your input." >Classification</span>
           <div class="api-checkbox cb4">
               <input type="checkbox" id="mccb-classification" ng-model="meaningcloud.types.classification">
               <label for="mccb-classification"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="left" tooltip-class="meaningcloud-tooltip" uib-tooltip="Detects the polarity, subjectivity, irony, and emotional agreement in your input.">Sentiment</span>
+          <span tooltip-placement="top" tooltip-class="meaningcloud-tooltip" uib-tooltip="Detects the polarity, subjectivity, irony, and emotional agreement in your input.">Sentiment</span>
           <div class="api-checkbox cb4">
               <input type="checkbox" id="mccb-sentiment" ng-model="meaningcloud.types.sentiment">
               <label for="mccb-sentiment"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="left" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts the topics in your input.">Topics</span>
+          <span tooltip-placement="top" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts the topics in your input.">Topics</span>
           <div class="api-checkbox cb4">
               <input type="checkbox" id="mccb-topics" ng-model="meaningcloud.types.topics">
               <label for="mccb-topics"></label>
@@ -268,9 +265,16 @@
       <!--=========  AYLIEN MESSAGE  =========-->
 
       <div class="message aylien" ng-if="message.who === 'aylien'" ng-show="message.view === 'json'">
+
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
+
+        <div class="message-header">
+          <strong>Analyses of your input in JSON</strong><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
+        </div>
+        <!--
         <b>Here are my analyses of your input in JSON format</b><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
+      -->
         <div ng-repeat="(type, analysis) in message.analyses">
           <h5>{{type | cap}}</h5>
           <pre>{{analysis | json}}</pre>
@@ -280,14 +284,18 @@
       <div class="message aylien" ng-if="message.who === 'aylien' && message.text === 'error'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
-        <b>Woops! There was an error analyzing your input. Please try again later</b>
+        <div class="message-header">
+          <strong>Woops! There was an error analyzing your input. Please try again later.</strong>
+        </div>
       </div>
 
       <div class="message aylien" ng-if="message.who === 'aylien' && message.text !== 'error'" ng-show="message.view === 'pretty'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
 
-        <b>Hello! Here are my analyses of your input</b><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+        <div class="message-header">
+          <strong>Hello! Here are my analyses of your input</strong><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+        </div>
 
         <div ng-if="message.analyses.classify">
           <h5>Classify</h5>
@@ -401,7 +409,9 @@
       <div class="message rosette" ng-if="message.who === 'rosette'" ng-show="message.view === 'json'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
-        <b>Here are my analyses of your input in JSON format</b><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
+        <div class="message-header">
+          <strong>Analyses of your input in JSON</strong><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
+        </div>
         <div ng-repeat="(type, analysis) in message.analyses">
           <h5>{{type | cap}}</h5>
           <pre>{{analysis | json}}</pre>
@@ -411,14 +421,18 @@
       <div class="message rosette" ng-if="message.who === 'rosette' && message.text === 'error'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
-        <b>Woops! There was an error analyzing your input. Please try again later</b>
+        <div class="message-header">
+          <strong>Woops! There was an error analyzing your input. Please try again later.</strong>
+        </div>
       </div>
 
       <div class="message rosette" ng-if="message.who === 'rosette' && message.text !== 'error'" ng-show="message.view === 'pretty'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
 
-        <b>Hello! Here are my analyses of your input</b><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+        <div class="message-header">
+          <strong>Hello! Here are my analyses of your input</strong><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+        </div>
 
         <div ng-if="message.analyses.categories">
           <h5>Categories</h5>
@@ -531,7 +545,9 @@
       <div class="message indico" ng-if="message.who === 'indico'" ng-show="message.view === 'json'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
-        <b>Here are my analyses of your input in JSON format</b><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
+        <div class="message-header">
+          <strong>Analyses of your input in JSON</strong><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
+        </div>
         <div ng-repeat="(type, analysis) in message.analyses">
           <h5>{{type | cap}}</h5>
           <pre>{{analysis | json}}</pre>
@@ -541,25 +557,28 @@
       <div class="message indico" ng-if="message.who === 'indico' && message.text === 'error'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
-        <b>Woops! There was an error analyzing your input. Please try again later</b>
+        <div class="message-header">
+          <strong>Woops! There was an error analyzing your input. Please try again later.</strong>
+        </div>
       </div>
 
       <div class="message indico" ng-if="message.who === 'indico' && message.text !== 'error'" ng-show="message.view === 'pretty'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
 
-        <b>Hello! Here are my analyses of your input</b><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+        <div class="message-header">
+          <strong>Hello! Here are my analyses of your input</strong><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+        </div>
 
-        <div ng-if="message.analyses.texttags">
+        <div class="texttags" ng-if="message.analyses.texttags">
           <h5>Text Tags</h5>
+          <span ng-click="showTexttags($event)"> - see all 111 text tags</span>
+          <span ng-click="hideTexttags($event)"> - hide text tags</span>
           <ul>
             <li ng-repeat="(texttag, confidence) in message.analyses.texttags.results">
               {{texttag}}: {{confidence}}
             </li>
           </ul>
-          <p ng-if="!message.analyses.categories.length">
-            No categories could be extracted from your input.
-          </p>
         </div>
 
 
@@ -651,7 +670,9 @@
       <div class="message meaningcloud" ng-if="message.who === 'meaningcloud'" ng-show="message.view === 'json'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
-        <b>Here are my analyses of your input in JSON format</b><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
+        <div class="message-header">
+          <strong>Analyses of your input in JSON</strong><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
+        </div>
         <div ng-repeat="(type, analysis) in message.analyses">
           <h5>{{type | cap}}</h5>
           <pre>{{analysis | json}}</pre>
@@ -661,14 +682,18 @@
       <div class="message meaningcloud" ng-if="message.who === 'meaningcloud' && message.text === 'error'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
-        <b>Woops! There was an error analyzing your input. Please try again later</b>
+        <div class="message-header">
+          <strong>Woops! There was an error analyzing your input. Please try again later.</strong>
+        </div>
       </div>
 
       <div class="message meaningcloud" ng-if="message.who === 'meaningcloud' && message.text !== 'error'" ng-show="message.view === 'pretty'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
 
-        <b>Hello! Here are my analyses of your input</b><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+        <div class="message-header">
+          <strong>Hello! Here are my analyses of your input</strong><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+        </div>
 
         <div ng-if="message.analyses.topics">
           <h5>Topics</h5>
