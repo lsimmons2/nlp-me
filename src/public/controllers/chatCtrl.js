@@ -9,7 +9,6 @@ angular.module('chatCtrl', [])
   });
 
 
-
   $scope.keys = Object.keys;
 
   //make this a watched flag instead
@@ -117,7 +116,7 @@ angular.module('chatCtrl', [])
       .catch(function(err){
         $scope.convo.push({
           who: 'aylien',
-          text: 'error'
+          error: true
         })
       });
   };
@@ -159,7 +158,7 @@ angular.module('chatCtrl', [])
       .catch(function(err){
         $scope.convo.push({
           who: 'rosette',
-          text: 'error'
+          error: true
         })
       });
   };
@@ -201,7 +200,7 @@ angular.module('chatCtrl', [])
       .catch(function(err){
         $scope.convo.push({
           who: 'indico',
-          text: 'error'
+          error: true
         })
       });
   };
@@ -242,7 +241,7 @@ angular.module('chatCtrl', [])
       .catch(function(err){
         $scope.convo.push({
           who: 'meaningcloud',
-          text: 'error'
+          error: true
         })
       });
   };
@@ -315,6 +314,6 @@ angular.module('chatCtrl', [])
     angular.element(event.target).next().css('display', 'none');
   };
 
-$scope.convo = [];
+  $scope.convo = [];
 
 });

@@ -10,10 +10,6 @@
       <div class="api-selection" id="aylien-selection">
         <img class="api-logo" src="images/aylien-icon.png">
         <span id="aylien-logo-text">AYLIEN</span>
-        <!--<div class="api-checkbox cb1">
-            <input type="checkbox" id="cb1" ng-model="aylien.enabled">
-            <label for="cb1"></label>
-         </div>-->
         <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="aylien.view"></span>
         <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="aylien.view"></span>
       </div>
@@ -25,10 +21,6 @@
 
       <div class="api-selection" id="rosette-selection">
         <img class="api-logo" src="images/rosette-logo.png">
-        <!--<div class="api-checkbox cb2">
-            <input type="checkbox" id="cb2" ng-model="rosette.enabled">
-            <label for="cb2"></label>
-         </div>-->
         <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="rosette.view"></span>
         <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="rosette.view"></span>
       </div>
@@ -40,10 +32,6 @@
 
       <div class="api-selection" id="indico-selection">
         <img class="api-logo" src="images/indico-logo.png">
-        <!--<div class="api-checkbox cb3">
-            <input type="checkbox" id="cb3" ng-model="indico.enabled">
-            <label for="cb3"></label>
-         </div>-->
         <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="indico.view"></span>
         <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="indico.view"></span>
       </div>
@@ -55,10 +43,6 @@
 
       <div class="api-selection" id="meaningcloud-selection">
         <img class="api-logo" src="images/meaningcloud-logo.png">
-        <!--<div class="api-checkbox cb4">
-            <input type="checkbox" id="cb4" ng-model="meaningcloud.enabled">
-            <label for="cb4"></label>
-         </div>-->
         <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="meaningcloud.view"></span>
         <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="meaningcloud.view"></span>
       </div>
@@ -262,7 +246,7 @@
         </div>
       </div>
 
-      <div class="message aylien" ng-if="message.who === 'aylien' && message.text === 'error'">
+      <div class="message aylien" ng-if="message.who === 'aylien' && message.error">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
         <div class="message-header">
@@ -270,7 +254,7 @@
         </div>
       </div>
 
-      <div class="message aylien" ng-if="message.who === 'aylien' && message.text !== 'error'" ng-show="message.view === 'pretty'">
+      <div class="message aylien" ng-if="message.who === 'aylien' && !message.error" ng-show="message.view === 'pretty'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
 
@@ -312,7 +296,6 @@
           </p>
         </div>
 
-
         <div ng-if="message.analyses.concepts.concepts">
           <h5>Concepts</h5>
 
@@ -340,7 +323,6 @@
             </span>
           </p>
         </div>
-
 
         <div ng-if="message.analyses.hashtags.hashtags">
           <h5>Hashtags</h5>
@@ -400,7 +382,7 @@
         </div>
       </div>
 
-      <div class="message rosette" ng-if="message.who === 'rosette' && message.text === 'error'">
+      <div class="message rosette" ng-if="message.who === 'rosette' && message.error">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
         <div class="message-header">
@@ -408,7 +390,7 @@
         </div>
       </div>
 
-      <div class="message rosette" ng-if="message.who === 'rosette' && message.text !== 'error'" ng-show="message.view === 'pretty'">
+      <div class="message rosette" ng-if="message.who === 'rosette' && !message.error" ng-show="message.view === 'pretty'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
 
@@ -539,7 +521,7 @@
         </div>
       </div>
 
-      <div class="message indico" ng-if="message.who === 'indico' && message.text === 'error'">
+      <div class="message indico" ng-if="message.who === 'indico' && message.error">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
         <div class="message-header">
@@ -547,7 +529,7 @@
         </div>
       </div>
 
-      <div class="message indico" ng-if="message.who === 'indico' && message.text !== 'error'" ng-show="message.view === 'pretty'">
+      <div class="message indico" ng-if="message.who === 'indico' && !message.error" ng-show="message.view === 'pretty'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
 
@@ -671,7 +653,7 @@
         </div>
       </div>
 
-      <div class="message meaningcloud" ng-if="message.who === 'meaningcloud' && message.text === 'error'">
+      <div class="message meaningcloud" ng-if="message.who === 'meaningcloud' && message.error">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
         <div class="message-header">
@@ -679,7 +661,7 @@
         </div>
       </div>
 
-      <div class="message meaningcloud" ng-if="message.who === 'meaningcloud' && message.text !== 'error'" ng-show="message.view === 'pretty'">
+      <div class="message meaningcloud" ng-if="message.who === 'meaningcloud' && !message.error" ng-show="message.view === 'pretty'">
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
 
