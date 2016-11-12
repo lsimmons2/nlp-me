@@ -15,6 +15,9 @@ angular.module('aboutCtrl', [])
     };
     $http.post('/feedback', data)
       .then(function(resp){
+        $scope.name = '';
+        $scope.email = '';
+        $scope.message = '';
         $scope.feedbackError = false;
         $scope.feedbackSuccess = true;
       })
