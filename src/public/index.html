@@ -20,8 +20,8 @@
 
 
     <script type='text/javascript' src='./controllers/navCtrl.js'></script>
-    <script type='text/javascript' src='./controllers/apiSearchCtrl.js'></script>
     <script type='text/javascript' src='./controllers/chatCtrl.js'></script>
+    <script type='text/javascript' src='./controllers/aboutCtrl.js'></script>
 
 
     <script type='text/javascript' src='./routes.js'></script>
@@ -29,8 +29,12 @@
     <script type='text/javascript' src='./filters.js'></script>
     <script type='text/javascript' src='./directives.js'></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:normal,bolder" rel="stylesheet">
     <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/aboutStyle.css">
+    <link rel="stylesheet" href="./style/chatStyle.css">
 
 
   </head>
@@ -38,6 +42,7 @@
   <body ng-app="App">
 
     <nav class="navbar navbar-default" id="nav">
+
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -48,8 +53,7 @@
           </button>
 
         </div>
-        <a class="navbar-brand" href="#/">
-          <!--<img src="" alt="home logo">-->
+        <a class="navbar-brand" href="#/about">
           NLP ME
         </a>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -61,14 +65,12 @@
               <a class="nav-item" href="#/about">About</a>
             </li>
             <li>
-              <a class="nav-item" href="#/apis">Search APIs</a>
-            </li>
-            <li>
               <a class="nav-item" href="#/chat">Chat with APIs</a>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
+
     </nav>
 
     <div class="container-fluid" ng-view> </div>

@@ -1,7 +1,7 @@
 angular.module('App', [
 	'ngRoute',
 	'routes',
-	'apiSearchCtrl',
+	'aboutCtrl',
 	'chatCtrl',
 	'ui.bootstrap'
 ]);

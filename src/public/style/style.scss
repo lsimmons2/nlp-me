@@ -1,52 +1,22 @@
 
-.navbar-default .navbar-brand {
-
-  color: #f9972c;
-  font-family: 'Gloria Hallelujah', cursive;
-
-}
-
-.navbar-default .navbar-nav > li > a {
-  color: #f9972c;
-  font-family: 'Gloria Hallelujah', cursive;
-}
+* {
+    font-family: 'Montserrat', sans-serif;
+  }
 
 
-.navbar-default {
-  background-color: #9776c1;
-}
+.navbar.navbar-default {
 
-.navbar {
+  background-color: #598bdc;
+  border-color: #598bdc;
   border-radius: 0;
-}
+  box-shadow: 0px 5px 10px #bdbdbd;
 
-#nav-brand-extension:hover {
-  color: #f9972c;
-}
+  a, li > a {
+    color: #d4d4d4;
+  }
 
-.api-container {
-  float: left;
-  display: inline-block;
-  width: 33%;
-}
+  #nav-brand-extension:hover {
+    color: #d4d4d4;
+  }
 
-
-.api-title {
-  display: inline;
-}
-
-
-.api-dropdown {
-  list-style-type: none;
-}
-
-
-.api-results-container {
-  float: left;
-  display: inline-block;
-  width: 33%;
-}
-
-.alert > p {
-  text-align: center;
 }
