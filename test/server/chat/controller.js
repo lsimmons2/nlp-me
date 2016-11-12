@@ -3,14 +3,21 @@ var request = require('supertest');
 var chai = require('chai');
 var should = chai.should();
 
-var app = require('../../dist/server/app.js');
-var config = require('../../config/config');
+var app = require('../../../dist/server/app.js');
+var config = require('../../../config/config');
 var agent = request.agent(app);
 var analyses;
 var analysisData;
+var util = require('util');
+var fs = require('fs');
+var response = require('./aylienRes');
+
+
+
 
 
 describe('POST /chat/aylien', function(){
+
 
   it('returns all analyses if requested', function(done){
     agent
@@ -188,6 +195,7 @@ describe('POST /chat/aylien', function(){
 
 
 
+
 describe('POST /chat/rosette', function(){
 
   it('returns all analyses if requested', function(done){
@@ -252,6 +260,7 @@ describe('POST /chat/rosette', function(){
       });
   });
 
+
   it('sentiment', function(done){
     agent
       .post('/chat/rosette')
@@ -310,7 +319,7 @@ describe('POST /chat/rosette', function(){
         types: [
           'relationships'
         ],
-        text: 'calvin and hobbes are best friends'
+        text: 'Hillary Clinton attended Wellesley College. Barack Obama attended Occidental and Columbia.'
       })
       .expect(200)
       .end(function(err, res){
@@ -322,9 +331,8 @@ describe('POST /chat/rosette', function(){
         analyses[0].data.relationships.should.be.an('array');
         if(analyses[0].data.relationships.length > 0){
           for (var i = 0; i < analyses[0].data.relationships.length; i++) {
-            //console.log(analyses[0].data.relationships[i]);
-            //analyses[0].data.categories[i].label.should.be.a('string');
-            //analyses[0].data.categories.confidence.should.be.within(0,1);
+            analyses[0].data.categories[i].label.should.be.a('string');
+            analyses[0].data.categories.confidence.should.be.within(0,1);
           }
         }
         done();
@@ -509,30 +517,7 @@ describe('POST /chat/indico', function(){
       });
   });
 
-  it('emotion', function(done){
-    agent
-      .post('/chat/indico')
-      .send({
-        types: [
-          'emotion'
-        ],
-        text: 'I love bananas and apples and oranges and batman and black tea'
-      })
-      .expect(200)
-      .end(function(err, res){
-        if(err) return done(err);
-        analyses = res.body;
-        analyses.should.be.an('array');
-        analyses.length.should.equal(1);
-        analyses[0].data.results.anger.should.be.within(0,1);
-        analyses[0].data.results.joy.should.be.within(0,1);
-        analyses[0].data.results.sadness.should.be.within(0,1);
-        analyses[0].data.results.surprise.should.be.within(0,1);
-        done();
-      });
-  });
-
-  it('emotion', function(done){
+  it('personas', function(done){
     agent
       .post('/chat/indico')
       .send({
@@ -547,11 +532,10 @@ describe('POST /chat/indico', function(){
         analyses = res.body;
         analyses.should.be.an('array');
         analyses.length.should.equal(1);
-        console.log(analyses[0].data);/*
         analyses[0].data.results.anger.should.be.within(0,1);
         analyses[0].data.results.joy.should.be.within(0,1);
         analyses[0].data.results.sadness.should.be.within(0,1);
-        analyses[0].data.results.surprise.should.be.within(0,1);*/
+        analyses[0].data.results.surprise.should.be.within(0,1);
         done();
       });
   });
@@ -627,6 +611,7 @@ describe('POST /chat/meaningcloud', function(){
             analysisData.concept_list[i].relevance.should.be.a('string');
           }
         }
+
         done();
       });
   });
@@ -652,7 +637,7 @@ describe('POST /chat/meaningcloud', function(){
         //analysisData.status.msg.should.be.oneOf([]);
         analysisData.subjectivity.should.be.a('string');
         parseInt(analysisData.confidence).should.be.a('number');
-        analysisData.irony.should.be.a('string')
+        analysisData.irony.should.be.a('string');
         done();
       });
   });

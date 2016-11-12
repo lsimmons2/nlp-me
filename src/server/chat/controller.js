@@ -22,10 +22,12 @@ import config from '../../../config/config';
 
 function hitApi(options, type){
 
-
   return new Promise((resolve, reject) => {
-    request.post(options, function(err, response, body){
+    request.post(options, (err, response, body) => {
       if(err || response.statusCode > 200){
+        console.error('err: ', err);
+        console.error('from: ', body);
+        console.error('code: ', response.statusCode);
         return resolve({
           type: type,
           data: 'error'
@@ -127,7 +129,7 @@ function rosette(req, res, next){
 
 //indicoSdk.apiKey = config.indico.key;
 /*
-*  indico sdk uses following methods:
+*  indico sdk uses following methods/endpoints:
 *   - texttags
 *   - sentiment
 *   - personality
@@ -193,7 +195,7 @@ function mcOptions(type, text){
     return options;
   }
   else {
-    throw new Error();
+    throw new Error('Wrong analysis type');
   }
 };
 
