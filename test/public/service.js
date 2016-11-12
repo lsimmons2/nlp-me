@@ -98,6 +98,7 @@ angular.module('testService', []).factory('TestService', function() {
 
 
 
+
   rosette.categories = function(){
     return [
       {
@@ -639,27 +640,6 @@ angular.module('testService', []).factory('TestService', function() {
         "data": "error"
       }
     ]
-  };
-
-
-  function rosetteChatRes(){
-    return [
-      {
-        type: 'categories',
-        data: {
-          categories: [
-            {
-              confidence: 0.05183973045327137,
-              label: 'FOOD_AND_DRINK'
-            }
-          ]
-        }
-      },
-      {
-        type: 'sentiment',
-        data: 'error'
-      }
-      ]
   };
 
 

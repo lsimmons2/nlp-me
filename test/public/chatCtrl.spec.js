@@ -22,6 +22,8 @@ describe('ChatController', function(){
     });
   }));
 
+
+
   describe('initial state', function(){
 
     it('$scope.aylien', function(){
@@ -54,6 +56,8 @@ describe('ChatController', function(){
 
   });
 
+
+
   describe('chatWithAylien()', function(){
 
 
@@ -64,18 +68,17 @@ describe('ChatController', function(){
     it('classify', function(){
 
       $scope.text = 'sah';
-      $scope.aylien.classify = true;
+      $scope.aylien.types.classify = true;
 
       $httpBackend.whenPOST('/chat/aylien').respond(200, service.aylien.classify());
 
-      $scope.chatWithAylien();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('aylien');
-      message.analyses.should.have.property('classify');
-      message.analyses.classify.should.have.property('categories');
+      message.analyses.classify.categories.should.be.an('array');
       message.errors.length.should.equal(3);
       for (var i = 0; i < message.errors.length; i++) {
         message.errors[i].should.be.oneOf(['sentiment', 'concepts', 'hashtags'])
@@ -86,21 +89,20 @@ describe('ChatController', function(){
     it('sentiment', function(){
 
       $scope.text = 'sah';
-      $scope.aylien.sentiment = true;
+      $scope.aylien.types.sentiment = true;
 
       $httpBackend.whenPOST('/chat/aylien').respond(200, service.aylien.sentiment());
 
-      $scope.chatWithAylien();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('aylien');
-      message.analyses.should.have.property('sentiment');
-      message.analyses.sentiment.should.have.property('subjectivity');
-      message.analyses.sentiment.should.have.property('subjectivity_confidence');
-      message.analyses.sentiment.should.have.property('polarity');
-      message.analyses.sentiment.should.have.property('polarity_confidence');
+      message.analyses.sentiment.subjectivity.should.be.a('string');
+      message.analyses.sentiment.subjectivity_confidence.should.be.a('number');
+      message.analyses.sentiment.polarity.should.be.a('string');
+      message.analyses.sentiment.polarity_confidence.should.be.a('number');
       message.errors.length.should.equal(3);
       for (var i = 0; i < message.errors.length; i++) {
         message.errors[i].should.be.oneOf(['classify', 'concepts', 'hashtags'])
@@ -111,18 +113,16 @@ describe('ChatController', function(){
     it('concepts', function(){
 
       $scope.text = 'sah';
-      $scope.aylien.concepts = true;
+      $scope.aylien.types.concepts = true;
 
       $httpBackend.whenPOST('/chat/aylien').respond(200, service.aylien.concepts());
 
-      $scope.chatWithAylien();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('aylien');
-      message.analyses.should.have.property('concepts');
-      message.analyses.concepts.should.have.property('concepts');
       message.analyses.concepts.concepts.should.be.an('object');
       message.errors.length.should.equal(3);
       for (var i = 0; i < message.errors.length; i++) {
@@ -134,18 +134,17 @@ describe('ChatController', function(){
     it('hashtags', function(){
 
       $scope.text = 'sah';
-      $scope.aylien.hashtags = true;
+      $scope.aylien.types.hashtags = true;
 
       $httpBackend.whenPOST('/chat/aylien').respond(200, service.aylien.hashtags());
 
-      $scope.chatWithAylien();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      $scope.convo[0].who.should.equal('user');
+      var message = $scope.convo[1];
       message.who.should.equal('aylien');
-      message.analyses.should.have.property('hashtags');
-      message.analyses.hashtags.should.have.property('hashtags');
       message.analyses.hashtags.hashtags.should.be.an('array');
       message.errors.length.should.equal(3);
       for (var i = 0; i < message.errors.length; i++) {
@@ -154,7 +153,67 @@ describe('ChatController', function(){
       $scope.text.should.equal('');
     });
 
+    it('handles 500 when it\'s the only API called', function(){
+      $scope.text = 'sah';
+      $scope.aylien.types.hashtags = true;
+      $httpBackend.whenPOST('/chat/aylien').respond(500);
+      $scope.chat();
+      $httpBackend.flush();
+
+      $scope.convo.length.should.equal(2);
+      $scope.convo[0].who.should.equal('user');
+      $scope.convo[0].text.should.equal('sah');
+      var message = $scope.convo[1];
+      message.who.should.equal('aylien');
+      message.error.should.equal(true);
+
+    });
+
+    it('handles 500 when called with other APIs', function(){
+
+      $scope.text = 'sah';
+      $scope.aylien.types.hashtags = true;
+      $scope.rosette.types.categories = true;
+      $scope.indico.types.emotion = true;
+      $scope.meaningcloud.types.classification = true;
+      $httpBackend.whenPOST('/chat/aylien').respond(500);
+      $httpBackend.whenPOST('/chat/rosette').respond(200, service.rosette.categories);
+      $httpBackend.whenPOST('/chat/indico').respond(200, service.indico.emotion);
+      $httpBackend.whenPOST('/chat/meaningcloud').respond(200, service.meaningcloud.classification);
+      $scope.chat();
+      $httpBackend.flush();
+
+      $scope.convo.length.should.equal(5);
+      $scope.convo[0].who.should.equal('user');
+      $scope.convo[0].text.should.equal('sah');
+      var apiMessages = $scope.convo.slice(1,6);
+      for (var i = 0; i < apiMessages.length; i++) {
+        apiMessages[i].who.should.be.oneOf(['aylien', 'indico', 'rosette', 'meaningcloud']);
+        if(apiMessages[i].who !== 'aylien'){
+          apiMessages[i].analyses.should.be.an('object');
+        } else {
+          apiMessages[i].error.should.equal(true);
+        }
+      }
+    });
+
+    it('does\'t fire when $scope.text is empty', function(){
+
+      $scope.text = '';
+      $scope.aylien.classify = true;
+      $scope.aylien.sentiment = true;
+      $scope.aylien.concepts = true;
+      $scope.aylien.hashtags = true;
+
+      $scope.chat();
+
+      $scope.convo.length.should.equal(0);
+      $scope.text.should.equal('');
+
+    });
+
   });
+
 
 
   describe('chatWithRosette()', function(){
@@ -168,15 +227,15 @@ describe('ChatController', function(){
     it('categories', function(){
 
       $scope.text = 'sah';
-      $scope.rosette.categories = true;
+      $scope.rosette.types.categories = true;
 
       $httpBackend.whenPOST('/chat/rosette').respond(200, service.rosette.categories());
 
-      $scope.chatWithRosette();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('rosette');
       message.analyses.should.have.property('categories');
       message.analyses.categories.categories.should.be.an('array');
@@ -191,15 +250,15 @@ describe('ChatController', function(){
     it('sentiment', function(){
 
       $scope.text = 'sah';
-      $scope.rosette.sentiment = true;
+      $scope.rosette.types.sentiment = true;
 
       $httpBackend.whenPOST('/chat/rosette').respond(200, service.rosette.sentiment());
 
-      $scope.chatWithRosette();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('rosette');      message.analyses.should.have.property('sentiment');
       message.analyses.sentiment.document.should.be.an('object');
       message.analyses.sentiment.entities.should.be.an('array');
@@ -213,15 +272,15 @@ describe('ChatController', function(){
 
     it('relationships', function(){
       $scope.text = 'sah';
-      $scope.rosette.relationships = true;
+      $scope.rosette.types.relationships = true;
 
       $httpBackend.whenPOST('/chat/rosette').respond(200, service.rosette.relationships());
 
-      $scope.chatWithRosette();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('rosette');      message.analyses.should.have.property('relationships');
       message.analyses.relationships.relationships.should.be.an('array');
       message.errors.length.should.equal(3);
@@ -234,15 +293,15 @@ describe('ChatController', function(){
 
     it('entities', function(){
       $scope.text = 'sah';
-      $scope.rosette.entities = true;
+      $scope.rosette.types.entities = true;
 
       $httpBackend.whenPOST('/chat/rosette').respond(200, service.rosette.entities());
 
-      $scope.chatWithRosette();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('rosette');      message.analyses.should.have.property('entities');
       message.analyses.entities.entities.should.be.an('array');
       message.errors.length.should.equal(3);
@@ -253,7 +312,70 @@ describe('ChatController', function(){
     });
 
 
+    it('handles 500 when it\'s the only API called', function(){
+
+      $scope.text = 'sah';
+      $scope.rosette.types.categories = true;
+      $httpBackend.whenPOST('/chat/rosette').respond(500);
+      $scope.chat();
+      $httpBackend.flush();
+
+      $scope.convo.length.should.equal(2);
+      $scope.convo[0].who.should.equal('user');
+      $scope.convo[0].text.should.equal('sah');
+      $scope.convo[1].who.should.equal('rosette');
+      $scope.convo[1].error.should.equal(true);
+
+    });
+
+
+    it('handles 500 when called with other APIs', function(){
+
+      $scope.text = 'sah';
+      $scope.aylien.types.classify = true;
+      $scope.rosette.types.categories = true;
+      $scope.indico.types.emotion = true;
+      $scope.meaningcloud.types.classification = true;
+      $httpBackend.whenPOST('/chat/rosette').respond(500);
+      $httpBackend.whenPOST('/chat/aylien').respond(200, service.aylien.classify);
+      $httpBackend.whenPOST('/chat/indico').respond(200, service.indico.emotion);
+      $httpBackend.whenPOST('/chat/meaningcloud').respond(200, service.meaningcloud.classification);
+      $scope.chat();
+      $httpBackend.flush();
+
+      $scope.convo.length.should.equal(5);
+      $scope.convo[0].who.should.equal('user');
+      $scope.convo[0].text.should.equal('sah');
+      var apiMessages = $scope.convo.slice(1,6);
+      for (var i = 0; i < apiMessages.length; i++) {
+        apiMessages[i].who.should.be.oneOf(['aylien', 'indico', 'rosette', 'meaningcloud']);
+        if(apiMessages[i].who !== 'rosette'){
+          apiMessages[i].analyses.should.be.an('object');
+        } else {
+          apiMessages[i].error.should.equal(true);
+        }
+      }
+    });
+
+
+    it('doesn\'t fire when $scope.text is empty', function(){
+
+      $scope.text = '';
+      $scope.rosette.categories = true;
+      $scope.rosette.entities = true;
+      $scope.rosette.relationships = true;
+      $scope.rosette.sentiment = true;
+
+      $scope.chat();
+
+      $scope.convo.length.should.equal(0);
+      $scope.text.should.equal('');
+
+    });
+
+
   });
+
 
 
   describe('chatWithIndico()', function(){
@@ -267,15 +389,15 @@ describe('ChatController', function(){
     it('texttags', function(){
 
       $scope.text = 'sah';
-      $scope.indico.texttags = true;
+      $scope.indico.types.texttags = true;
 
       $httpBackend.whenPOST('/chat/indico').respond(200, service.indico.texttags());
 
-      $scope.chatWithIndico();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('indico');
       message.analyses.should.have.property('texttags');
       message.analyses.texttags.results.should.be.an('object');
@@ -286,18 +408,19 @@ describe('ChatController', function(){
       $scope.text.should.equal('');
     });
 
+
     it('sentiment', function(){
 
       $scope.text = 'sah';
-      $scope.indico.sentiment = true;
+      $scope.indico.types.sentiment = true;
 
       $httpBackend.whenPOST('/chat/indico').respond(200, service.indico.sentiment());
 
-      $scope.chatWithIndico();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('indico');
       message.analyses.should.have.property('sentiment');
       message.analyses.sentiment.results.should.be.a('number');
@@ -311,15 +434,15 @@ describe('ChatController', function(){
 
     it('personality', function(){
       $scope.text = 'sah';
-      $scope.indico.personality = true;
+      $scope.indico.types.personality = true;
 
       $httpBackend.whenPOST('/chat/indico').respond(200, service.indico.personality());
 
-      $scope.chatWithIndico();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('indico');
       message.analyses.should.have.property('personality');
       message.analyses.personality.results.should.be.an('object');
@@ -333,15 +456,15 @@ describe('ChatController', function(){
 
     it('people', function(){
       $scope.text = 'sah';
-      $scope.indico.people = true;
+      $scope.indico.types.people = true;
 
       $httpBackend.whenPOST('/chat/indico').respond(200, service.indico.people());
 
-      $scope.chatWithIndico();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('indico');
       message.analyses.should.have.property('people');
       message.analyses.people.results.should.be.an('array');
@@ -355,15 +478,15 @@ describe('ChatController', function(){
 
     it('political', function(){
       $scope.text = 'sah';
-      $scope.indico.political = true;
+      $scope.indico.types.political = true;
 
       $httpBackend.whenPOST('/chat/indico').respond(200, service.indico.political());
 
-      $scope.chatWithIndico();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('indico');
       message.analyses.should.have.property('political');
       message.analyses.political.results.should.be.an('object');
@@ -377,15 +500,15 @@ describe('ChatController', function(){
 
     it('emotion', function(){
       $scope.text = 'sah';
-      $scope.indico.emotion = true;
+      $scope.indico.types.emotion = true;
 
       $httpBackend.whenPOST('/chat/indico').respond(200, service.indico.emotion());
 
-      $scope.chatWithIndico();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('indico');
       message.analyses.should.have.property('emotion');
       message.analyses.emotion.results.should.be.an('object');
@@ -397,9 +520,71 @@ describe('ChatController', function(){
     });
 
 
+    it('handles 500 when it\'s the only API called', function(){
+
+      $scope.text = 'sah';
+      $scope.indico.types.people = true;
+      $httpBackend.whenPOST('/chat/indico').respond(500);
+      $scope.chat();
+      $httpBackend.flush();
+
+      $scope.convo.length.should.equal(2);
+      $scope.convo[0].who.should.equal('user');
+      $scope.convo[0].text.should.equal('sah');
+      $scope.convo[1].who.should.equal('indico');
+      $scope.convo[1].error.should.equal(true);
+
+    });
+
+
+    it('handles 500 when called with other APIs', function(){
+
+      $scope.text = 'sah';
+      $scope.aylien.types.classify = true;
+      $scope.rosette.types.categories = true;
+      $scope.indico.types.emotion = true;
+      $scope.meaningcloud.types.classification = true;
+      $httpBackend.whenPOST('/chat/indico').respond(500);
+      $httpBackend.whenPOST('/chat/aylien').respond(200, service.aylien.classify);
+      $httpBackend.whenPOST('/chat/rosette').respond(200, service.rosette.categories);
+      $httpBackend.whenPOST('/chat/meaningcloud').respond(200, service.meaningcloud.classification);
+      $scope.chat();
+      $httpBackend.flush();
+
+      $scope.convo.length.should.equal(5);
+      $scope.convo[0].who.should.equal('user');
+      $scope.convo[0].text.should.equal('sah');
+      var apiMessages = $scope.convo.slice(1,6);
+      for (var i = 0; i < apiMessages.length; i++) {
+        apiMessages[i].who.should.be.oneOf(['aylien', 'indico', 'rosette', 'meaningcloud']);
+        if(apiMessages[i].who !== 'indico'){
+          apiMessages[i].analyses.should.be.an('object');
+        } else {
+          apiMessages[i].error.should.equal(true);
+        }
+      }
+    });
+
+
+    it('doesn\'t fire when $scope.text is empty', function(){
+
+      $scope.text = '';
+      $scope.indico.emotion = true;
+      $scope.indico.people = true;
+      $scope.indico.personality = true;
+      $scope.indico.political = true;
+      $scope.indico.sentiment = true;
+      $scope.indico.texttags = true;
+
+      $scope.chat();
+
+      $scope.convo.length.should.equal(0);
+      $scope.text.should.equal('');
+
+    });
+
 
   });
-
 
 
 
@@ -413,15 +598,15 @@ describe('ChatController', function(){
 
     it('classification', function(){
       $scope.text = 'sah';
-      $scope.meaningcloud.classification = true;
+      $scope.meaningcloud.types.classification = true;
 
       $httpBackend.whenPOST('/chat/meaningcloud').respond(200, service.meaningcloud.classification());
 
-      $scope.chatWithMeaningcloud();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('meaningcloud');
       message.analyses.should.have.property('classification');
       message.analyses.classification.category_list.should.be.an('array');
@@ -435,15 +620,15 @@ describe('ChatController', function(){
 
     it('sentiment', function(){
       $scope.text = 'sah';
-      $scope.meaningcloud.sentiment = true;
+      $scope.meaningcloud.types.sentiment = true;
 
       $httpBackend.whenPOST('/chat/meaningcloud').respond(200, service.meaningcloud.sentiment());
 
-      $scope.chatWithMeaningcloud();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('meaningcloud');
       message.analyses.should.have.property('sentiment');
       message.analyses.sentiment.subjectivity.should.be.a('string');
@@ -455,17 +640,18 @@ describe('ChatController', function(){
       $scope.text.should.equal('');
     });
 
+
     it('topics', function(){
       $scope.text = 'sah';
-      $scope.meaningcloud.topics = true;
+      $scope.meaningcloud.types.topics = true;
 
       $httpBackend.whenPOST('/chat/meaningcloud').respond(200, service.meaningcloud.topics());
 
-      $scope.chatWithMeaningcloud();
+      $scope.chat();
       $httpBackend.flush();
 
-      $scope.convo.length.should.equal(1);
-      var message = $scope.convo[0];
+      $scope.convo.length.should.equal(2);
+      var message = $scope.convo[1];
       message.who.should.equal('meaningcloud');
       message.analyses.should.have.property('topics');
       message.analyses.topics.entity_list.should.be.an('array');
@@ -477,7 +663,70 @@ describe('ChatController', function(){
     });
 
 
+    it('handles 500 when it\'s the only API called', function(){
+
+      $scope.text = 'sah';
+      $scope.meaningcloud.types.sentiment = true;
+      $httpBackend.whenPOST('/chat/meaningcloud').respond(500);
+      $scope.chat();
+      $httpBackend.flush();
+
+      $scope.convo.length.should.equal(2);
+      $scope.convo[0].who.should.equal('user');
+      $scope.convo[0].text.should.equal('sah');
+      $scope.convo[1].who.should.equal('meaningcloud');
+      $scope.convo[1].error.should.equal(true);
+
+    });
+
+
+    it('handles 500 when called with other APIs', function(){
+
+      $scope.text = 'sah';
+      $scope.aylien.types.classify = true;
+      $scope.rosette.types.categories = true;
+      $scope.indico.types.emotion = true;
+      $scope.meaningcloud.types.classification = true;
+
+      $httpBackend.whenPOST('/chat/meaningcloud').respond(500);
+      $httpBackend.whenPOST('/chat/aylien').respond(200, service.aylien.classify);
+      $httpBackend.whenPOST('/chat/rosette').respond(200, service.rosette.categories);
+      $httpBackend.whenPOST('/chat/indico').respond(200, service.indico.emotion);
+      $scope.chat();
+      $httpBackend.flush();
+
+      $scope.convo.length.should.equal(5);
+      $scope.convo[0].who.should.equal('user');
+      $scope.convo[0].text.should.equal('sah');
+      var apiMessages = $scope.convo.slice(1,6);
+      for (var i = 0; i < apiMessages.length; i++) {
+        apiMessages[i].who.should.be.oneOf(['aylien', 'indico', 'rosette', 'meaningcloud']);
+        if(apiMessages[i].who !== 'meaningcloud'){
+          apiMessages[i].analyses.should.be.an('object');
+        } else {
+          apiMessages[i].error.should.equal(true);
+        }
+      }
+    });
+
+
+    it('doesn\'t fire when $scope.text is empty', function(){
+
+      $scope.text = '';
+      $scope.meaningcloud.classification = true;
+      $scope.meaningcloud.sentiment = true;
+      $scope.meaningcloud.topics = true;
+
+      $scope.chat();
+
+      $scope.convo.length.should.equal(0);
+      $scope.text.should.equal('');
+
+    });
+
+
   });
+
 
 
 });
