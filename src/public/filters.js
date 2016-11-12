@@ -4,7 +4,7 @@ angular.module('App')
     return input.charAt(0).toUpperCase() + input.slice(1);
   }
 })
-.filter('Perc', function($filter){
+.filter('perc', function($filter){
   return function(input){
     if(input === 1 || parseInt(input) === 1){
       return 100;
@@ -14,5 +14,17 @@ angular.module('App')
     }
     input = input.match(/^-?\d+(?:\.\d{0,4})?/)[0];
     return (input * 100);
+  }
+})
+.filter('oneToTen', function($filter){
+  return function(input){
+    if(input === 1 || parseInt(input) === 1){
+      return 1;
+    }
+    if (typeof input !== 'string'){
+      input = input.toString();
+    }
+    input = input.match(/^-?\d+(?:\.\d{0,2})?/)[0];
+    return input;
   }
 })

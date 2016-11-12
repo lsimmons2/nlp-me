@@ -237,9 +237,7 @@
         <div class="message-header">
           <strong class="data">Analyses of your input in JSON</strong><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
         </div>
-        <!--
-        <b>Here are my analyses of your input in JSON format</b><span class="json-link"> - <a ng-click="message.view = 'pretty'">view in English</a></span>
-        -->
+
         <div ng-repeat="(type, analysis) in message.analyses">
           <h5>{{type | cap}}</h5>
           <pre>{{analysis | json}}</pre>
@@ -268,7 +266,7 @@
             I'm
             <span ng-repeat="category in message.analyses.classify.categories track by $index">
               <span ng-if="$last">and</span>
-              <strong class="data">{{category.confidence | Perc}}%</strong>
+              <strong class="data">{{ category.confidence | perc }}%</strong>
               confident that
               <strong class="data">{{category.label}}</strong>
               is a category
@@ -285,11 +283,11 @@
           <h5>Sentiment</h5>
           <p>
             I'm
-            <strong class="data">{{message.analyses.sentiment.subjectivity_confidence | Perc}}%</strong>
+            <strong class="data">{{ message.analyses.sentiment.subjectivity_confidence | perc }}%</strong>
             confident that the subjectivity is
             <strong class="data">{{message.analyses.sentiment.subjectivity}}</strong>
             and
-            <strong class="data">{{message.analyses.sentiment.polarity_confidence | Perc}}%</strong>
+            <strong class="data">{{ message.analyses.sentiment.polarity_confidence | perc }}%</strong>
             confident that the polarity is
             <strong class="data">{{message.analyses.sentiment.polarity}}</strong>
             <span class="comma-period">.</span>
@@ -403,12 +401,12 @@
           <p ng-if="message.analyses.categories.categories.length">
             I'm
             <span ng-repeat="category in message.analyses.categories.categories track by $index">
-              <span ng-if="$last">and</span>
-              <strong class="data">{{category.confidence}}%</strong>
+              <span ng-if="$last && message.analyses.categories.categories.length > 1">and</span>
+              <strong class="data">{{ category.confidence | perc }}%</strong>
               confident that
               <strong class="data">{{category.label}}</strong>
               is a category
-              <span class="comma-period" ng-if="!$last">,</span>
+              <span class="comma-period" ng-if="!$last && message.analyses.categories.categories.length > 2">,</span>
               <span class="comma-period" ng-if="$last">.</span>
             </span>
           </p>
@@ -422,19 +420,16 @@
           <h5>Sentiment</h5>
           <p>
             I'm
-            <strong class="data">{{message.analyses.sentiment.document.confidence}}%</strong>
+            <strong class="data">{{ message.analyses.sentiment.document.confidence | perc }}%</strong>
             confident that the overall sentiment is
             <strong class="data">{{message.analyses.sentiment.document.label}}</strong>
             <span class="comma-period">.</span>
-            <!--<span ng-if="message.analyses.sentiment.entities.length === 1">
-              I'm also <strong class="data">{{message.analyses.sentiment.entities[0].sentiment.confidence}}%</strong> confident that the entity, <strong class="data">{{message.analyses.sentiment.entities[0].mention}}</strong> has a sentiment of <strong class="data">{{message.analyses.sentiment.entities[0].sentiment.label}}</strong>.
-            </span>-->
             <span ng-if="message.analyses.sentiment.entities.length">
               I'm also
               <span ng-repeat="entity in message.analyses.sentiment.entities">
                 <span ng-if="$last && message.analyses.sentiment.entities.length > 1">and</span>
-                <strong class="data">{{entity.sentiment.confidence}}%</strong> confident that the entity, <strong class="data">{{entity.mention}}</strong>, has a sentiment of <strong class="data">{{entity.sentiment.label}}</strong>
-                <span class="comma-period" ng-if="!$last">,</span>
+                <strong class="data">{{ entity.sentiment.confidence | perc }}%</strong> confident that the entity, <strong class="data">{{entity.mention}}</strong>, has a sentiment of <strong class="data">{{entity.sentiment.label}}</strong>
+                <span class="comma-period" ng-if="!$last && message.analyses.sentiment.entities.length > 2">,</span>
                 <span class="comma-period" ng-if="$last">.</span>
               </span>
             </span>
@@ -449,7 +444,7 @@
               <span ng-if="$last && message.analyses.relationships.relationships.length > 2">Lastly, </span>
               I'm
               <span ng-if="$last && message.analyses.relationships.relationships.length === 2">also</span>
-              <strong class="data">{{relationship.confidence}}%</strong>
+              <strong class="data">{{ relationship.confidence | perc }}%</strong>
               confident that the the arguments
               <strong class="data">{{relationship.arg1}}</strong>
               and <strong class="data">{{relationship.arg2}}</strong>
@@ -553,8 +548,8 @@
         <div ng-if="message.analyses.sentiment">
           <h5>Sentiment</h5>
           <p>
-            I rate your sentiment as a <strong class="data">{{message.analyses.sentiment.results}}</strong>
-            On a scale of 0 to 1, 0 being negative and 1 being positive.
+            On a scale of 0 to 1, 0 being negative and 1 being positive,
+            I rate your sentiment as <strong class="data">{{ message.analyses.sentiment.results | perc }}</strong>.
           </p>
         </div>
 
@@ -566,7 +561,7 @@
             <span ng-repeat="(sentiment, score) in message.analyses.personality.results">
               <span ng-if="$last">and</span>
               <span>your</span>
-              <strong class="data">{{sentiment}}</strong> as <strong class="data">{{score}}</strong>
+              <strong class="data">{{sentiment}}</strong> as <strong class="data">{{ score | perc }}</strong>
               <span class="comma-period" ng-if="!$last">,</span>
               <span class="comma-period" ng-if="$last">.</span>
             </span>
@@ -580,7 +575,7 @@
             Couldn't find any people in your input. Sorry!
           </p>
           <p ng-if="message.analyses.people.results.length === 1">
-            The only person I could find was {{message.analyses.people.results[0].text}}
+            The only person I could find was <strong>{{message.analyses.people.results[0].text}}</strong>
           </p>
           <p ng-if="message.analyses.people.results.length > 1">
             The people I found were
@@ -600,7 +595,7 @@
             <span ng-repeat="(affiliation, score) in message.analyses.political.results">
               <span ng-if="$last">and</span>
               <span>your</span>
-              <strong class="data">{{affiliation}}</strong> affiliation as <strong class="data">{{score}}</strong>
+              <strong class="data">{{affiliation}}</strong> affiliation as <strong class="data">{{ score | oneToTen }}</strong>
               <span class="comma-period" ng-if="!$last">,</span>
               <span class="comma-period" ng-if="$last">.</span>
             </span>
@@ -614,7 +609,7 @@
             <span ng-repeat="(emotion, score) in message.analyses.emotion.results">
               <span ng-if="$last">and</span>
               <span>your</span>
-              <strong class="data">{{emotion}}</strong> as <strong class="data">{{score}}</strong>
+              <strong class="data">{{emotion}}</strong> as <strong class="data">{{ score | oneToTen }}</strong>
               <span class="comma-period" ng-if="!$last">,</span>
               <span class="comma-period" ng-if="$last">.</span>
             </span>
@@ -671,16 +666,20 @@
 
         <div ng-if="message.analyses.topics">
           <h5>Topics</h5>
-          <p ng-if="message.analyses.topics.entity_list.length === 1">
-            The only entity I could find was <strong class="data">{{message.analyses.topics.entity_list[0].form}}</strong>
-            .
+          <p ng-if="!message.analyses.topics.concept_list.length">
+            Couldn't find any topics in your input. Sorry!
+            <strong class="data">{{message.analyses.topics.concept_list[0].form}}</strong>.
           </p>
-          <p ng-if="message.analyses.topics.entity_list.length > 1">
-            The entities I found were
-            <span ng-repeat="entity in message.analyses.topics.entity_list track by $index">
+          <p ng-if="message.analyses.topics.concept_list.length === 1">
+            The only topic I could find was
+            <strong class="data">{{message.analyses.topics.concept_list[0].form}}</strong>.
+          </p>
+          <p ng-if="message.analyses.topics.concept_list.length > 1">
+            The topics I found were
+            <span ng-repeat="concept in message.analyses.topics.concept_list track by $index">
               <span ng-if="$last">and</span>
-              <strong class="data">{{entity.form}}</strong>
-              <span class="comma-period" ng-if="!$last && message.analyses.topics.entity_list.length > 2">,</span>
+              <strong class="data">{{concept.form}}</strong>
+              <span class="comma-period" ng-if="!$last && message.analyses.topics.concept_list.length > 2">,</span>
               <span class="comma-period" ng-if="$last">.</span>
             </span>
           </p>
