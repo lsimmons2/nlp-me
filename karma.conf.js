@@ -25,8 +25,6 @@ module.exports = function(config) {
       './src/public/controllers/chatCtrl.js',
       './src/public/app.js',
       './test/public/service.js',
-      './test/public/navCtrl.spec.js',
-      './test/public/apiSearchCtrl.spec.js',
       './test/public/chatCtrl.spec.js'
     ],
 

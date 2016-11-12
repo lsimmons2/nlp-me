@@ -4,3 +4,5 @@ notes.txt
 /config
 /images
 .DS_Store
+/test/responses
+/test/convos
