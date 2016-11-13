@@ -422,13 +422,13 @@
             I'm
             <strong class="data">{{ message.analyses.sentiment.document.confidence | perc }}%</strong>
             confident that the overall sentiment is
-            <strong class="data">{{message.analyses.sentiment.document.label}}</strong>
+            <strong class="data">{{ message.analyses.sentiment.document.label | rosetteSentiment }}</strong>
             <span class="comma-period">.</span>
             <span ng-if="message.analyses.sentiment.entities.length">
               I'm also
               <span ng-repeat="entity in message.analyses.sentiment.entities">
                 <span ng-if="$last && message.analyses.sentiment.entities.length > 1">and</span>
-                <strong class="data">{{ entity.sentiment.confidence | perc }}%</strong> confident that the entity, <strong class="data">{{entity.mention}}</strong>, has a sentiment of <strong class="data">{{entity.sentiment.label}}</strong>
+                <strong class="data">{{ entity.sentiment.confidence | perc }}%</strong> confident that the entity, <strong class="data">{{entity.mention}}</strong>, has a sentiment of <strong class="data">{{ entity.sentiment.label | rosetteSentiment }}</strong>
                 <span class="comma-period" ng-if="!$last && message.analyses.sentiment.entities.length > 2">,</span>
                 <span class="comma-period" ng-if="$last">.</span>
               </span>

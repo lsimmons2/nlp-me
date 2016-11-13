@@ -28,3 +28,16 @@ angular.module('App')
     return input;
   }
 })
+.filter('rosetteSentiment', function($filter){
+  return function(input){
+    if(input === 'pos'){
+      return 'positive';
+    }
+    if(input === 'neg'){
+      return 'negative';
+    }
+    if(input === 'neu'){
+      return 'neutral';
+    }
+  }
+})
