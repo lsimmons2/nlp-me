@@ -2,17 +2,10 @@
 #chat {
 
   position: relative;
-  margin-bottom: 0;
-  bottom: 0;
+  width: 80vw;
+  margin: 0 auto;
+  bottom: 15px;
 
-
-  #header {
-
-    h5 {
-      text-align: center;
-    }
-
-  }
 
 
   #selection-container {
@@ -21,10 +14,8 @@
     .api-selection-container {
 
       border-style: solid;
-      //border-color: #989898;
       border-top-width: 2px;
       border-bottom-width: 2px;
-      // border-bottom-width: 0;
       float: left;
       width: 25%;
       text-align: center;
@@ -54,7 +45,6 @@
       .api-selection {
 
         border-width: 1px;
-        //border-style: solid;
         border-color: red;
         height: 40px;
         display: inline-block;
@@ -103,8 +93,11 @@
 
         &#meaningcloud-selection {
 
+          padding: 2px 0;
+
+
           img {
-            height: 40px;
+            height: 36px;
           }
 
         }
@@ -128,6 +121,8 @@
     }
 
   }
+
+
 
   #dropdown-container {
 
@@ -189,13 +184,18 @@
 
 
 
-
   #convo-container {
 
     clear: left;
     height: 80vh;
     background-color: #989898;
     overflow: scroll;
+
+
+    #to-begin {
+      text-align: center;
+      margin: 20px 0;
+    }
 
     .avatar {
       margin: 0px 10px;
@@ -212,7 +212,6 @@
 
     .message {
 
-      width: 45%;
       background-color: #b8b9b8;
       margin: 5px 30px 20px;
       box-shadow: 0px 5px 5px grey;
@@ -276,6 +275,7 @@
       }
 
       &.aylien {
+        width: 45%;
         border-color: #b2d127;
         .outer-triangle {
           border-color: #b2d127 transparent transparent transparent;
@@ -283,6 +283,7 @@
       }
 
       &.rosette {
+        width: 45%;
         border-color: #eb3e0f;
         .outer-triangle {
           border-color: #eb3e0f transparent transparent transparent;
@@ -290,7 +291,7 @@
       }
 
       &.indico {
-
+        width: 45%;
         border-color: #333333;
         .outer-triangle {
           border-color: #333333 transparent transparent transparent;
@@ -318,20 +319,29 @@
           }
         }
 
+        .onlytexttags {
+          margin-bottom: 8px;
+        }
+
       }
 
       &.meaningcloud {
+        width: 45%;
         border-color: #fe6601;
         .outer-triangle {
           border-color: #fe6601 transparent transparent transparent;
         }
       }
 
+
       &.user {
 
         margin-left: auto;
         border-color: #598bdc;
         padding: 10px 10px 0;
+        width: 35%;
+        display: inline-block;
+        display: block;
 
         .outer-triangle {
           display: block;
@@ -344,7 +354,7 @@
 
         .inner-triangle {
           display: block;
-          width: 46px;
+          // width: 46px;
           top: -54px;
           right: -26px;
           margin-left: auto;
@@ -366,14 +376,13 @@
 
 
 
-  form {
+  #input-container {
 
-    width: 100%;
+    border: 2px solid;
 
-    #input-container {
+    form {
 
       position: relative;
-      margin-bottom: 20px;
 
       input {
         width: 100%;
@@ -394,7 +403,6 @@
 
         border: none;
         background: #598bdc;
-        //border-radius: 8px;
         padding: 2px 16px;
 
         &:hover {
@@ -412,7 +420,6 @@
     }
 
   }
-
 
 
 }
