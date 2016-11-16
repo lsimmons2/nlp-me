@@ -146,11 +146,8 @@
 
       .api-types-list {
         -moz-column-count: 2;
-        // -moz-column-gap: 1px;
         -webkit-column-count: 2;
-        // -webkit-column-gap: 1px;
         column-count: 2;
-        //column-gap: 1px;
         list-style-type: none;
         padding-left: 0;
       }
@@ -183,7 +180,6 @@
 
   #convo-container {
 
-    clear: left;
     height: 87%;
     background-color: #989898;
     overflow: scroll;
@@ -333,40 +329,39 @@
 
       &.user {
 
-        margin-left: auto;
         border-color: #598bdc;
         padding: 10px 10px 0;
-        width: 35%;
-        display: inline-block;
-        display: block;
+        max-width: 45%;
+        min-width: 10%;
+        float: right;
+        position: relative;
 
         .outer-triangle {
-          display: block;
-          width: 44px;
-          top: -13px;
-          right: -34px;
-          margin-left: auto;
+          position: absolute;
+          top: -3px;
+          right: -25px;
           border-color: #598bdc transparent transparent transparent;
         }
 
         .inner-triangle {
-          display: block;
-          // width: 46px;
-          top: -54px;
-          right: -26px;
-          margin-left: auto;
+          position: absolute;
+          top: 0;
+          right: -17px;
           border-color: #b8b9b8 transparent transparent transparent;
         }
 
+
         p {
           text-align: right;
-          position: relative;
-          bottom: 90px;
-          right: 5px;
         }
 
       }
 
+    }
+
+
+    .user-message-container {
+      overflow: auto;
     }
 
   }

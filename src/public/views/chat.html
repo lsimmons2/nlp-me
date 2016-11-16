@@ -217,17 +217,17 @@
 
     <div  ng-repeat="message in convo track by $index">
 
-      <img class="avatar" ng-if="message.who !== 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}">
 
       <!--=========  USER MESSAGE  =========-->
-      <div class="message user" ng-if="message.who === 'user'">
-        <!-- <div class="inner-user-message"> -->
-          <span class="outer-triangle"> </span>
-          <span class="inner-triangle"> </span>
-          <p>{{message.text}}</p>
-        <!-- </div> -->
+      <div class="user-message-container" ng-if="message.who === 'user'">
+        <div class="message user">
+            <span class="outer-triangle"> </span>
+            <span class="inner-triangle"> </span>
+            <p>{{message.text}}</p>
+        </div>
       </div>
 
+      <!-- <img class="avatar" ng-if="message.who !== 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}"> -->
 
       <!--=========  AYLIEN MESSAGE  =========-->
 
@@ -254,7 +254,12 @@
         </div>
       </div>
 
+      <img class="avatar" ng-if="message.who !== 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}">
+
+
       <div class="message aylien" ng-if="message.who === 'aylien' && !message.error" ng-show="message.view === 'pretty'">
+
+
         <span class="outer-triangle"> </span>
         <span class="inner-triangle"> </span>
 
