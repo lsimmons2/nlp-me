@@ -21,6 +21,19 @@ angular.module('chatCtrl', [])
 
 
   $scope.text = '';
+  $scope.convo = [];
+
+  $scope.selectAll = function(api){
+    for(var type in api.types){
+      api.types[type] = true;
+    }
+  };
+
+  $scope.unselectAll = function(api){
+    for(var type in api.types){
+      api.types[type] = false;
+    }
+  };
 
   function ready(){
     for (var type in this.types) {
@@ -32,7 +45,7 @@ angular.module('chatCtrl', [])
   };
 
   $scope.aylien = {
-    view: false,
+    view: true,
     types: {
       classify: false,
       sentiment: false,
@@ -43,7 +56,7 @@ angular.module('chatCtrl', [])
   };
 
   $scope.rosette = {
-    view: false,
+    view: true,
     types: {
       categories: false,
       sentiment: false,
@@ -54,7 +67,7 @@ angular.module('chatCtrl', [])
   };
 
   $scope.indico = {
-    view: false,
+    view: true,
     types: {
       texttags: false,
       sentiment: false,
@@ -67,7 +80,7 @@ angular.module('chatCtrl', [])
   };
 
   $scope.meaningcloud = {
-    view: false,
+    view: true,
     types: {
       classification: false,
       sentiment: false,
@@ -313,7 +326,5 @@ angular.module('chatCtrl', [])
     angular.element(event.target).css('display', 'none');
     angular.element(event.target).next().css('display', 'none');
   };
-
-  $scope.convo = [];
 
 });
