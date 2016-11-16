@@ -62,34 +62,40 @@
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
         <li>
-          <span tooltip-placement="right" tooltip-class="indico-tooltip" uib-tooltip="Produces confidence scores for different categories in your input.">Classify</span>
+          <div tooltip-placement="right" tooltip-class="indico-tooltip" uib-tooltip="Produces confidence scores for different categories in your input.">Classify</div>
           <div class="api-checkbox cb1">
               <input type="checkbox" id="acb-classify" ng-model="aylien.types.classify">
               <label for="acb-classify"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="right" tooltip-class="indico-tooltip" uib-tooltip="Produces scores for the polarity and subjectivity your input expresses.">Sentiment</span>
+          <div tooltip-placement="right" tooltip-class="indico-tooltip" uib-tooltip="Produces scores for the polarity and subjectivity your input expresses.">Sentiment</div>
           <div class="api-checkbox cb1">
               <input type="checkbox" id="acb-sentiment" ng-model="aylien.types.sentiment">
               <label for="acb-sentiment"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different concepts from your input.">Concepts</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different concepts from your input.">Concepts</div>
           <div class="api-checkbox cb1">
               <input type="checkbox" id="acb-concepts" ng-model="aylien.types.concepts">
               <label for="acb-concepts"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different hashtags from your input.">Hashtags</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different hashtags from your input.">Hashtags</div>
           <div class="api-checkbox cb1">
               <input type="checkbox" id="acb-hashtags" ng-model="aylien.types.hashtags">
               <label for="acb-hashtags"></label>
            </div>
         </li>
       </ul>
+      <div class="un-select-all" ng-click="selectAll(aylien)">
+        Select all
+      </div>
+      <div class="un-select-all" ng-click="unselectAll(aylien)">
+        Unselect all
+      </div>
     </div>
 
     <!--=========  ROSETTE DROPDOWN  =========-->
@@ -97,34 +103,40 @@
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different categories from your input.">Categories</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different categories from your input.">Categories</div>
           <div class="api-checkbox cb2">
               <input type="checkbox" id="rcb-categories" ng-model="rosette.types.categories">
               <label for="rcb-categories"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different entities from your input.">Entities</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different entities from your input.">Entities</div>
           <div class="api-checkbox cb2">
               <input type="checkbox" id="rcb-entities" ng-model="rosette.types.entities">
               <label for="rcb-entities"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces a confidence score for whether the overall sentiment of your input is positive or negative and individual confidence scores for whether each detected entity is correlated with positive or negative sentiment.">Sentiment</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces a confidence score for whether the overall sentiment of your input is positive or negative and individual confidence scores for whether each detected entity is correlated with positive or negative sentiment.">Sentiment</div>
           <div class="api-checkbox cb2">
               <input type="checkbox" id="rcb-sentiment" ng-model="rosette.types.sentiment">
               <label for="rcb-sentiment"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Detects relationships between different entities in your input.">Relationships</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Detects relationships between different entities in your input.">Relationships</div>
           <div class="api-checkbox cb2">
               <input type="checkbox" id="rcb-relationships" ng-model="rosette.types.relationships">
               <label for="rcb-relationships"></label>
            </div>
         </li>
       </ul>
+      <div class="un-select-all" ng-click="selectAll(rosette)">
+        Select all
+      </div>
+      <div class="un-select-all" ng-click="unselectAll(rosette)">
+        Unselect all
+      </div>
     </div>
 
     <!--=========  INDICO DROPDOWN  =========-->
@@ -132,48 +144,54 @@
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces confidence scores for the correlation between 111 text tags (similar to categories) and your input.">Text Tags</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces confidence scores for the correlation between 111 text tags (similar to categories) and your input.">Text Tags</div>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-texttags" ng-model="indico.types.texttags">
               <label for="icb-texttags"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces a sentiment score between 0 and 1 for your input. Above 0.5 indicates positive sentiment, below 0.5 indicates negative sentiment." >Sentiment</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces a sentiment score between 0 and 1 for your input. Above 0.5 indicates positive sentiment, below 0.5 indicates negative sentiment." >Sentiment</div>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-sentiment" ng-model="indico.types.sentiment">
               <label for="icb-sentiment"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces scores for how strongly your input expresses openness, extraversion, agreeableness, and conscientiousness." >Personality</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces scores for how strongly your input expresses openness, extraversion, agreeableness, and conscientiousness." >Personality</div>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-personality" ng-model="indico.types.personality">
               <label for="icb-personality"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts the people referenced in your input." >People</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts the people referenced in your input." >People</div>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-people" ng-model="indico.types.people">
               <label for="icb-people"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces scores that represent the likelihood that your input expresses a leaning to the liberal, green, conservative, and libertarian political affiliations." >Political</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces scores that represent the likelihood that your input expresses a leaning to the liberal, green, conservative, and libertarian political affiliations." >Political</div>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-political" ng-model="indico.types.political">
               <label for="icb-political"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces scores for how much your input expresses anger, joy, fear, surprise, and sadness.">Emotion</span>
+          <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces scores for how much your input expresses anger, joy, fear, surprise, and sadness.">Emotion</div>
           <div class="api-checkbox cb3">
               <input type="checkbox" id="icb-emotion" ng-model="indico.types.emotion">
               <label for="icb-emotion"></label>
            </div>
         </li>
       </ul>
+      <div class="un-select-all" ng-click="selectAll(indico)">
+        Select all
+      </div>
+      <div class="un-select-all" ng-click="unselectAll(indico)">
+        Unselect all
+      </div>
     </div>
 
     <!--=========  MEANING CLOUD DROPDOWN  =========-->
@@ -181,27 +199,38 @@
       <h3 class="dropdown-header">Analysis Options</h3>
       <ul class="api-types-list">
         <li>
-          <span tooltip-placement="top" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts categories in your input." >Classification</span>
+          <div tooltip-placement="top" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts categories in your input." >Classification</div>
           <div class="api-checkbox cb4">
               <input type="checkbox" id="mccb-classification" ng-model="meaningcloud.types.classification">
               <label for="mccb-classification"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="meaningcloud-tooltip" uib-tooltip="Detects the polarity, subjectivity, irony, and emotional agreement in your input.">Sentiment</span>
+          <div tooltip-placement="top" tooltip-class="meaningcloud-tooltip" uib-tooltip="Detects the polarity, subjectivity, irony, and emotional agreement in your input.">Sentiment</div>
           <div class="api-checkbox cb4">
               <input type="checkbox" id="mccb-sentiment" ng-model="meaningcloud.types.sentiment">
               <label for="mccb-sentiment"></label>
            </div>
         </li>
         <li>
-          <span tooltip-placement="top" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts the topics in your input.">Topics</span>
+          <div tooltip-placement="top" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts the topics in your input.">Topics</div>
           <div class="api-checkbox cb4">
               <input type="checkbox" id="mccb-topics" ng-model="meaningcloud.types.topics">
               <label for="mccb-topics"></label>
            </div>
         </li>
+        <li>
+          <div>
+            &nbsp;
+          </div>
+        </li>
       </ul>
+      <div class="un-select-all" ng-click="selectAll(meaningcloud)">
+        Select all
+      </div>
+      <div class="un-select-all" ng-click="unselectAll(meaningcloud)">
+        Unselect all
+      </div>
     </div>
 
   </div>

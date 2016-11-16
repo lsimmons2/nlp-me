@@ -21,6 +21,19 @@ angular.module('chatCtrl', [])
 
 
   $scope.text = '';
+  $scope.convo = [];
+
+  $scope.selectAll = function(api){
+    for(var type in api.types){
+      api.types[type] = true;
+    }
+  };
+
+  $scope.unselectAll = function(api){
+    for(var type in api.types){
+      api.types[type] = false;
+    }
+  };
 
   function ready(){
     for (var type in this.types) {
@@ -313,7 +326,5 @@ angular.module('chatCtrl', [])
     angular.element(event.target).css('display', 'none');
     angular.element(event.target).next().css('display', 'none');
   };
-
-  $scope.convo = [];
 
 });

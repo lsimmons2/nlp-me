@@ -130,11 +130,10 @@
       border-top-width: 0;
       float: left;
       width: 25%;
-      padding: 0 10px;
+      padding: 0 10px 10px;
       background-color: white;
       border-style: solid;
       text-align: center;
-      height: 170px;
       z-index: 3;
 
       .dropdown-header {
@@ -150,6 +149,19 @@
         column-count: 2;
         list-style-type: none;
         padding-left: 0;
+      }
+
+      .un-select-all {
+        display: inline-block;
+        width: 45%;
+        margin: 0 auto;
+        font-weight: bold;
+
+        &:hover {
+          cursor: pointer;
+          text-decoration: underline;
+        }
+
       }
 
       &#aylien-dropdown {
