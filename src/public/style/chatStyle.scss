@@ -1,11 +1,8 @@
 
 #chat {
 
+  height: 100%;
   position: relative;
-  width: 80vw;
-  margin: 0 auto;
-  bottom: 15px;
-
 
 
   #selection-container {
@@ -187,7 +184,7 @@
   #convo-container {
 
     clear: left;
-    height: 80vh;
+    height: 87%;
     background-color: #989898;
     overflow: scroll;
 
