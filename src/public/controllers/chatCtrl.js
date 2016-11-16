@@ -45,7 +45,7 @@ angular.module('chatCtrl', [])
   };
 
   $scope.aylien = {
-    view: true,
+    view: false,
     types: {
       classify: false,
       sentiment: false,
@@ -56,7 +56,7 @@ angular.module('chatCtrl', [])
   };
 
   $scope.rosette = {
-    view: true,
+    view: false,
     types: {
       categories: false,
       sentiment: false,
@@ -67,7 +67,7 @@ angular.module('chatCtrl', [])
   };
 
   $scope.indico = {
-    view: true,
+    view: false,
     types: {
       texttags: false,
       sentiment: false,
@@ -80,7 +80,7 @@ angular.module('chatCtrl', [])
   };
 
   $scope.meaningcloud = {
-    view: true,
+    view: false,
     types: {
       classification: false,
       sentiment: false,
