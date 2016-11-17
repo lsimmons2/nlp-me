@@ -26,9 +26,16 @@ app.use('/chat', chat);
 app.use('/feedback', feedback);
 
 
-if(process.env.NODE_ENV !== 'test'){
+if(process.env.NODE_ENV === 'prod'){
+  app.listen(80, () => {
+    console.log('app here in prod mode');
+  })
+}
+
+
+if(process.env.NODE_ENV === 'dev'){
   app.listen(8080, () => {
-    console.log('app here');
+    console.log('app here in dev mode (8080)');
   });
 }
 
