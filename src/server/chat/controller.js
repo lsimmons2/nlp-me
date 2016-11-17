@@ -1,6 +1,7 @@
 import request from 'request';
-import rp from 'request-promise';
 import config from '../../../config/config';
+import Message from './messageModel';
+import Call from './callModel';
 //import indicoSdk from 'indico.io';
 
 /*
@@ -20,19 +21,27 @@ import config from '../../../config/config';
 
 
 
-function hitApi(options, type){
+function hitApi(options, api, type){
 
   return new Promise((resolve, reject) => {
+
+    let call = new Call;
+    call.api = api;
+    call.url = options.url;
+    call.text = options.form.text || options.json.content || options.json.data || options.form.txt;
+    call.type = type;
+
     request.post(options, (err, response, body) => {
       if(err || response.statusCode > 200){
-        console.error('err: ', err);
-        console.error('from: ', body);
-        console.error('code: ', response.statusCode);
+        call.error = err || body || { error: 'Unknown error' };
+        call.save();
         return resolve({
           type: type,
           data: 'error'
         });
       }
+      call.response = body || { body: 'Unknown' };
+      call.save()
       return resolve({
         type: type,
         data: body
@@ -40,6 +49,20 @@ function hitApi(options, type){
     })
   })
 
+};
+
+function store(api, body){
+  let message = new Message;
+  message.api = api;
+  message.text = body.text;
+  message.types = body.types;
+  message.save()
+  .then(message => {
+    console.log('Message saved: ', message);
+  })
+  .catch(message => {
+    console.error('Error saving message: ', message)
+  })
 };
 
 
@@ -58,6 +81,8 @@ function hitApi(options, type){
 */
 function aylien(req, res, next){
 
+  store('aylien', req.body);
+
   let base = 'https://api.aylien.com/api/v1/';
   let types = req.body.types;
 
@@ -69,16 +94,16 @@ function aylien(req, res, next){
     }
   };
 
+
   let callPromises = [];
 
   types.forEach(type => {
     options.url = base + type;
-    callPromises.push(hitApi(options, type));
+    callPromises.push(hitApi(options, 'aylien', type));
   });
 
   Promise.all(callPromises)
     .then(function(results){
-
       return res.status(200).send(results);
     })
     .catch(function(err){
@@ -98,6 +123,8 @@ function aylien(req, res, next){
 */
 function rosette(req, res, next){
 
+  store('rosette', req.body);
+
   let base = 'https://api.rosette.com/rest/v1/';
   let types = req.body.types;
 
@@ -109,11 +136,12 @@ function rosette(req, res, next){
     }
   };
 
+
   let callPromises = [];
 
   types.forEach(type => {
     options.url = base + type;
-    callPromises.push(hitApi(options, type));
+    callPromises.push(hitApi(options, 'rosette', type));
   });
 
   Promise.all(callPromises)
@@ -140,6 +168,8 @@ function rosette(req, res, next){
 */
 function indico(req, res, next){
 
+  store('indico', req.body);
+
   let types = req.body.types;
   let text = req.body.text;
 
@@ -150,12 +180,13 @@ function indico(req, res, next){
     }
   };
 
+
   let callPromises = [];
 
   types.forEach(type => {
     options.url = 'https://apiv2.indico.io/' + type;
     //callPromises.push(indicoSdk[type](text));
-    callPromises.push(hitApi(options, type))
+    callPromises.push(hitApi(options, 'indico', type))
   });
 
   Promise.all(callPromises)
@@ -209,15 +240,19 @@ function mcOptions(type, text){
 */
 function meaningcloud(req, res, next){
 
+  store('meaningcloud', req.body);
+
   let types = req.body.types;
   let text = req.body.text;
   let callPromises = [];
   let options;
 
+
   types.forEach(type => {
     options = mcOptions(type, text);
-    callPromises.push(hitApi(options, type));
+    callPromises.push(hitApi(options, 'meaningcloud', type));
   });
+
   Promise.all(callPromises)
     .then(function(results){
       return res.status(200).send(results);

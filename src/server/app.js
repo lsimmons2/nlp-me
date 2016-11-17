@@ -10,6 +10,7 @@ import search from './search';
 import chat from './chat';
 import feedback from './feedback';
 
+const env = process.env.NODE_ENV;
 const app = express();
 
 app.use(bodyParser.json());
@@ -26,14 +27,28 @@ app.use('/chat', chat);
 app.use('/feedback', feedback);
 
 
-if(process.env.NODE_ENV === 'prod'){
+let dbUri = 'mongodb://localhost:27017/nlpme-' + env;
+mongoose.connect(dbUri);
+mongoose.connection
+  .on('error', (err) => {
+    return console.log(err.message);
+  })
+  .once('connected', () => {
+    return console.log('Connection to ', dbUri);
+  })
+  .once('disconnected', () => {
+    return console.log('Disconnected from ', dbUri);
+  });
+
+
+if(env === 'prod'){
   app.listen(80, () => {
     console.log('app here in prod mode');
   })
 }
 
 
-if(process.env.NODE_ENV === 'dev'){
+if(env === 'dev'){
   app.listen(8080, () => {
     console.log('app here in dev mode (8080)');
   });
