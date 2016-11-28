@@ -10,7 +10,6 @@ var analyses;
 var analysisData;
 var util = require('util');
 var fs = require('fs');
-var response = require('./aylienRes');
 
 
 
@@ -331,8 +330,10 @@ describe('POST /chat/rosette', function(){
         analyses[0].data.relationships.should.be.an('array');
         if(analyses[0].data.relationships.length > 0){
           for (var i = 0; i < analyses[0].data.relationships.length; i++) {
-            analyses[0].data.categories[i].label.should.be.a('string');
-            analyses[0].data.categories.confidence.should.be.within(0,1);
+            console.log(util.inspect(analyses[0].data.relationships, true, 5));
+            analyses[0].data.relationships[i].arg1.should.be.a('string');
+            analyses[0].data.relationships[i].arg2.should.be.a('string');
+            analyses[0].data.relationships[i].confidence.should.be.within(0,1);
           }
         }
         done();
@@ -517,28 +518,6 @@ describe('POST /chat/indico', function(){
       });
   });
 
-  it('personas', function(done){
-    agent
-      .post('/chat/indico')
-      .send({
-        types: [
-          'personas'
-        ],
-        text: 'I love bananas and apples and oranges and batman and black tea'
-      })
-      .expect(200)
-      .end(function(err, res){
-        if(err) return done(err);
-        analyses = res.body;
-        analyses.should.be.an('array');
-        analyses.length.should.equal(1);
-        analyses[0].data.results.anger.should.be.within(0,1);
-        analyses[0].data.results.joy.should.be.within(0,1);
-        analyses[0].data.results.sadness.should.be.within(0,1);
-        analyses[0].data.results.surprise.should.be.within(0,1);
-        done();
-      });
-  });
 
 });
 
