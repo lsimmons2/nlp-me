@@ -12,11 +12,8 @@ var forever = require('gulp-forever-monitor');
 
 // ============= test =============
 
-gulp.task('set-test-env', function(){
-	return process.env.NODE_ENV = 'test';
-});
-
 gulp.task('ft', function(done){
+	process.env.NODE_ENV = 'test';
   new Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
@@ -32,13 +29,15 @@ gulp.task('wft', function(){
   ], ['ft']);
 });
 
-gulp.task('bt', ['set-test-env'], function(){
+gulp.task('bt', function(){
+	process.env.NODE_ENV = 'test';
   gulp.src('test/server/chat/*.js')
     .pipe(mocha())
     .on('error', gutil.log)
 });
 
-gulp.task('res', ['set-test-env'], function(){
+gulp.task('res', function(){
+	process.env.NODE_ENV = 'test';
 	gulp.src('test/server/chat/res.js')
 	.pipe(mocha())
 	.on('error', gutil.log)
@@ -46,19 +45,30 @@ gulp.task('res', ['set-test-env'], function(){
 
 gulp.task('wr', function(){
 	gulp.watch([
-		'test/server/chat/res.js',
+		'test/server/chat/controller.spec.js',
 		'src/server/chat/controller.js'
 	], ['res']);
 });
 
 gulp.task('wbt', function(){
   gulp.watch([
-    'test/server/chat/controller.js',
+    'test/server/chat/controller.spec.js',
     'src/server/chat/controller.js',
     'src/server/app.js'
   ], ['bt']);
 });
 
+gulp.task('debug', ['watch-html', 'watch-babel'], function(){
+	return nodemon({
+		nodeArgs: ['--inspect'],
+		script: 'dist/server/app.js',
+		verbose: true,
+		ignore: ['test/**', 'node_modules/**', 'dist/**'],
+		env: {
+			'NODE_ENV': 'dev'
+		}
+	})
+});
 
 
 
@@ -94,7 +104,6 @@ gulp.task('html', function(){
 });
 
 gulp.task('watch-html', ['html'], function(){
-	livereload.listen();
 	gulp.watch(['src/public/**/*.html'], ['html']);
 });
 
