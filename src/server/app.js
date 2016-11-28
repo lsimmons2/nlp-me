@@ -40,6 +40,12 @@ mongoose.connection
     return console.log('Disconnected from ', dbUri);
   });
 
+process.on('SIGINT', function(){
+  mongoose.connection.close(function(){
+    return process.exit(0);
+  });
+});
+
 
 if(env === 'prod'){
   app.listen(80, () => {
@@ -49,8 +55,8 @@ if(env === 'prod'){
 
 
 if(env === 'dev'){
-  app.listen(8080, () => {
-    console.log('app here in dev mode (8080)');
+  app.listen(3000, () => {
+    console.log('app here in dev mode (3000)');
   });
 }
 
