@@ -1,8 +1,53 @@
+
+
 import request from 'request';
 import config from '../../../config/config';
-import Message from './messageModel';
-import Call from './callModel';
-//import indicoSdk from 'indico.io';
+import Message from './models/messageModel';
+import Call from './models/callModel';
+import winston from 'winston';
+import fs from 'fs';
+require('winston-daily-rotate-file');
+
+const tsFormat = () => (new Date()).toLocaleTimeString();
+const env = process.env.NODE_ENV || 'dev';
+const logDir = 'logs/' + env;
+
+if(!fs.existsSync(logDir)){
+  fs.mkdirSync(logDir);
+}
+
+let infoFileLog = new winston.transports.DailyRotateFile({
+  name: 'infoFile',
+  level: 'info',
+  filename: logDir + '/info.log',
+  timestamp: tsFormat,
+  json: true,
+  prettyPrint: true
+});
+
+let errorFileLog = new winston.transports.DailyRotateFile({
+  name: 'errorFile',
+  level: 'error',
+  filename: logDir + '/errors.log',
+  timestamp: tsFormat,
+  json: true,
+  prettyPrint: true
+});
+
+
+const logger = new (winston.Logger)({
+  transports: [
+    new (winston.transports.Console)({
+      colorize: true,
+      timestamp: tsFormat,
+      silent: env !== 'dev'
+    }),
+    infoFileLog,
+    errorFileLog
+  ]
+})
+
+
 
 /*
 *
@@ -21,35 +66,7 @@ import Call from './callModel';
 
 
 
-function hitApi(options, api, type){
 
-  return new Promise((resolve, reject) => {
-
-    let call = new Call;
-    call.api = api;
-    call.url = options.url;
-    call.text = options.form.text || options.json.content || options.json.data || options.form.txt;
-    call.type = type;
-
-    request.post(options, (err, response, body) => {
-      if(err || response.statusCode > 200){
-        call.error = err || body || { error: 'Unknown error' };
-        call.save();
-        return resolve({
-          type: type,
-          data: 'error'
-        });
-      }
-      call.response = body || { body: 'Unknown' };
-      call.save()
-      return resolve({
-        type: type,
-        data: body
-      });
-    })
-  })
-
-};
 
 function store(api, body){
   let message = new Message;
@@ -57,12 +74,61 @@ function store(api, body){
   message.text = body.text;
   message.types = body.types;
   message.save()
-  .then(message => {
-    console.log('Message saved: ', message);
+    .then( message => {
+      logger.info('Message saved: ', util.inspect(message, true, 6));
+    })
+    .catch( err => {
+      logger.error('Error saving message: ', util.inspect(err, true, 6));
+    })
+};
+
+import util from 'util';
+
+function hitApi(options, api, type){
+
+  return new Promise((resolve, reject) => {
+
+    let call = new Call;
+    call.api = api;
+    call.url = options.url;
+    if (options.form){
+      call.text = options.form.text || options.form.txt;
+    }
+    if (options.json){
+      call.text =  options.json.content || options.json.data;
+    }
+    call.type = type;
+
+    request.post(options, (err, response, body) => {
+      if(err || response.statusCode > 200){
+        call.error = err || body || { error: 'Unknown error' };
+        call.save()
+          .then( call => {
+            logger.info('Call saved: ', call);
+          })
+          .catch( err => {
+            logger.error('Error saving call: ', err);
+          })
+        return resolve({
+          type: type,
+          data: 'error'
+        });
+      }
+      call.response = body || { body: 'Unknown' };
+      call.save()
+        .then( call => {
+          logger.info('Call saved: ', util.inspect(call, true, 6));
+        })
+        .catch( err => {
+          logger.error('Error saving call: ', util.inspect(err, true, 6));
+        })
+      return resolve({
+        type: type,
+        data: body
+      });
+    })
   })
-  .catch(message => {
-    console.error('Error saving message: ', message)
-  })
+
 };
 
 
@@ -79,9 +145,14 @@ function store(api, body){
 *   - related [phrases]
 *   - unsupervised (semantic labeling)
 */
+
+
 function aylien(req, res, next){
 
   store('aylien', req.body);
+
+  // return res.status(500).send();
+
 
   let base = 'https://api.aylien.com/api/v1/';
   let types = req.body.types;
@@ -104,9 +175,11 @@ function aylien(req, res, next){
 
   Promise.all(callPromises)
     .then(function(results){
+      // logger.info('Aylien response processed: ', results);
       return res.status(200).send(results);
     })
     .catch(function(err){
+      // logger.error('Error processing aylien reponse: ', err);
       return res.status(500).send(err);
     });
 
@@ -132,7 +205,8 @@ function rosette(req, res, next){
     url: '',
     headers: config.rosette.headers,
     json: {
-      'content': req.body.text
+      'content': req.body.text,
+      'language': 'eng'
     }
   };
 
@@ -146,9 +220,11 @@ function rosette(req, res, next){
 
   Promise.all(callPromises)
     .then(function(results){
+      logger.info('Rosette response processed: ', results);
       return res.status(200).send(results);
     })
     .catch(function(err){
+      logger.error('Error processing rosette reponse: ', err);
       return res.status(500).send(err);
     });
 
@@ -191,9 +267,11 @@ function indico(req, res, next){
 
   Promise.all(callPromises)
     .then(function(results){
+      logger.info('Indico response processed: ', results);
       return res.status(200).send(results);
     })
     .catch(function(err){
+      logger.error('Error processing indico reponse: ', err);
       return res.status(500).send(err);
     });
 
@@ -255,9 +333,11 @@ function meaningcloud(req, res, next){
 
   Promise.all(callPromises)
     .then(function(results){
+      logger.info('Meaningcloud response processed: ', results);
       return res.status(200).send(results);
     })
     .catch(function(err){
+      logger.error('Error processing meaningcloud reponse: ', err);
       return res.status(500).send(err);
     });
 

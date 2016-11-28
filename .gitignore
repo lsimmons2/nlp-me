@@ -1,8 +1,8 @@
 notes.txt
-/node_modules
-/dist
-/config
-/images
+node_modules/
+dist/
+config/
+images/
 .DS_Store
-/test/samples
-
+test/samples/
+logs/

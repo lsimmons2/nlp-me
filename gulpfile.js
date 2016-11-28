@@ -111,7 +111,7 @@ gulp.task('dev', ['watch-sass', 'watch-html', 'watch-babel'], function(){
 	return nodemon({
 		script: 'dist/server/app.js',
 		verbose: true,
-		ignore: ['test/**', 'node_modules/**', 'dist/**'],
+		ignore: ['test/**', 'node_modules/**', 'dist/**', 'logs/**'],
 		env: {
 			'NODE_ENV': 'dev'
 		}
