@@ -86,17 +86,19 @@ gulp.task('watch-sass', ['sass'], function(){
   gulp.watch(['src/public/style/*.scss'], ['sass']);
 });
 
-gulp.task('babel', function(){
-	return gulp.src('src/**/*.js')
-		.pipe(babel({
-			presets: ['es2015']
-		}))
-		.pipe(gulp.dest('dist/'));
-});
+// gulp.task('babel', function(){
+// 	return gulp.src('src/**/*.js')
+// 		.pipe(babel({
+// 			presets: ['es2015']
+// 		}))
+// 		.pipe(gulp.dest('dist/'));
+// });
 
-gulp.task('watch-babel', ['babel'], function(){
-	gulp.watch(['src/**/*.js'], ['babel']);
-});
+// gulp.task('watch-babel', ['babel'], function(){
+// 	gulp.watch(['src/**/*.js'], ['babel']);
+// 	gulp.watch(['src/public/**/*.js'], ['babel']);
+// });
+
 
 gulp.task('html', function(){
 	gulp.src('src/**/*.html')
@@ -107,15 +109,26 @@ gulp.task('watch-html', ['html'], function(){
 	gulp.watch(['src/public/**/*.html'], ['html']);
 });
 
-gulp.task('dev', ['watch-sass', 'watch-html', 'watch-babel'], function(){
+gulp.task('dev', function(){
 	return nodemon({
 		script: 'dist/server/app.js',
 		verbose: true,
-		ignore: ['test/**', 'node_modules/**', 'dist/**', 'logs/**'],
+		ignore: ['test/**', 'node_modules/**', 'logs/**', 'src/**'],
 		env: {
 			'NODE_ENV': 'dev'
 		}
 	})
 });
+
+// gulp.task('dev', ['watch-sass', 'watch-html', 'watch-babel'], function(){
+// 	return nodemon({
+// 		script: 'dist/server/app.js',
+// 		verbose: true,
+// 		ignore: ['test/**', 'node_modules/**', 'dist/**', 'logs/**'],
+// 		env: {
+// 			'NODE_ENV': 'dev'
+// 		}
+// 	})
+// });
 
 gulp.task('prod', ['sass', 'html', 'babel']);
