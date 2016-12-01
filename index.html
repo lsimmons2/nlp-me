@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+
+    <meta charset='UTF-8'>
+  	<meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>NLP ME</title>
+
+    <script type='text/javascript' src='../../node_modules/jquery/dist/jquery.js'></script>
+    <script type='text/javascript' src='node_modules/bootstrap/dist/js/bootstrap.js'></script>
+	  <link rel='stylesheet' href='node_modules/bootstrap/dist/css/bootstrap.css'>
+
+
+
+     <link href="https://fonts.googleapis.com/css?family=Montserrat:normal,bolder" rel="stylesheet">
+    <!--
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/aboutStyle.css">
+    <link rel="stylesheet" href="./style/chatStyle.css"> -->
+
+
+  </head>
+
+  <body ng-app="App">
+
+    <nav class="navbar navbar-default" id="nav">
+
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+        </div>
+        <a class="navbar-brand" href="#/about">
+          NLP ME
+        </a>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-left">
+            <li><a id="nav-brand-extension">-- chat with natural language processing APIs</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a class="nav-item" href="#/about">About</a>
+            </li>
+            <li>
+              <a class="nav-item" href="#/chat">Chat with APIs</a>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+
+    </nav>
+    <div id="app" />
+    <script src="bundle.js"></script>
+
+  </body>
+</html>

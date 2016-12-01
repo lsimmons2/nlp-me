@@ -20,12 +20,12 @@ module.exports = function(config) {
       './node_modules/angular-route/angular-route.js',
       './node_modules/angular-mocks/angular-mocks.js',
       './node_modules/bootstrap/dist/js/bootstrap.js',
-      './src/public/controllers/navCtrl.js',
-      './src/public/controllers/apiSearchCtrl.js',
-      './src/public/controllers/chatCtrl.js',
-      './src/public/app.js',
-      './test/public/service.js',
-      './test/public/chatCtrl.spec.js'
+      './src/client/controllers/navCtrl.js',
+      './src/client/controllers/apiSearchCtrl.js',
+      './src/client/controllers/chatCtrl.js',
+      './src/client/app.js',
+      './test/client/service.js',
+      './test/client/chatCtrl.spec.js'
     ],
 
 

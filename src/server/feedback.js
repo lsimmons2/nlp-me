@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport(config.gmail);
 
 function mailMe(req, res, next){
 
-  let html = '<p>From: ' + req.body.name + '</p>' + '<p>Message: ' + req.body.message + '</p>';
+  let html = '<p>From: ' + req.body.name + '</p>' + '<p>Email: ' + req.body.email + '</p>' '<p>Message: ' + req.body.message + '</p>';
 
 
   let mail = {

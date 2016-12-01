@@ -1,0 +1,17 @@
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+.fill {
+  height: 87%;
+}
+
+
+@import 'nav.scss';
+@import 'about.scss';
+@import 'chat.scss';
