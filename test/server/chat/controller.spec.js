@@ -330,7 +330,6 @@ describe('POST /chat/rosette', function(){
         analyses[0].data.relationships.should.be.an('array');
         if(analyses[0].data.relationships.length > 0){
           for (var i = 0; i < analyses[0].data.relationships.length; i++) {
-            console.log(util.inspect(analyses[0].data.relationships, true, 5));
             analyses[0].data.relationships[i].arg1.should.be.a('string');
             analyses[0].data.relationships[i].arg2.should.be.a('string');
             analyses[0].data.relationships[i].confidence.should.be.within(0,1);

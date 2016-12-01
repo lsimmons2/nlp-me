@@ -256,9 +256,11 @@
         </div>
       </div>
 
-      <!-- <img class="avatar" ng-if="message.who !== 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}"> -->
 
       <!--=========  AYLIEN MESSAGE  =========-->
+
+      <img class="avatar" ng-if="message.who !== 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}">
+
 
       <div class="message aylien" ng-if="message.who === 'aylien'" ng-show="message.view === 'json'">
 
@@ -282,8 +284,6 @@
           <strong class="data">Woops! There was an error analyzing your input. Please try again later.</strong>
         </div>
       </div>
-
-      <img class="avatar" ng-if="message.who !== 'user'" ng-src="{{'images/' + message.who + '-icon.png'}}">
 
 
       <div class="message aylien" ng-if="message.who === 'aylien' && !message.error" ng-show="message.view === 'pretty'">
