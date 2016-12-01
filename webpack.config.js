@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 
 module.exports = {
   devtool: 'inline-source-map',
@@ -39,5 +40,8 @@ module.exports = {
       }
       // { test: /\.scss$/, loader: `${stylesheetsLoader}'!sass` }
     ]
-  }
+  },
+  plugins: [
+    new webpack.NoErrorsPlugin()
+  ]
 }

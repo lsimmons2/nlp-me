@@ -5,9 +5,9 @@
   "main": "server.js",
   "scripts": {
     "build": "babel --watch src/ --out-dir dist/ --source-maps --copy-files",
-    "start": "sudo nodemon dist/server/app.js",
+    "start": "webpack-dev-server",
     "debug": "node-debug --debug-brk dist/server/app.js",
-    "prod": "sudo NODE_ENV=prod forever start dist/server/app.js"
+    "prod": "NODE_ENV=prod forever start dist/server/app.js"
   },
   "repository": {
     "type": "git",
