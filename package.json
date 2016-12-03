@@ -75,6 +75,7 @@
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-router": "^3.0.0",
+    "react-tooltip": "^3.2.2",
     "request": "^2.75.0",
     "request-promise": "^4.1.1",
     "winston": "^2.3.0",
