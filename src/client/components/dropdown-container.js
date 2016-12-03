@@ -11,9 +11,9 @@ class DropdownContainer extends React.Component {
     return (
       <div id="dropdown-container">
         < AylienDropdown view={this.props.viewChoices.aylien}/>
-        < RosetteDropdown />
-        < IndicoDropdown />
-        < MeaningcloudDropdown />
+        < RosetteDropdown view={this.props.viewChoices.rosette}/>
+        < IndicoDropdown view={this.props.viewChoices.indico}/>
+        < MeaningcloudDropdown view={this.props.viewChoices.meaningcloud}/>
       </div>
     )
   }

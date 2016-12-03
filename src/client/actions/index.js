@@ -1,9 +1,9 @@
 let actions = {
 
   toggleView: function(api){
-    console.log('hrerrr in action for ', api);
+    let type = api.toUpperCase() + '_TOGGLE_VIEW';
     return {
-      type: 'TOGGLE_VIEW',
+      type: type,
       api: api
     }
   }

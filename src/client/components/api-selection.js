@@ -7,8 +7,7 @@ class ApiSelection extends React.Component {
   }
 
   toggleView(){
-    console.log('sah from component');
-    this.props.actions.toggleView(this.props.api);
+    this.props.actions.toggleView(this.props.apiName);
   }
 
   render(){
@@ -25,8 +24,8 @@ class ApiSelection extends React.Component {
       )
     } else {
       apiSelectionElement = (
-        <div className="api-selection" id={ this.props.api + "-selection" }>
-          <img className="api-logo" src={"images/" + this.props.api + "-logo.png"}/>
+        <div className="api-selection" id={ this.props.apiName + "-selection" }>
+          <img className="api-logo" src={"images/" + this.props.apiName + "-logo.png"}/>
           <span className="glyphicon glyphicon-chevron-down dropdown-toggle"></span>
           <span className="glyphicon glyphicon-chevron-up dropdown-toggle"></span>
         </div>

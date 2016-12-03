@@ -11,13 +11,23 @@ class ChatBox extends React.Component {
   render(){
 
     let viewChoices = {};
-    [this.props.aylien].forEach( api => {
-      viewChoices['aylien'] = api.view;
-    })
+    if (this.props.aylien.view){
+      viewChoices['aylien'] = true;
+    } else viewChoices['aylien'] = false;
+    if (this.props.rosette.view){
+      viewChoices['rosette'] = true;
+    } else viewChoices['rosette'] = false;
+    if (this.props.indico.view){
+      viewChoices['indico'] = true;
+    } else viewChoices['indico'] = false;
+    if (this.props.meaningcloud.view){
+      viewChoices['meaningcloud'] = true;
+    } else viewChoices['meaningcloud'] = false;
+
 
     return (
       <div id="chat">
-        < SelectionContainer actions={this.props.actions} aylien={this.props.aylien}/>
+        < SelectionContainer actions={this.props.actions} apis={this.props.apis}/>
         < DropdownContainer viewChoices={viewChoices}/>
         < ConvoContainer />
         < InputContainer />

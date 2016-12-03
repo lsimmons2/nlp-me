@@ -27,38 +27,38 @@ let initialState = {
       hashtags: false
     },
     ready: ready
+  },
+  rosette: {
+    view: false,
+    types: {
+      categories: false,
+      sentiment: false,
+      entities: false,
+      relationships: false
+    },
+    ready: ready
+  },
+  indico: {
+    view: false,
+    types: {
+      texttags: false,
+      sentiment: false,
+      personality: false,
+      people: false,
+      political: false,
+      emotion: false
+    },
+    ready: ready
+  },
+  meaningcloud: {
+    view: false,
+    types: {
+      classification: false,
+      sentiment: false,
+      topics: false
+    },
+    ready: ready
   }
-  // rosette: {
-  //   view: false,
-  //   types: {
-  //     categories: false,
-  //     sentiment: false,
-  //     entities: false,
-  //     relationships: false
-  //   },
-  //   ready: ready
-  // },
-  // indico: {
-  //   view: false,
-  //   types: {
-  //     texttags: false,
-  //     sentiment: false,
-  //     personality: false,
-  //     people: false,
-  //     political: false,
-  //     emotion: false
-  //   },
-  //   ready: ready
-  // },
-  // meaningcloud: {
-  //   view: false,
-  //   types: {
-  //     classification: false,
-  //     sentiment: false,
-  //     topics: false
-  //   },
-  //   ready: ready
-  // }
 }
 
 let store = configureStore(initialState);

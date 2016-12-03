@@ -27,7 +27,9 @@ class App extends React.Component {
       < ChatBox
         actions={this.props.actions}
         aylien={this.props.aylien}
-        apis={this.props.apis}
+        rosette={this.props.rosette}
+        indico={this.props.indico}
+        meaningcloud={this.props.meaningcloud}
       />
     )
   }

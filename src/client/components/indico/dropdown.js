@@ -6,8 +6,16 @@ import Tooltip from 'react-tooltip';
 class IndicoDropdown extends React.Component {
 
   render(){
+
+    let viewStyle = {};
+    if (this.props.view){
+      viewStyle.display = 'block';
+    } else {
+      viewStyle.display = 'none';
+    }
+
     return (
-      <div className="dropdown" id="indico-dropdown">
+      <div className="dropdown" id="indico-dropdown" style={viewStyle} >
         <h3 className="dropdown-header">Analysis Options</h3>
         <ul className="api-types-list">
           <li>

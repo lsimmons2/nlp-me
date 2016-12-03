@@ -13,11 +13,6 @@ class AylienDropdown extends React.Component {
     } else {
       viewStyle.display = 'none';
     }
-    // if (this.props.api.view){
-    //   viewStyle.display = 'none';
-    // } else {
-    //   viewStyle.display = 'block';
-    // }
 
     return (
       <div className="dropdown" id="aylien-dropdown" style={viewStyle} >
