@@ -10,7 +10,7 @@ class DropdownContainer extends React.Component {
   render(){
     return (
       <div id="dropdown-container">
-        < AylienDropdown />
+        < AylienDropdown view={this.props.viewChoices.aylien}/>
         < RosetteDropdown />
         < IndicoDropdown />
         < MeaningcloudDropdown />

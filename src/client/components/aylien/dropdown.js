@@ -6,8 +6,21 @@ import Tooltip from 'react-tooltip';
 class AylienDropdown extends React.Component {
 
   render(){
+
+    let viewStyle = {};
+    if (this.props.view){
+      viewStyle.display = 'block';
+    } else {
+      viewStyle.display = 'none';
+    }
+    // if (this.props.api.view){
+    //   viewStyle.display = 'none';
+    // } else {
+    //   viewStyle.display = 'block';
+    // }
+
     return (
-      <div className="dropdown" id="aylien-dropdown">
+      <div className="dropdown" id="aylien-dropdown" style={viewStyle} >
         <h3 className="dropdown-header">Analysis Options</h3>
         <ul className="api-types-list">
           <li>

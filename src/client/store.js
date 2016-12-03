@@ -1,10 +1,13 @@
-import React from 'react';
-import { render } from 'react-dom';
-import App from './components/app';
-import configureStore from './store';
-import { Provider } from 'react-redux';
-// import './style/main.scss';
+//this store function will create the store in the entry of the app
 
+import { applyMiddleware, compose, createStore } from 'redux';
+import rootReducer from './reducers';
+import logger from 'redux-logger';
+import thunk from 'redux-thunk';
+
+let finalCreateStore = compose(
+  applyMiddleware(thunk, logger())
+)(createStore)
 
 function ready(){
   for (var type in this.types) {
@@ -15,7 +18,8 @@ function ready(){
   return false;
 };
 
-let initialState = {
+
+let defInitialState = {
   // text: '',
   // convo: [],
   aylien: {
@@ -27,7 +31,7 @@ let initialState = {
       hashtags: false
     },
     ready: ready
-  }
+  }//,
   // rosette: {
   //   view: false,
   //   types: {
@@ -61,11 +65,6 @@ let initialState = {
   // }
 }
 
-let store = configureStore(initialState);
-
-render(
-  <Provider store={store}>
-    <App/>
-  </Provider>,
-  document.getElementById('app')
-)
+export default function configureStore(initialState = defInitialState){
+  return finalCreateStore(rootReducer, initialState)
+}
