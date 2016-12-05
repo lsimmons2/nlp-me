@@ -301,7 +301,7 @@
           <p ng-if="message.analyses.classify.categories.length">
             I'm
             <span ng-repeat="category in message.analyses.classify.categories track by $index">
-              <span ng-if="$last">and</span>
+              <span ng-if="$last && message.analyses.classify.categories.length > 1">and</span>
               <strong class="data">{{ category.confidence | perc }}%</strong>
               confident that
               <strong class="data">{{category.label}}</strong>
@@ -585,7 +585,7 @@
           <h5>Sentiment</h5>
           <p>
             On a scale of 0 to 1, 0 being negative and 1 being positive,
-            I rate your sentiment as <strong class="data">{{ message.analyses.sentiment.results | perc }}</strong>.
+            I rate your sentiment as <strong class="data">{{ message.analyses.sentiment.results | oneToTen }}</strong>.
           </p>
         </div>
 
@@ -595,9 +595,9 @@
           <p>
             On a scale of 0 to 1, I rate
             <span ng-repeat="(sentiment, score) in message.analyses.personality.results">
-              <span ng-if="$last">and</span>
+              <span ng-if="$last && keys(message.analyses.personality.results).length > 1">and</span>
               <span>your</span>
-              <strong class="data">{{sentiment}}</strong> as <strong class="data">{{ score | perc }}</strong>
+              <strong class="data">{{sentiment}}</strong> as <strong class="data">{{ score | oneToTen }}</strong>
               <span class="comma-period" ng-if="!$last">,</span>
               <span class="comma-period" ng-if="$last">.</span>
             </span>
@@ -629,7 +629,7 @@
           <p>
             On a scale of 0 to 1, I rate
             <span ng-repeat="(affiliation, score) in message.analyses.political.results">
-              <span ng-if="$last">and</span>
+              <span ng-if="$last && keys(message.analyses.political.results).length > 1">and</span>
               <span>your</span>
               <strong class="data">{{affiliation}}</strong> affiliation as <strong class="data">{{ score | oneToTen }}</strong>
               <span class="comma-period" ng-if="!$last">,</span>
@@ -643,7 +643,7 @@
           <p>
             On a scale of 0 to 1, I rate
             <span ng-repeat="(emotion, score) in message.analyses.emotion.results">
-              <span ng-if="$last">and</span>
+              <span ng-if="$last && keys(message.analyses.emotion.results).length > 1">and</span>
               <span>your</span>
               <strong class="data">{{emotion}}</strong> as <strong class="data">{{ score | oneToTen }}</strong>
               <span class="comma-period" ng-if="!$last">,</span>
