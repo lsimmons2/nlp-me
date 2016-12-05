@@ -5,6 +5,22 @@ import Tooltip from 'react-tooltip';
 
 class AylienDropdown extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      classify: false,
+      sentiment: false,
+      concepts: false,
+      hashtags: false
+    }
+  }
+
+  setSelection(type, e){
+    let update = {};
+    update[type] = e.target.checked;
+    this.setState(update);
+  }
+
   render(){
 
     let viewStyle = {};
@@ -24,8 +40,13 @@ class AylienDropdown extends React.Component {
               Produces confidence scores for different categories in your input.
             </ Tooltip >
             <div className="api-checkbox cb1">
-                <input type="checkbox" id="acb-classify" />
-                <label htmlFor="acb-classify"></label>
+              <input
+                type="checkbox"
+                id="acb-classify"
+                onChange={this.setSelection.bind(this, 'classify')}
+                defaultChecked={this.state.classify}
+              />
+              <label htmlFor="acb-classify"></label>
              </div>
           </li>
           <li>
@@ -34,8 +55,13 @@ class AylienDropdown extends React.Component {
               Produces scores for the polarity and subjectivity your input expresses.
             </ Tooltip >
             <div className="api-checkbox cb1">
-                <input type="checkbox" id="acb-sentiment" />
-                <label htmlFor="acb-sentiment"></label>
+              <input
+                type="checkbox"
+                id="acb-sentiment"
+                onChange={this.setSelection.bind(this, 'sentiment')}
+                defaultChecked={this.state.sentiment}
+              />
+              <label htmlFor="acb-sentiment"></label>
              </div>
           </li>
           <li>
@@ -44,8 +70,13 @@ class AylienDropdown extends React.Component {
               Extracts different concepts from your input.
             </ Tooltip >
             <div className="api-checkbox cb1">
-                <input type="checkbox" id="acb-concepts" />
-                <label htmlFor="acb-concepts"></label>
+              <input
+                type="checkbox"
+                id="acb-concepts"
+                onChange={this.setSelection.bind(this, 'concepts')}
+                defaultChecked={this.state.concepts}
+              />
+              <label htmlFor="acb-concepts"></label>
              </div>
           </li>
           <li>
@@ -54,8 +85,13 @@ class AylienDropdown extends React.Component {
               Extracts different hashtags from your input.
             </ Tooltip >
             <div className="api-checkbox cb1">
-                <input type="checkbox" id="acb-hashtags" />
-                <label htmlFor="acb-hashtags"></label>
+              <input
+                type="checkbox"
+                id="acb-hashtags"
+                onChange={this.setSelection.bind(this, 'hashtags')}
+                defaultChecked={this.state.hashtags}
+              />
+              <label htmlFor="acb-hashtags"></label>
              </div>
           </li>
         </ul>
@@ -66,45 +102,6 @@ class AylienDropdown extends React.Component {
           Unselect all
         </div>
       </div>
-      // <div className="dropdown" id="aylien-dropdown">
-      //   <h3 className="dropdown-header">Analysis Options</h3>
-      //   <ul className="api-types-list">
-      //     <li>
-      //       <div tooltip-placement="right" tooltip-className="indico-tooltip" uib-tooltip="Produces confidence scores for different categories in your input.">Classify</div>
-      //       <div className="api-checkbox cb1">
-      //           <input type="checkbox" id="acb-classify" />
-      //           <label htmlFor="acb-classify"></label>
-      //        </div>
-      //     </li>
-      //     <li>
-      //       <div tooltip-placement="right" tooltip-className="indico-tooltip" uib-tooltip="Produces scores for the polarity and subjectivity your input expresses.">Sentiment</div>
-      //       <div className="api-checkbox cb1">
-      //           <input type="checkbox" id="acb-sentiment" />
-      //           <label htmlFor="acb-sentiment"></label>
-      //        </div>
-      //     </li>
-      //     <li>
-      //       <div tooltip-placement="top" tooltip-className="indico-tooltip" uib-tooltip="Extracts different concepts from your input.">Concepts</div>
-      //       <div className="api-checkbox cb1">
-      //           <input type="checkbox" id="acb-concepts" />
-      //           <label htmlFor="acb-concepts"></label>
-      //        </div>
-      //     </li>
-      //     <li>
-      //       <div tooltip-placement="top" tooltip-className="indico-tooltip" uib-tooltip="Extracts different hashtags from your input.">Hashtags</div>
-      //       <div className="api-checkbox cb1">
-      //           <input type="checkbox" id="acb-hashtags" />
-      //           <label htmlFor="acb-hashtags"></label>
-      //        </div>
-      //     </li>
-      //   </ul>
-      //   <div className="un-select-all">
-      //     Select all
-      //   </div>
-      //   <div className="un-select-all">
-      //     Unselect all
-      //   </div>
-      // </div>
     )
   }
 }

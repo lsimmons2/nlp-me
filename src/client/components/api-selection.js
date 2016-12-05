@@ -12,22 +12,27 @@ class ApiSelection extends React.Component {
 
   render(){
 
+    let arrowElement;
+    if (this.props.view){
+      arrowElement = <span className="glyphicon glyphicon-chevron-up dropdown-toggle"></span>
+    } else {
+      arrowElement = <span className="glyphicon glyphicon-chevron-down dropdown-toggle"></span>
+    }
+
     let apiSelectionElement;
     if (this.props.apiName === 'aylien'){
       apiSelectionElement = (
         <div className="api-selection" id={ this.props.apiName + "-selection" }>
           <img className="api-logo" src={"images/aylien-icon.png"}/>
           <span id="aylien-logo-text">AYLIEN</span>
-          <span className="glyphicon glyphicon-chevron-down dropdown-toggle"></span>
-          <span className="glyphicon glyphicon-chevron-up dropdown-toggle"></span>
+          {arrowElement}
         </div>
       )
     } else {
       apiSelectionElement = (
         <div className="api-selection" id={ this.props.apiName + "-selection" }>
           <img className="api-logo" src={"images/" + this.props.apiName + "-logo.png"}/>
-          <span className="glyphicon glyphicon-chevron-down dropdown-toggle"></span>
-          <span className="glyphicon glyphicon-chevron-up dropdown-toggle"></span>
+          {arrowElement}
         </div>
       )
     }

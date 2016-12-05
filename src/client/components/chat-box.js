@@ -27,8 +27,13 @@ class ChatBox extends React.Component {
 
     return (
       <div id="chat">
-        < SelectionContainer actions={this.props.actions} apis={this.props.apis}/>
-        < DropdownContainer viewChoices={viewChoices}/>
+        < SelectionContainer
+          actions={this.props.actions}
+          viewChoices={viewChoices}
+        />
+        < DropdownContainer
+          viewChoices={viewChoices}
+        />
         < ConvoContainer />
         < InputContainer />
       </div>

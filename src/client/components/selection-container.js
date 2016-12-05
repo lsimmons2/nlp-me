@@ -3,13 +3,33 @@ import ApiSelection from './api-selection'
 
 class SelectionContainer extends React.Component {
 
+  constructor(props){
+    super(props);
+  }
+
   render(){
     return (
       <div id="selection-container">
-        < ApiSelection actions={this.props.actions} api={this.props.aylien} apiName='aylien'/>
-        < ApiSelection actions={this.props.actions} api={this.props.rosette} apiName='rosette'/>
-        < ApiSelection actions={this.props.actions} api={this.props.indico} apiName='indico'/>
-        < ApiSelection actions={this.props.actions} api={this.props.meaningcloud} apiName='meaningcloud'/>
+        < ApiSelection
+          actions={this.props.actions}
+          view={this.props.viewChoices.aylien}
+          apiName='aylien'
+        />
+        < ApiSelection
+          actions={this.props.actions}
+          view={this.props.viewChoices.rosette}
+          apiName='rosette'
+        />
+        < ApiSelection
+          actions={this.props.actions}
+          view={this.props.viewChoices.indico}
+          apiName='indico'
+        />
+        < ApiSelection
+          actions={this.props.actions}
+          view={this.props.viewChoices.meaningcloud}
+          apiName='meaningcloud'
+        />
       </div>
     )
   }

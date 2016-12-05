@@ -5,6 +5,24 @@ import Tooltip from 'react-tooltip';
 
 class IndicoDropdown extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      texttags: false,
+      sentiment: false,
+      personality: false,
+      people: false,
+      political: false,
+      emotion: false
+    }
+  }
+
+  setSelection(type, e){
+    let update = {};
+    update[type] = e.target.checked;
+    this.setState(update);
+  }
+
   render(){
 
     let viewStyle = {};
@@ -24,8 +42,13 @@ class IndicoDropdown extends React.Component {
               Produces confidence scores for the correlation between 111 text tags (similar to categories) and your input.
             </ Tooltip >
             <div className="api-checkbox cb3">
-                <input type="checkbox" id="icb-texttags"/>
-                <label htmlFor="icb-texttags"></label>
+              <input
+                type="checkbox"
+                id="icb-texttags"
+                onChange={this.setSelection.bind(this, "texttags")}
+                defaultChecked={this.state.texttags}
+              />
+              <label htmlFor="icb-texttags"></label>
              </div>
           </li>
           <li>
@@ -34,8 +57,13 @@ class IndicoDropdown extends React.Component {
               Produces a sentiment score between 0 and 1 for your input. Above 0.5 indicates positive sentiment, below 0.5 indicates negative sentiment.
             </ Tooltip >
             <div className="api-checkbox cb3">
-                <input type="checkbox" id="icb-sentiment"/>
-                <label htmlFor="icb-sentiment"></label>
+              <input
+                type="checkbox"
+                id="icb-sentiment"
+                onChange={this.setSelection.bind(this, "sentiment")}
+                defaultChecked={this.state.sentiment}
+              />
+              <label htmlFor="icb-sentiment"></label>
              </div>
           </li>
           <li>
@@ -44,8 +72,13 @@ class IndicoDropdown extends React.Component {
               Produces scores for how strongly your input expresses openness, extraversion, agreeableness, and conscientiousness.
             </ Tooltip >
             <div className="api-checkbox cb3">
-                <input type="checkbox" id="icb-personality"/>
-                <label htmlFor="icb-personality"></label>
+              <input
+                type="checkbox"
+                id="icb-personality"
+                onChange={this.setSelection.bind(this, "personality")}
+                defaultChecked={this.state.personality}
+              />
+              <label htmlFor="icb-personality"></label>
              </div>
           </li>
           <li>
@@ -54,8 +87,13 @@ class IndicoDropdown extends React.Component {
               Extracts the people referenced in your input.
             </ Tooltip >
             <div className="api-checkbox cb3">
-                <input type="checkbox" id="icb-people"/>
-                <label htmlFor="icb-people"></label>
+              <input
+                type="checkbox"
+                id="icb-people"
+                onChange={this.setSelection.bind(this, "people")}
+                defaultChecked={this.state.people}
+              />
+              <label htmlFor="icb-people"></label>
              </div>
           </li>
           <li>
@@ -64,8 +102,13 @@ class IndicoDropdown extends React.Component {
               Produces scores that represent the likelihood that your input expresses a leaning to the liberal, green, conservative, and libertarian political affiliations.
             </ Tooltip >
             <div className="api-checkbox cb3">
-                <input type="checkbox" id="icb-political"/>
-                <label htmlFor="icb-political"></label>
+              <input
+                type="checkbox"
+                id="icb-political"
+                onChange={this.setSelection.bind(this, "political")}
+                defaultChecked={this.state.political}
+              />
+              <label htmlFor="icb-political"></label>
              </div>
           </li>
           <li>
@@ -74,8 +117,13 @@ class IndicoDropdown extends React.Component {
               Produces scores for how much your input expresses anger, joy, fear, surprise, and sadness.
             </ Tooltip >
             <div className="api-checkbox cb3">
-                <input type="checkbox" id="icb-emotion"/>
-                <label htmlFor="icb-emotion"></label>
+              <input
+                type="checkbox"
+                id="icb-emotion"
+                onChange={this.setSelection.bind(this, "emotion")}
+                defaultChecked={this.state.emotion}
+              />
+              <label htmlFor="icb-emotion"></label>
              </div>
           </li>
         </ul>
