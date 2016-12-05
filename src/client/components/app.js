@@ -26,10 +26,7 @@ class App extends React.Component {
     return (
       < ChatBox
         actions={this.props.actions}
-        aylien={this.props.aylien}
-        rosette={this.props.rosette}
-        indico={this.props.indico}
-        meaningcloud={this.props.meaningcloud}
+        apis={this.props.apis}
       />
     )
   }
@@ -47,17 +44,3 @@ function mapDispatchToProps(dispatch){
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
-// class App extends React.Component {
-//   render() {
-//     return (
-//       <Router history={hashHistory}>
-//         <Route path='/' component={AboutPage} />
-//         <Route path='/about' component={AboutPage} />
-//         <Route path='/chat' component={ChatBox} />
-//       </Router>
-//     )
-//   }
-// }
-
-
-// export default App
