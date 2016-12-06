@@ -302,7 +302,7 @@
             I'm
             <span ng-repeat="category in message.analyses.classify.categories track by $index">
               <span ng-if="$last && message.analyses.classify.categories.length > 1">and</span>
-              <strong class="data">{{ category.confidence | perc }}%</strong>
+              <strong class="data">{{ category.score | perc }}%</strong>
               confident that
               <strong class="data">{{category.label}}</strong>
               is a category

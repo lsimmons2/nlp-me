@@ -8,6 +8,12 @@ import winston from 'winston';
 import fs from 'fs';
 require('winston-daily-rotate-file');
 
+import AylienApi from 'aylien_textapi';
+const aylienApi = new AylienApi({
+  application_id: config.aylien.headers['X-AYLIEN-TextAPI-Application-ID'],
+  application_key: config.aylien.headers['X-AYLIEN-TextAPI-Application-Key']
+});
+
 const tsFormat = () => (new Date()).toLocaleTimeString();
 const env = process.env.NODE_ENV || 'dev';
 const logDir = 'logs/' + env;
@@ -133,53 +139,108 @@ function hitApi(options, api, type){
 
 
 
+function callAylien(type, text){
+
+  let analysis;
+
+  return new Promise( (resolve, reject) => {
+
+    if( type === 'classify') {
+      aylienApi.classifyByTaxonomy({
+        'text': text,
+        'taxonomy': 'iab-qag'
+      }, (error, response) => {
+        if (error){
+          return reject(error);
+        }
+        analysis = {};
+        analysis['type'] = 'classify';
+        analysis['data'] = JSON.stringify(response);
+        return resolve(analysis);
+      });
+    }
+
+    if ( type === 'sentiment') {
+      aylienApi.sentiment({
+        text: text,
+        mode: 'tweet'
+      }, function(error, response) {
+        if (error){
+          return reject(error);
+        }
+        analysis = {};
+        analysis['type'] = 'sentiment';
+        analysis['data'] = JSON.stringify(response)
+        return resolve(analysis);
+      });
+    }
+
+    if ( type === 'concepts') {
+      aylienApi.concepts({
+        text: text
+      }, function(error, response) {
+        if (error){
+          return reject(error);
+        }
+        analysis = {};
+        analysis['type'] = 'concepts';
+        analysis['data'] = JSON.stringify(response);
+        return resolve(analysis);
+      });
+    }
+
+    if ( type === 'hashtags') {
+      aylienApi.hashtags({
+        text: text
+      }, function(error, response) {
+        if (error){
+          return reject(error);
+        }
+        analysis = {};
+        analysis['type'] = 'hashtags';
+        analysis['data'] = JSON.stringify(response);
+        return resolve(analysis);
+      });
+    }
+
+  })
+
+
+}
+
+
+
 /*
-*  aylien api takes following endpoints:
+*  aylien analyses:
 *   - classify
 *   - sentiment
 *   - concepts
-*   - entities
-*   - summarize
-*   - image-tags
 *   - hashtags
-*   - related [phrases]
-*   - unsupervised (semantic labeling)
 */
+
+
 
 
 function aylien(req, res, next){
 
   store('aylien', req.body);
 
-  // return res.status(500).send();
-
-
-  let base = 'https://api.aylien.com/api/v1/';
   let types = req.body.types;
-
-  let options = {
-    url: '',
-    headers: config.aylien.headers,
-    form: {
-      text: req.body.text
-    }
-  };
-
+  let text = req.body.text;
 
   let callPromises = [];
 
   types.forEach(type => {
-    options.url = base + type;
-    callPromises.push(hitApi(options, 'aylien', type));
+    callPromises.push(callAylien(type, text))
   });
 
   Promise.all(callPromises)
     .then(function(results){
-      // logger.info('Aylien response processed: ', results);
+      logger.info('Aylien response processed: ', results);
       return res.status(200).send(results);
     })
     .catch(function(err){
-      // logger.error('Error processing aylien reponse: ', err);
+      logger.error('Error processing aylien reponse: ', err);
       return res.status(500).send(err);
     });
 
@@ -231,7 +292,6 @@ function rosette(req, res, next){
 };
 
 
-//indicoSdk.apiKey = config.indico.key;
 /*
 *  indico sdk uses following methods/endpoints:
 *   - texttags
@@ -239,7 +299,6 @@ function rosette(req, res, next){
 *   - personality
 *   - people
 *   - political
-*   - personas
 *   - emotion
 */
 function indico(req, res, next){
@@ -312,7 +371,6 @@ function mcOptions(type, text){
 /*
 *  meaningcloud api takes following endpoints:
 *   - entities
-*   - relationships
 *   - categories
 *   - sentiment
 */

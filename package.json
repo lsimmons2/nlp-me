@@ -47,6 +47,7 @@
     "angular": "^1.5.8",
     "angular-route": "^1.5.8",
     "angular-ui-bootstrap": "^2.2.0",
+    "aylien_textapi": "^0.6.0",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "connect": "^3.5.0",
