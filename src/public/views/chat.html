@@ -4,11 +4,12 @@
   <div id="selection-container">
 
 
-    <div class="api-selection-container" id="aylien-selection-container" ng-click="aylien.view = !aylien.view">
+    <div class="api-selection-container" id="aylien-selection-container" ng-click="viewDropdown('aylien')">
 
       <div class="api-selection" id="aylien-selection">
-        <img class="api-logo" src="images/aylien-icon.png">
-        <span id="aylien-logo-text">AYLIEN</span>
+        <img class="api-logo-icon selection-logo" src="images/aylien-icon.png">
+        <span id="aylien-logo-text" class="selection-logo">AYLIEN</span>
+        <img class="api-logo-icon selection-icon" src="images/aylien-icon.png">
         <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="aylien.view"></span>
         <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="aylien.view"></span>
       </div>
@@ -16,10 +17,11 @@
     </div>
 
 
-    <div class="api-selection-container" id="rosette-selection-container" ng-click="rosette.view = !rosette.view">
+    <div class="api-selection-container" id="rosette-selection-container" ng-click="viewDropdown('rosette')">
 
       <div class="api-selection" id="rosette-selection">
-        <img class="api-logo" src="images/rosette-logo.png">
+        <img class="api-logo-icon selection-logo" src="images/rosette-logo.png">
+        <img class="api-logo-icon selection-icon" src="images/rosette-icon.png">
         <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="rosette.view"></span>
         <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="rosette.view"></span>
       </div>
@@ -28,10 +30,11 @@
 
 
 
-    <div class="api-selection-container" id="indico-selection-container" ng-click="indico.view = !indico.view">
+    <div class="api-selection-container" id="indico-selection-container" ng-click="viewDropdown('indico')">
 
       <div class="api-selection" id="indico-selection">
-        <img class="api-logo" src="images/indico-logo.png">
+        <img class="api-logo-icon selection-logo" src="images/indico-logo.png">
+        <img class="api-logo-icon selection-icon" src="images/indico-icon.png">
         <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="indico.view"></span>
         <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="indico.view"></span>
       </div>
@@ -39,10 +42,11 @@
     </div>
 
 
-    <div class="api-selection-container" id="meaningcloud-selection-container" ng-click="meaningcloud.view = !meaningcloud.view">
+    <div class="api-selection-container" id="meaningcloud-selection-container" ng-click="viewDropdown('meaningcloud')">
 
       <div class="api-selection" id="meaningcloud-selection">
-        <img class="api-logo" src="images/meaningcloud-logo.png">
+        <img class="api-logo-icon selection-logo" src="images/meaningcloud-logo.png">
+        <img class="api-logo-icon selection-icon" src="images/meaningcloud-icon.png">
         <span class="glyphicon glyphicon-chevron-down dropdown-toggle" ng-hide="meaningcloud.view"></span>
         <span class="glyphicon glyphicon-chevron-up dropdown-toggle" ng-show="meaningcloud.view"></span>
       </div>
@@ -59,7 +63,7 @@
 
     <!--=========  AYLIEN DROPDOWN =========-->
     <div class="dropdown" id="aylien-dropdown" ng-show="aylien.view">
-      <h3 class="dropdown-header">Analysis Options</h3>
+      <h3 class="dropdown-header"><span class="dropdown-api-name">Aylien </span>Analysis Options</h3>
       <ul class="api-types-list">
         <li>
           <div tooltip-placement="right" tooltip-class="indico-tooltip" uib-tooltip="Produces confidence scores for different categories in your input.">Classify</div>
@@ -100,7 +104,7 @@
 
     <!--=========  ROSETTE DROPDOWN  =========-->
     <div class="dropdown" id="rosette-dropdown" ng-show="rosette.view">
-      <h3 class="dropdown-header">Analysis Options</h3>
+      <h3 class="dropdown-header"><span class="dropdown-api-name">Rosette </span>Analysis Options</h3>
       <ul class="api-types-list">
         <li>
           <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Extracts different categories from your input.">Categories</div>
@@ -141,7 +145,7 @@
 
     <!--=========  INDICO DROPDOWN  =========-->
     <div class="dropdown" id="indico-dropdown" ng-show="indico.view">
-      <h3 class="dropdown-header">Analysis Options</h3>
+      <h3 class="dropdown-header"><span class="dropdown-api-name">Indico </span>Analysis Options</h3>
       <ul class="api-types-list">
         <li>
           <div tooltip-placement="top" tooltip-class="indico-tooltip" uib-tooltip="Produces confidence scores for the correlation between 111 text tags (similar to categories) and your input.">Text Tags</div>
@@ -196,7 +200,7 @@
 
     <!--=========  MEANING CLOUD DROPDOWN  =========-->
     <div class="dropdown" id="meaningcloud-dropdown" ng-show="meaningcloud.view">
-      <h3 class="dropdown-header">Analysis Options</h3>
+      <h3 class="dropdown-header"><span class="dropdown-api-name">Meaning Cloud </span>Analysis Options</h3>
       <ul class="api-types-list">
         <li>
           <div tooltip-placement="top" tooltip-class="meaningcloud-tooltip" uib-tooltip="Extracts categories in your input." >Classification</div>

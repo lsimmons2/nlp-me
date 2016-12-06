@@ -45,10 +45,18 @@
       margin-bottom: 30px;
     }
 
-    #top-api-row {
-      margin-bottom: 70px;
+    @media only screen and (min-width: 768px){
+      #top-api-row {
+        margin-bottom: 70px;
+      }
     }
 
+    @media only screen and (max-width: 767px){
+      .api-container {
+        margin-bottom: 70px;
+      }
+    }
+    
     .api-container {
 
 

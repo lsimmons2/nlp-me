@@ -11,6 +11,22 @@ angular.module('chatCtrl', [])
 
   $scope.keys = Object.keys;
 
+  $scope.viewDropdown = function(api){
+    var mq = window.matchMedia( "(min-width: 992px)" );
+    if (mq.matches) {
+      $scope[api].view = !$scope[api].view;
+    } else {
+      //not going for elegance since I'm trying to replace all this with react anyway
+      $scope[api].view = !$scope[api].view;
+      var apis = ['aylien', 'rosette', 'indico', 'meaningcloud'];
+      apis.forEach( apiOption => {
+        if (apiOption !== api){
+          $scope[apiOption].view = false;
+        }
+      })
+    }
+  };
+
   //make this a watched flag instead
   $scope.only = function(input){
     if(Object.keys(input).length === 1){

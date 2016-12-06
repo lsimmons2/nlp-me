@@ -10,13 +10,15 @@
 
     .api-selection-container {
 
+      float: left;
+      width: 25%;
+
       border-style: solid;
       border-top-width: 2px;
       border-bottom-width: 2px;
-      float: left;
-      width: 25%;
       text-align: center;
       cursor: pointer;
+
 
       &#aylien-selection-container {
         border-left-width: 2px;
@@ -45,6 +47,19 @@
         border-color: red;
         height: 40px;
         display: inline-block;
+
+        .selection-logo {
+          @media only screen and (max-width: 679px){
+            display: none;
+          }
+        }
+
+        .selection-icon, .dropwdown-api-name {
+          margin-right: 10px;
+          @media only screen and (min-width: 680px){
+            display: none;
+          }
+        }
 
 
         &#aylien-selection {
@@ -136,6 +151,11 @@
       text-align: center;
       z-index: 3;
 
+      @media only screen and (max-width: 991px){
+        float: left;
+        width: 100%;
+      }
+
       .dropdown-header {
         color: #333;
         text-align: center;
@@ -171,17 +191,23 @@
 
       &#rosette-dropdown {
         border-color: #eb3e0f;
-        margin: 0 50% 0 25%;
+        @media only screen and (min-width: 992px){
+          margin: 0 50% 0 25%;
+        }
       }
 
       &#indico-dropdown {
         border-color: #333333;
-        margin: 0 25% 0 50%;
+        @media only screen and (min-width: 992px){
+          margin: 0 25% 0 50%;
+        }
       }
 
       &#meaningcloud-dropdown {
+        @media only screen and (min-width: 992px){
+          margin-left: 75%;
+        }
         border-color: #fe6601;
-        margin-left: 75%;
       }
 
     }
@@ -200,6 +226,11 @@
     #to-begin {
       text-align: center;
       margin: 20px 0;
+
+      @media only screen and (max-width: 991px){
+        padding: 0 20px;
+      }
+
     }
 
     .avatar {

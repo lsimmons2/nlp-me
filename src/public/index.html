@@ -41,8 +41,7 @@
 
   <body ng-app="App">
 
-    <nav class="navbar navbar-default" id="nav">
-
+    <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -51,26 +50,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-
+          <a class="navbar-brand" href="#/about">
+            NLP ME
+          </a>
+          <a class="navbar-brand" id="brand-extension">
+            -- chat with NLP APIs
+          </a>
         </div>
-        <a class="navbar-brand" href="#/about">
-          NLP ME
-        </a>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-left">
-            <li><a id="nav-brand-extension">-- chat with natural language processing APIs</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a class="nav-item" href="#/about">About</a>
-            </li>
-            <li>
-              <a class="nav-item" href="#/chat">Chat with APIs</a>
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
 
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/chat">Chat with APIs</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
 
     <div class="container fill" ng-view> </div>

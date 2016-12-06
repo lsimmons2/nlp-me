@@ -20,10 +20,33 @@ html, body {
 
   a, li > a {
     color: #d4d4d4;
+
+    &:hover {
+      color: #5e5e5e;
+    }
   }
 
-  #nav-brand-extension:hover {
-    color: #d4d4d4;
+  .navbar-header .navbar-toggle:hover {
+      background-color: #598bdc;
   }
+  .navbar-header .navbar-toggle .icon-bar {
+      background-color: #d4d4d4;
+  }
+
+  #brand-extension {
+
+    font-size: 14px;
+    color: #d4d4d4;
+
+    &:hover {
+      color: #d4d4d4;
+    }
+
+  }
+
+  .nav.navbar-nav.navbar-right {
+    text-align: center;
+  }
+
 
 }
