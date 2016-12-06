@@ -9,11 +9,12 @@ angular.module('App')
     if(input === 1 || parseInt(input) === 1){
       return 100;
     }
-    if (typeof input !== 'string'){
-      input = input.toString();
+    if (typeof input === 'string'){
+      input = parseFloat(input);
     }
-    input = input.match(/^-?\d+(?:\.\d{0,4})?/)[0];
-    return (input * 100);
+    var multAns = input * 100;
+    var fixedMultAns = multAns.toFixed(2);
+    return fixedMultAns;
   }
 })
 .filter('oneToTen', function($filter){
@@ -21,11 +22,10 @@ angular.module('App')
     if(input === 1 || parseInt(input) === 1){
       return 1;
     }
-    if (typeof input !== 'string'){
-      input = input.toString();
+    if (typeof input === 'string'){
+      input = parseFloat(input);
     }
-    input = input.match(/^-?\d+(?:\.\d{0,2})?/)[0];
-    return input;
+    return input.toFixed(2);
   }
 })
 .filter('rosetteSentiment', function($filter){

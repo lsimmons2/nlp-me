@@ -4,54 +4,13 @@ import request from 'request';
 import config from '../../../config/config';
 import Message from './models/messageModel';
 import Call from './models/callModel';
-import winston from 'winston';
-import fs from 'fs';
-require('winston-daily-rotate-file');
-
+import logger from './logger';
 import AylienApi from 'aylien_textapi';
+
 const aylienApi = new AylienApi({
   application_id: config.aylien.headers['X-AYLIEN-TextAPI-Application-ID'],
   application_key: config.aylien.headers['X-AYLIEN-TextAPI-Application-Key']
 });
-
-const tsFormat = () => (new Date()).toLocaleTimeString();
-const env = process.env.NODE_ENV || 'dev';
-const logDir = 'logs/' + env;
-
-if(!fs.existsSync(logDir)){
-  fs.mkdirSync(logDir);
-}
-
-let infoFileLog = new winston.transports.DailyRotateFile({
-  name: 'infoFile',
-  level: 'info',
-  filename: logDir + '/info.log',
-  timestamp: tsFormat,
-  json: true,
-  prettyPrint: true
-});
-
-let errorFileLog = new winston.transports.DailyRotateFile({
-  name: 'errorFile',
-  level: 'error',
-  filename: logDir + '/errors.log',
-  timestamp: tsFormat,
-  json: true,
-  prettyPrint: true
-});
-
-
-const logger = new (winston.Logger)({
-  transports: [
-    new (winston.transports.Console)({
-      colorize: true,
-      timestamp: tsFormat,
-      silent: env !== 'dev'
-    }),
-    infoFileLog,
-    errorFileLog
-  ]
-})
 
 
 
@@ -151,8 +110,10 @@ function callAylien(type, text){
         'taxonomy': 'iab-qag'
       }, (error, response) => {
         if (error){
+          logger.error('Error saving Aylien call: ', util.inspect(err, true, 6));
           return reject(error);
         }
+        logger.info('Aylien call saved: ', util.inspect(response, true, 6));
         analysis = {};
         analysis['type'] = 'classify';
         analysis['data'] = JSON.stringify(response);
@@ -231,7 +192,7 @@ function aylien(req, res, next){
   let callPromises = [];
 
   types.forEach(type => {
-    callPromises.push(callAylien(type, text))
+    callPromises.push(callAylien(type, text));
   });
 
   Promise.all(callPromises)
