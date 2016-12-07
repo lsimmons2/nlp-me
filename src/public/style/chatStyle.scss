@@ -54,7 +54,7 @@
           }
         }
 
-        .selection-icon, .dropwdown-api-name {
+        .selection-icon {
           margin-right: 10px;
           @media only screen and (min-width: 680px){
             display: none;
@@ -160,7 +160,13 @@
         color: #333;
         text-align: center;
         font-size: 22px;
+        .dropdown-api-name {
+          @media only screen and (min-width: 990px){
+            display: none;
+          }
+        }
       }
+
 
 
       .api-types-list {

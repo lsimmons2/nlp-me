@@ -56,7 +56,7 @@
         margin-bottom: 70px;
       }
     }
-    
+
     .api-container {
 
 
@@ -85,7 +85,7 @@
 
         .image-container {
           display: inline-block;
-          margin: 0 5px;
+          margin: 0 5px 4px;
           height: 30px;
           img {
             height: 100%;
@@ -98,7 +98,6 @@
 
         img {
           height: 80%;
-          margin-bottom: 7px;
         }
 
         #aylien-logo-text {
@@ -173,7 +172,8 @@
 
     form {
 
-      width: 60%;
+      width: 80%;
+      max-width: 500px;
       margin-left: auto;
       margin-right: auto;
 
