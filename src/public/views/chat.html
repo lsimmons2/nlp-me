@@ -297,7 +297,7 @@
         <span class="inner-triangle"> </span>
 
         <div class="message-header">
-          <strong>Hello! Here are my analyses of your input</strong><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+          <strong>Hello! Here are my analyses of your input</strong><span ng-if="keys(message.analyses).length" class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
         </div>
 
         <div ng-if="message.analyses.classify">
@@ -433,7 +433,7 @@
         <span class="inner-triangle"> </span>
 
         <div class="message-header">
-          <strong>Hey! Here are my analyses of your input</strong><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+          <strong>Hey! Here are my analyses of your input</strong><span ng-if="keys(message.analyses).length" class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
         </div>
 
         <div ng-if="message.analyses.categories">
@@ -569,7 +569,7 @@
         <span class="inner-triangle"> </span>
 
         <div class="message-header">
-          <strong>Hi! Here are my analyses of your input</strong><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+          <strong>Hi! Here are my analyses of your input</strong><span ng-if="keys(message.analyses).length" class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
         </div>
 
 
@@ -701,7 +701,7 @@
         <span class="inner-triangle"> </span>
 
         <div class="message-header">
-          <strong>Howdy! Here are my analyses of your input</strong><span class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
+          <strong>Howdy! Here are my analyses of your input</strong><span ng-if="keys(message.analyses).length" class="json-link"> - <a ng-click="message.view = 'json'">view in JSON</a></span>
         </div>
 
         <div ng-if="message.analyses.topics">
