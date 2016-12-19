@@ -8,7 +8,7 @@ import SelectionContainer from './selection-container';
 import DropdownContainer from './dropdown-container';
 import ConvoContainer from './convo-container';
 import InputContainer from './input-container';
-import actions from '../actions';
+import * as actions from '../actions';
 
 
 class Chat extends React.Component {
@@ -30,7 +30,9 @@ class Chat extends React.Component {
           apis={this.props.apis}
         />
         < ConvoContainer />
-        < InputContainer />
+        < InputContainer
+          chat={this.props.actions.chat}
+        />
       </div>
     )
   }
