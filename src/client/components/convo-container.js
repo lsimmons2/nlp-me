@@ -1,4 +1,6 @@
-
+// aylien - classify, concepts, hashtags
+// rosette - categories
+//aylien links not working
 import React from 'react'
 
 import AylienMessage from './aylien/aylien-message'

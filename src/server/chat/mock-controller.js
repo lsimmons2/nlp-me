@@ -7,33 +7,113 @@ var meaningcloud = {};
 
 
 
+
 aylien.classify = function(){
 
   return {
-      "type": "classify",
-      "data": "{\n  \"text\": \"So if the devil wear Prada, Adam Eve wear Nada, I'm in between, but way more fresher.\",\n  \"language\": \"en\",\n  \"categories\": [{\n    \"label\": \"arts, culture and entertainment - nightclub\",\n    \"code\": \"01023000\",\n    \"confidence\": 0.9744709946314386\n  }]\n}"
-    };
+    "type": "classify",
+    "data": {
+      "text": "So if the devil wear Prada, Adam Eve wear Nada, I'm in between, but way more fresher.",
+      "language": "en",
+      "categories": [
+        {
+          "label": "arts, culture and entertainment - nightclub",
+          "code": "01023000",
+          "confidence": 0.744709946314386
+        },
+        {
+          "label": "arts, culturrtainment - nightclub",
+          "code": "01023000",
+          "confidence": 0.9744709946314386
+        },
+        {
+          "label": "arts, culture and entertnment - nightclub",
+          "code": "01023000",
+          "confidence": 0.9744709946314386
+        }
+      ]
+    }
+  };
 
 };
 
 aylien.sentiment = function(){
   return {
-      "type": "sentiment",
-      "data": "{\n  \"polarity\": \"negative\",\n  \"subjectivity\": \"subjective\",\n  \"text\": \"I'm like the fly Malcolm X, buy any jeans necessary\",\n  \"polarity_confidence\": 0.3802330791950226,\n  \"subjectivity_confidence\": 1.0\n}"
-    };
+    "type": "sentiment",
+    "data": {
+      "polarity": "negative",
+      "subjectivity": "subjective",
+      "text": "I'm like the fly Malcolm X, buy any jeans necessary",
+      "polarity_confidence": 0.3802330791950226,
+      "subjectivity_confidence": 1
+    }
+  }
 };
 
 aylien.concepts = function(){
   return {
       "type": "concepts",
-      "data": "{\n  \"text\": \"I'm like the fly Malcolm X, buy any jeans necessary\",\n  \"language\": \"en\",\n  \"concepts\": {\n    \"http://dbpedia.org/resource/Malcolm_X\": {\n      \"surfaceForms\": [{\n        \"string\": \"Malcolm X\",\n        \"score\": 0.9999963068766374,\n        \"offset\": 17\n      }],\n      \"types\": [\"http://dbpedia.org/ontology/Person\"],\n      \"support\": 1341\n    }\n  }\n}"
+      "data": {
+        "text": "I'm like the fly Malcolm X, buy any jeans necessary",
+        "language": "en",
+        "concepts": {
+          "http://dbpedia.org/resource/George_Washington": {
+            "surfaceForms": [
+              {
+                "string": "George_Washington",
+                "score": 0.9999963068766374,
+                "offset": 17
+              }
+            ],
+            "types": [
+              "http://dbpedia.org/ontology/Person"
+            ],
+            "support": 1341
+          },
+          "http://dbpedia.org/resource/Malcolm_X": {
+            "surfaceForms": [
+              {
+                "string": "Malcolm X",
+                "score": 0.9999963068766374,
+                "offset": 17
+              }
+            ],
+            "types": [
+              "http://dbpedia.org/ontology/Person"
+            ],
+            "support": 1341
+          },
+          "http://dbpedia.org/resource/Thomas_Jefferson": {
+            "surfaceForms": [
+              {
+                "string": "Thomas_Jefferson",
+                "score": 0.9999963068766374,
+                "offset": 17
+              }
+            ],
+            "types": [
+              "http://dbpedia.org/ontology/Person"
+            ],
+            "support": 1341
+          }
+        }
+      }
     };
 };
 
 aylien.hashtags = function(){
   return {
       "type": "hashtags",
-      "data": "{\n  \"text\": \"So if the devil wear Prada, Adam Eve wear Nada, I'm in between, but way more fresher.\",\n  \"language\": \"en\",\n  \"hashtags\": [\"#Adam\", \"#Prada\"]\n}"
+      "data": {
+        "text": "So if the devil wear Prada, Adam Eve wear Nada, I'm in between, but way more fresher.",
+        "language": "en",
+        "hashtags": [
+          "#sah?",
+          "#Adam",
+          "#bro",
+          "#Prada"
+        ]
+      }
     };
 };
 
