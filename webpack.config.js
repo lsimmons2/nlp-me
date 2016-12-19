@@ -1,34 +1,33 @@
+
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   devtool: 'inline-source-map',
   entry: [
-    'webpack-dev-server/client?http://127.0.0.1:8080/',
-    './src/client'
+    'whatwg-fetch',
+    'webpack-dev-server/client?http://localhost:8080/',
+    'webpack/hot/dev-server',
+    './src/client/index.js'
   ],
-  // devServer: {
-  //   inline: true,
-  //   contentBase: './src/client',
-  //   port: 3000
-  // },
-  // resolve: {
-  //   modulesDirectories: [
-  //     'node_modules'
-  //   ]
-  // },
   output: {
-    path: './src/client',
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'src/client'),
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     loaders: [
       {
-        test: [/\.js$/, /\.es6$/, /\.jsx?$/],
+        test: [/\.js$/],
+        loaders: ['react-hot'],
+        include: path.join(__dirname, 'src/client')
+      },
+      {
+        test: [/\.js$/],
         loader: 'babel-loader',
-        exclude: /node_modules/,
+        include: path.join(__dirname, 'src/client'),
         query: {
-          presets: ['react', 'es2015']//,
-          // plugins: ['transform-object-rest-spread']
+          presets: ['react', 'es2015']
         }
       },
       {
@@ -39,10 +38,13 @@ module.exports = {
           'sass'
         ]
       }
-      // { test: /\.scss$/, loader: `${stylesheetsLoader}'!sass` }
     ]
   },
+  resolve: {
+    extensions: ['', '.js']
+  },
   plugins: [
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 }
