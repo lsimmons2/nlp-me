@@ -2,7 +2,7 @@
 import React from 'react';
 
 class InputContainer extends React.Component {
-
+  
   chat(event){
     event.preventDefault();
     this.props.chat();

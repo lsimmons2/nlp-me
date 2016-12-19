@@ -29,7 +29,9 @@ class Chat extends React.Component {
           toggleSelection={this.props.actions.toggleSelection}
           apis={this.props.apis}
         />
-        < ConvoContainer />
+        < ConvoContainer
+          messages={this.props.convo.messages}
+        />
         < InputContainer
           chat={this.props.actions.chat}
         />

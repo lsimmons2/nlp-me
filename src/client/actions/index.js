@@ -23,15 +23,32 @@ function chatRequest(){
   }
 }
 
-function chatSucess(){
-
+function chatSuccess(api, data){
+  console.log(data);
+  let message = {
+    successes: [],
+    errors: []
+  }
+  data.forEach(analysis => {
+    if(analysis.data !== 'error'){
+      analysis.data = JSON.parse(analysis.data);
+      message.successes.push(analysis);
+    } else {
+      message.errors.push(analysis.type)
+    }
+  })
+  return {
+    type: 'CHAT_SUCCESS',
+    api,
+    message
+  }
 }
 
 function chatError(){
 
 }
 
-function callApi(api, input, types){
+function callApi(dispatch, api, input, types){
 
   let url = `/chat/${api}`;
   let req = {
@@ -41,7 +58,7 @@ function callApi(api, input, types){
     },
     body: JSON.stringify({
       text: input,
-      types
+      types: types
     })
   };
 
@@ -53,12 +70,10 @@ function callApi(api, input, types){
       return resp.json();
     })
     .then(data => {
-      console.log('sah');
-      console.log(data);
+      dispatch(chatSuccess(api, data));
     })
     .catch(err => {
-      console.log('nah?');
-      console.log(err);
+      dispatch(chatError(err));
     })
 
 }
@@ -74,7 +89,6 @@ function chat(){
     let types = [];
 
     for(api in apis){
-
       if(apis[api].ready()){
         dispatch(chatRequest());
         for(type in apis[api].types){
@@ -82,7 +96,7 @@ function chat(){
             types.push(type);
           }
         }
-        callApi(api, input, types);
+        callApi(dispatch, api, input, types);
         types = [];
       }
 
