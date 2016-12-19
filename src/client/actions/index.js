@@ -24,28 +24,32 @@ function chatRequest(){
 }
 
 function chatSuccess(api, data){
-  console.log(data);
-  let message = {
+  let analyses = {
     successes: [],
     errors: []
   }
   data.forEach(analysis => {
     if(analysis.data !== 'error'){
-      analysis.data = JSON.parse(analysis.data);
-      message.successes.push(analysis);
+      if (typeof analysis.data === 'string' || analysis.data instanceof String){
+        analysis.data = JSON.parse(analysis.data);
+      }
+      analyses.successes.push(analysis);
     } else {
-      message.errors.push(analysis.type)
+      analyses.errors.push(analysis.type);
     }
   })
   return {
     type: 'CHAT_SUCCESS',
     api,
-    message
+    analyses
   }
 }
 
-function chatError(){
-
+function chatError(err){
+  return {
+    type: 'CHAT_ERROR',
+    err
+  }
 }
 
 function callApi(dispatch, api, input, types){

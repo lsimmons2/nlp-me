@@ -6,8 +6,7 @@ import methodOverride from 'method-override'
 import cookieParser from 'cookie-parser'
 import path from 'path'
 
-// import search from './search';
-// import chat from './chat';
+import chat from './chat';
 // import feedback from './feedback';
 
 
@@ -15,10 +14,16 @@ const env = process.env.NODE_ENV;
 const app = express();
 
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.json({ type: 'application/vnd.api+json'}));
-// app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/vnd.api+json'}));
+app.use(bodyParser.urlencoded({extended: true}));
 
+app.all('*', (req, res, next) => {
+  console.log(req.method, req.url);
+  next();
+})
+app.use('/chat', chat);
+// app.use('/feedback', feedback);
 
 app.use('/vendor', express.static(path.join(__dirname, '../../node_modules')));
 app.use('/images', express.static(path.join(__dirname, '../../images')));
@@ -26,9 +31,7 @@ app.use('/images', express.static(path.join(__dirname, '../../images')));
 app.all('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../src/client/index.html'));
 });
-// app.use('/nlp', search);
-// app.use('/chat', chat);
-// app.use('/feedback', feedback);
+
 
 
 // let dbUri = 'mongodb://localhost:27017/nlpme-' + env;

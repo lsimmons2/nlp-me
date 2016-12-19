@@ -2,7 +2,12 @@
 import React from 'react';
 
 class InputContainer extends React.Component {
-  
+
+  constructor(props){
+    super(props);
+    this.props.chat();
+  }
+
   chat(event){
     event.preventDefault();
     this.props.chat();

@@ -1,7 +1,4 @@
 
-// import * as format from '../format'
-
-
 export default function(convo={}, action){
 
   switch(action.type){
@@ -13,14 +10,14 @@ export default function(convo={}, action){
       };
 
     case 'CHAT_SUCCESS':
-      // format[action.api](action.data);
-      // console.log(action.data);
-      console.log(action.api);
-      console.log(action.message);
-      return { ...convo,
-        messages: [...convo['messages'], action.message]
-      };
-      // return convo;
+      let message = {
+        api: action.api,
+        analyses: action.analyses
+      }
+      return Object.assign({}, convo, {
+          isFetching: false,
+          messages: [...convo['messages'], message]
+        });
 
     case 'CHAT_ERROR':
       return convo;
