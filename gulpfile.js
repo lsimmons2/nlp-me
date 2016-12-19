@@ -22,10 +22,10 @@ gulp.task('ft', function(done){
 
 gulp.task('wft', function(){
   gulp.watch([
-    'test/client/chatCtrl.spec.js',
-		'test/client/service.js',
+    'test/public/chatCtrl.spec.js',
+		'test/public/service.js',
     'karma.conf.js',
-    'src/client/controllers/chatCtrl.js'
+    'src/public/controllers/chatCtrl.js'
   ], ['ft']);
 });
 
@@ -58,90 +58,63 @@ gulp.task('wbt', function(){
   ], ['bt']);
 });
 
-gulp.task('debug', ['watch-html', 'watch-babel'], function(){
-	return nodemon({
-		nodeArgs: ['--inspect'],
-		script: 'dist/server/app.js',
-		verbose: true,
-		ignore: ['test/**', 'node_modules/**', 'dist/**'],
-		env: {
-			'NODE_ENV': 'dev'
-		}
-	})
-});
-
 
 
 // ============= prod and dev =============
 
-gulp.task('sass', function(){
-  gulp.src('./src/client/style/*.scss')
+gulp.task('nav-sass', function(){
+  gulp.src('./src/client/style/nav.scss')
   .pipe(sass().on('error', gutil.log))
-  .pipe(gulp.dest('./dist/client/style/'))
-  .pipe(livereload());
+  .pipe(gulp.dest('./dist/client/style/nav.css'))
 });
 
-gulp.task('watch-sass', ['sass'], function(){
+gulp.task('nav-sass:watch', ['nav-sass'], function(){
   livereload.listen();
-  gulp.watch(['src/client/style/*.scss'], ['sass']);
+  gulp.watch(['src/client/style/nav.scss'], ['nav-sass']);
 });
-
-// gulp.task('babel', function(){
-// 	return gulp.src('src/**/*.js')
-// 		.pipe(babel({
-// 			presets: ['es2015']
-// 		}))
-// 		.pipe(gulp.dest('dist/'));
-// });
-//
-// gulp.task('watch-babel', ['babel'], function(){
-// 	gulp.watch(['src/**/*.js'], ['babel']);
-// 	gulp.watch(['src/client/**/*.js'], ['babel']);
-// });
-
 
 gulp.task('babel', function(){
-	return gulp.src('src/server/app.js')
-		.pipe(babel({
-			presets: ['es2015']
-		}))
-		.pipe(gulp.dest('dist/server/'));
+	return gulp.src('src/server/**/*.js')
+		.pipe(babel())
+		.pipe(gulp.dest('dist/server'));
 });
 
-gulp.task('watch-babel', ['babel'], function(){
-	gulp.watch(['src/server/app.js'], ['babel']);
+gulp.task('babel:watch', ['babel'], function(){
+	gulp.watch(['src/server/**/*.js'], ['babel']);
 });
-
 
 gulp.task('html', function(){
 	gulp.src('src/**/*.html')
 		.pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch-html', ['html'], function(){
+gulp.task('html:watch', ['html'], function(){
 	gulp.watch(['src/client/**/*.html'], ['html']);
 });
 
-gulp.task('dev', ['watch-html', 'watch-babel'], function(){
-	return nodemon({
+gulp.task('server', ['nav-sass:watch', 'babel:watch'], function(){
+	nodemon({
 		script: 'dist/server/app.js',
-		verbose: true,
-		ignore: ['test/**', 'node_modules/**', 'logs/**', 'src/**'],
+		watch: ['dist/server/**/*'],
 		env: {
 			'NODE_ENV': 'dev'
 		}
 	})
 });
 
-// gulp.task('dev', ['watch-sass', 'watch-html', 'watch-babel'], function(){
-// 	return nodemon({
-// 		script: 'dist/server/app.js',
-// 		verbose: true,
-// 		ignore: ['test/**', 'node_modules/**', 'dist/**', 'logs/**'],
-// 		env: {
-// 			'NODE_ENV': 'dev'
-// 		}
-// 	})
-// });
+gulp.task('server:debug', ['nav-sass:watch', 'babel:watch'], function(){
+	return nodemon({
+		script: 'dist/server/app.js',
+		verbose: true,
+		watch: ['dist/server/**/*'],
+		env: {
+			'NODE_ENV': 'dev'
+		},
+		exec: 'node --inspect'
+	})
+});
+
 
 gulp.task('prod', ['sass', 'html', 'babel']);
+
+gulp.task('default', ['server']);

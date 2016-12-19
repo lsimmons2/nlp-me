@@ -1,17 +1,18 @@
 
+@import url(https://fonts.googleapis.com/css?family=Montserrat:normal,bolder);
+
+@import './nav.scss';
+@import './about.scss';
+@import './chat.scss';
+
 * {
     font-family: 'Montserrat', sans-serif;
 }
 
-html, body {
+html body {
   height: 100%;
 }
 
 .fill {
   height: 87%;
 }
-
-
-@import 'nav.scss';
-@import 'about.scss';
-@import 'chat.scss';
