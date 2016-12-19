@@ -5,26 +5,14 @@ import Tooltip from 'react-tooltip';
 
 class AylienDropdown extends React.Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      classify: false,
-      sentiment: false,
-      concepts: false,
-      hashtags: false
-    }
-  }
-
-  setSelection(type, e){
-    let update = {};
-    update[type] = e.target.checked;
-    this.setState(update);
+  toggleSelection(type){
+    this.props.toggleSelection(this.props.apiName, type)
   }
 
   render(){
 
     let viewStyle = {};
-    if (this.props.view){
+    if (this.props.api.view){
       viewStyle.display = 'block';
     } else {
       viewStyle.display = 'none';
@@ -43,8 +31,7 @@ class AylienDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="acb-classify"
-                onChange={this.setSelection.bind(this, 'classify')}
-                defaultChecked={this.state.classify}
+                onChange={this.toggleSelection.bind(this, 'classify')}
               />
               <label htmlFor="acb-classify"></label>
              </div>
@@ -58,8 +45,7 @@ class AylienDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="acb-sentiment"
-                onChange={this.setSelection.bind(this, 'sentiment')}
-                defaultChecked={this.state.sentiment}
+                onChange={this.toggleSelection.bind(this, 'sentiment')}
               />
               <label htmlFor="acb-sentiment"></label>
              </div>
@@ -73,8 +59,7 @@ class AylienDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="acb-concepts"
-                onChange={this.setSelection.bind(this, 'concepts')}
-                defaultChecked={this.state.concepts}
+                onChange={this.toggleSelection.bind(this, 'concepts')}
               />
               <label htmlFor="acb-concepts"></label>
              </div>
@@ -88,8 +73,7 @@ class AylienDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="acb-hashtags"
-                onChange={this.setSelection.bind(this, 'hashtags')}
-                defaultChecked={this.state.hashtags}
+                onChange={this.toggleSelection.bind(this, 'hashtags')}
               />
               <label htmlFor="acb-hashtags"></label>
              </div>

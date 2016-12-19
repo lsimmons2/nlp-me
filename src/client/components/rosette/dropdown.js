@@ -5,26 +5,14 @@ import Tooltip from 'react-tooltip';
 
 class RosetteDropdown extends React.Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      categories: false,
-      sentiment: false,
-      entities: false,
-      relationships: false
-    }
-  }
-
-  setSelection(type, e){
-    let update = {};
-    update[type] = e.target.checked;
-    this.setState(update);
+  toggleSelection(type){
+    this.props.toggleSelection(this.props.apiName, type)
   }
 
   render(){
 
     let viewStyle = {};
-    if (this.props.view){
+    if (this.props.api.view){
       viewStyle.display = 'block';
     } else {
       viewStyle.display = 'none';
@@ -43,8 +31,7 @@ class RosetteDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="rcb-categories"
-                onChange={this.setSelection.bind(this, 'categories')}
-                defaultChecked={this.state.categories}
+                onChange={this.toggleSelection.bind(this, 'categories')}
               />
               <label htmlFor="rcb-categories"></label>
              </div>
@@ -58,8 +45,7 @@ class RosetteDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="rcb-entities"
-                onChange={this.setSelection.bind(this, 'entities')}
-                defaultChecked={this.state.entities}
+                onChange={this.toggleSelection.bind(this, 'entities')}
               />
               <label htmlFor="rcb-entities"></label>
              </div>
@@ -73,8 +59,7 @@ class RosetteDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="rcb-sentiment"
-                onChange={this.setSelection.bind(this, 'sentiment')}
-                defaultChecked={this.state.sentiment}
+                onChange={this.toggleSelection.bind(this, 'sentiment')}
               />
               <label htmlFor="rcb-sentiment"></label>
              </div>
@@ -88,8 +73,7 @@ class RosetteDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="rcb-relationships"
-                onChange={this.setSelection.bind(this, 'relationships')}
-                defaultChecked={this.state.relationships}
+                onChange={this.toggleSelection.bind(this, 'relationships')}
               />
               <label htmlFor="rcb-relationships"></label>
              </div>

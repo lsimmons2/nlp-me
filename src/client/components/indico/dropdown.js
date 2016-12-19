@@ -5,28 +5,14 @@ import Tooltip from 'react-tooltip';
 
 class IndicoDropdown extends React.Component {
 
-  constructor(props){
-    super(props);
-    this.state = {
-      texttags: false,
-      sentiment: false,
-      personality: false,
-      people: false,
-      political: false,
-      emotion: false
-    }
-  }
-
-  setSelection(type, e){
-    let update = {};
-    update[type] = e.target.checked;
-    this.setState(update);
+  toggleSelection(type){
+    this.props.toggleSelection(this.props.apiName, type)
   }
 
   render(){
 
     let viewStyle = {};
-    if (this.props.view){
+    if (this.props.api.view){
       viewStyle.display = 'block';
     } else {
       viewStyle.display = 'none';
@@ -45,8 +31,7 @@ class IndicoDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="icb-texttags"
-                onChange={this.setSelection.bind(this, "texttags")}
-                defaultChecked={this.state.texttags}
+                onChange={this.toggleSelection.bind(this, "texttags")}
               />
               <label htmlFor="icb-texttags"></label>
              </div>
@@ -60,8 +45,7 @@ class IndicoDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="icb-sentiment"
-                onChange={this.setSelection.bind(this, "sentiment")}
-                defaultChecked={this.state.sentiment}
+                onChange={this.toggleSelection.bind(this, "sentiment")}
               />
               <label htmlFor="icb-sentiment"></label>
              </div>
@@ -75,8 +59,7 @@ class IndicoDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="icb-personality"
-                onChange={this.setSelection.bind(this, "personality")}
-                defaultChecked={this.state.personality}
+                onChange={this.toggleSelection.bind(this, "personality")}
               />
               <label htmlFor="icb-personality"></label>
              </div>
@@ -90,8 +73,7 @@ class IndicoDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="icb-people"
-                onChange={this.setSelection.bind(this, "people")}
-                defaultChecked={this.state.people}
+                onChange={this.toggleSelection.bind(this, "people")}
               />
               <label htmlFor="icb-people"></label>
              </div>
@@ -105,8 +87,7 @@ class IndicoDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="icb-political"
-                onChange={this.setSelection.bind(this, "political")}
-                defaultChecked={this.state.political}
+                onChange={this.toggleSelection.bind(this, "political")}
               />
               <label htmlFor="icb-political"></label>
              </div>
@@ -120,8 +101,7 @@ class IndicoDropdown extends React.Component {
               <input
                 type="checkbox"
                 id="icb-emotion"
-                onChange={this.setSelection.bind(this, "emotion")}
-                defaultChecked={this.state.emotion}
+                onChange={this.toggleSelection.bind(this, "emotion")}
               />
               <label htmlFor="icb-emotion"></label>
              </div>

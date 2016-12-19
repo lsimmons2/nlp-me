@@ -4,26 +4,15 @@ import Tooltip from 'react-tooltip';
 
 
 class MeaningcloudDropdown extends React.Component {
-
-  constructor(props){
-    super(props);
-    this.state = {
-      classification: false,
-      sentiment: false,
-      topics: false
-    }
-  }
-
-  setSelection(type, e){
-    let update = {};
-    update[type] = e.target.checked;
-    this.setState(update);
+  
+  toggleSelection(type){
+    this.props.toggleSelection(this.props.apiName, type)
   }
 
   render(){
 
     let viewStyle = {};
-    if (this.props.view){
+    if (this.props.api.view){
       viewStyle.display = 'block';
     } else {
       viewStyle.display = 'none';
@@ -42,8 +31,8 @@ class MeaningcloudDropdown extends React.Component {
                 <input
                   type="checkbox"
                   id="mccb-classification"
-                  onChange={this.setSelection.bind(this, 'classification')}
-                  defaultChecked={this.state.classification}
+                  onChange={this.toggleSelection.bind(this, 'classification')}
+                  ref="classification"
                 />
                 <label htmlFor="mccb-classification"></label>
              </div>
@@ -57,8 +46,8 @@ class MeaningcloudDropdown extends React.Component {
                 <input
                   type="checkbox"
                   id="mccb-sentiment"
-                  onChange={this.setSelection.bind(this, 'sentiment')}
-                  defaultChecked={this.state.sentiment}
+                  onChange={this.toggleSelection.bind(this, 'sentiment')}
+                  ref="sentiment"
                 />
                 <label htmlFor="mccb-sentiment"></label>
              </div>
@@ -72,8 +61,8 @@ class MeaningcloudDropdown extends React.Component {
                 <input
                   type="checkbox"
                   id="mccb-topics"
-                  onChange={this.setSelection.bind(this, 'topics')}
-                  defaultChecked={this.state.topics}
+                  onChange={this.toggleSelection.bind(this, 'topics')}
+                  ref="topics"
                 />
                 <label htmlFor="mccb-topics"></label>
              </div>

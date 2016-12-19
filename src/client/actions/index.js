@@ -2,10 +2,17 @@
 let actions = {
 
   toggleView: function(api){
-    let type = api.toUpperCase() + '_TOGGLE_VIEW';
+    let toggleViewType = api.toUpperCase() + '_TOGGLE_VIEW';
     return {
-      type: type,
-      api: api
+      type: toggleViewType
+    }
+  },
+
+  toggleSelection: function(api, analysisType){
+    let toggleSelectionType = api.toUpperCase() + '_TOGGLE_SELECTION';
+    return {
+      type: toggleSelectionType,
+      analysisType
     }
   }
 

@@ -10,7 +10,7 @@ class App extends React.Component {
 
   render(){
     return (
-      <Router history={browserHistory}>
+      <Router key={Math.random()} history={browserHistory}>
         <Route path='/'>
           <IndexRoute component={About} />
           <Route name='about' path='/about' component={About}/>

@@ -11,10 +11,26 @@ class DropdownContainer extends React.Component {
   render(){
     return (
       <div id="dropdown-container">
-        < AylienDropdown view={this.props.viewChoices.aylien}/>
-        < RosetteDropdown view={this.props.viewChoices.rosette}/>
-        < IndicoDropdown view={this.props.viewChoices.indico}/>
-        < MeaningcloudDropdown view={this.props.viewChoices.meaningcloud}/>
+        < AylienDropdown
+          apiName='aylien'
+          api={this.props.apis.aylien}
+          toggleSelection={this.props.toggleSelection}
+        />
+        < RosetteDropdown
+          apiName='rosette'
+          api={this.props.apis.rosette}
+          toggleSelection={this.props.toggleSelection}
+        />
+        < IndicoDropdown
+          apiName='indico'
+          api={this.props.apis.indico}
+          toggleSelection={this.props.toggleSelection}
+        />
+        < MeaningcloudDropdown
+          apiName='meaningcloud'
+          api={this.props.apis.meaningcloud}
+          toggleSelection={this.props.toggleSelection}
+        />
       </div>
     )
   }
