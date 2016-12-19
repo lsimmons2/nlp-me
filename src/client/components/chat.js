@@ -1,13 +1,17 @@
 
 import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 
 import SelectionContainer from './selection-container';
 import DropdownContainer from './dropdown-container';
 import ConvoContainer from './convo-container';
 import InputContainer from './input-container';
+import actions from '../actions';
 
 
-class ChatBox extends React.Component {
+class Chat extends React.Component {
   render(){
 
     let viewChoices = {};
@@ -18,7 +22,7 @@ class ChatBox extends React.Component {
     return (
       <div id="chat">
         < SelectionContainer
-          actions={this.props.actions}
+          toggleView={this.props.actions.toggleView}
           viewChoices={viewChoices}
         />
         < DropdownContainer
@@ -31,4 +35,15 @@ class ChatBox extends React.Component {
   }
 }
 
-export default ChatBox
+
+function mapStateToProps(state){
+  return state;
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Chat)

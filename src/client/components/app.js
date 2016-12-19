@@ -1,46 +1,24 @@
-import React from 'react';
-import { Router, Route, Link, IndexRoute, hashHistory, browserHistory } from 'react-router';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
-import ChatBox from './chat-box';
-import AboutPage from './about-page';
-import actions from '../actions';
-import '../style/main.scss';
+import React from 'react'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
-// class App extends React.Component {
-//   render() {
-//     return (
-//       <Router history={hashHistory}>
-//         <Route path='/' component={AboutPage} />
-//         <Route path='/about' component={AboutPage} />
-//         <Route path='/chat' component={ChatBox} />
-//       </Router>
-//     )
-//   }
-// }
+import Chat from './chat'
+import About from './about-page'
+
 
 class App extends React.Component {
 
   render(){
     return (
-      < ChatBox
-        actions={this.props.actions}
-        apis={this.props.apis}
-      />
+      <Router history={browserHistory}>
+        <Route path='/'>
+          <IndexRoute component={About} />
+          <Route name='about' path='/about' component={About}/>
+          <Route name='chat' path='/chat' component={Chat}/>
+        </Route>
+      </Router>
     )
   }
 }
 
-
-function mapStateToProps(state){
-  return state;
-}
-
-function mapDispatchToProps(dispatch){
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

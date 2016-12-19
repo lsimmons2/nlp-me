@@ -6,6 +6,7 @@ import RosetteDropdown from './rosette/dropdown';
 import IndicoDropdown from './indico/dropdown';
 import MeaningcloudDropdown from './meaningcloud/dropdown';
 
+
 class DropdownContainer extends React.Component {
   render(){
     return (
@@ -18,5 +19,6 @@ class DropdownContainer extends React.Component {
     )
   }
 }
+
 
 export default DropdownContainer

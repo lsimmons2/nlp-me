@@ -2,12 +2,8 @@ import React from 'react';
 
 class ApiSelection extends React.Component {
 
-  constructor(props){
-    super(props);
-  }
-
   toggleView(){
-    this.props.actions.toggleView(this.props.apiName);
+    this.props.toggleView(this.props.apiName);
   }
 
   render(){
@@ -38,7 +34,10 @@ class ApiSelection extends React.Component {
     }
 
     return (
-      <div className="api-selection-container" onClick={this.toggleView.bind(this)}>
+      <div
+        className="api-selection-container"
+        onClick={this.toggleView.bind(this)}
+      >
         {apiSelectionElement}
       </div>
     )

@@ -1,9 +1,11 @@
+
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+
 import App from './components/app';
 import configureStore from './store';
-import { Provider } from 'react-redux';
-// import './style/main.scss';
+import './style/main.scss';
 
 
 function ready(){
