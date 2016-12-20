@@ -29,6 +29,15 @@ class IndicoMessage extends React.Component {
     }
   }
 
+  renderJson(analysis){
+    return (
+      <div key={analysis.type}>
+        <h5>{analysis.type.charAt(0).toUpperCase() + analysis.type.slice(1)}</h5>
+        <pre>{JSON.stringify(analysis.data, null, 2)}</pre>
+      </div>
+    )
+  }
+
   zeroToOne(sentiment){
     return sentiment.toFixed(2);
   }

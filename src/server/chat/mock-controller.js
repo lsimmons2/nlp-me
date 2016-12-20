@@ -479,21 +479,160 @@ indico.texttags = function(){
 meaningcloud.classification = function(){
   return {
       "type": "classification",
-      "data": "{\"status\":{\"code\":\"0\",\"msg\":\"OK\",\"credits\":\"1\",\"remaining_credits\":\"39915\"},\"category_list\":[{\"code\":\"Style&Fashion>Fashion\",\"label\":\"Style & Fashion>Fashion\",\"abs_relevance\":\"1\",\"relevance\":\"100\"},{\"code\":\"Education\",\"label\":\"Education\",\"abs_relevance\":\"1\",\"relevance\":\"100\"}]}"
+      "data":{
+        "status": {
+          "code": "0",
+          "msg": "OK",
+          "credits": "1",
+          "remaining_credits": "39915"
+        },
+        "category_list": [
+          {
+            "code": "Style&Fashion>Fashion",
+            "label": "Style & Fashion>Fashion",
+            "abs_relevance": "1",
+            "relevance": "100"
+          },
+          {
+            "code": "Style&Fashion>Fashion",
+            "label": "rtgretgertgrgt",
+            "abs_relevance": "1",
+            "relevance": "100"
+          },
+          {
+            "code": "Education",
+            "label": "Education",
+            "abs_relevance": "1",
+            "relevance": "100"
+          }
+        ]
+      }
     };
 };
 
 meaningcloud.sentiment = function(){
   return {
       "type": "sentiment",
-      "data": "{\"status\":{\"code\":\"0\",\"msg\":\"OK\",\"credits\":\"1\",\"remaining_credits\":\"39957\"},\"model\":\"general_en\",\"score_tag\":\"N+\",\"agreement\":\"AGREEMENT\",\"subjectivity\":\"OBJECTIVE\",\"confidence\":\"100\",\"irony\":\"NONIRONIC\",\"sentence_list\":[{\"text\":\"hurry up with my damn croissants\",\"inip\":\"0\",\"endp\":\"31\",\"bop\":\"y\",\"confidence\":\"100\",\"score_tag\":\"N+\",\"agreement\":\"AGREEMENT\",\"segment_list\":[{\"text\":\"hurry up with my damn croissants\",\"segment_type\":\"main\",\"inip\":\"0\",\"endp\":\"31\",\"confidence\":\"100\",\"score_tag\":\"N+\",\"agreement\":\"AGREEMENT\",\"polarity_term_list\":[{\"text\":\"damn\",\"inip\":\"17\",\"endp\":\"20\",\"confidence\":\"100\",\"score_tag\":\"N+\"}]}],\"sentimented_entity_list\":[],\"sentimented_concept_list\":[]}],\"sentimented_entity_list\":[],\"sentimented_concept_list\":[]}"
+      "data":{
+        "status": {
+          "code": "0",
+          "msg": "OK",
+          "credits": "1",
+          "remaining_credits": "39957"
+        },
+        "model": "general_en",
+        "score_tag": "N+",
+        "agreement": "AGREEMENT",
+        "subjectivity": "OBJECTIVE",
+        "confidence": "100",
+        "irony": "NONIRONIC",
+        "sentence_list": [
+          {
+            "text": "hurry up with my damn croissants",
+            "inip": "0",
+            "endp": "31",
+            "bop": "y",
+            "confidence": "100",
+            "score_tag": "N+",
+            "agreement": "AGREEMENT",
+            "segment_list": [
+              {
+                "text": "hurry up with my damn croissants",
+                "segment_type": "main",
+                "inip": "0",
+                "endp": "31",
+                "confidence": "100",
+                "score_tag": "N+",
+                "agreement": "AGREEMENT",
+                "polarity_term_list": [
+                  {
+                    "text": "damn",
+                    "inip": "17",
+                    "endp": "20",
+                    "confidence": "100",
+                    "score_tag": "N+"
+                  }
+                ]
+              }
+            ],
+            "sentimented_entity_list": [],
+            "sentimented_concept_list": []
+          }
+        ],
+        "sentimented_entity_list": [],
+        "sentimented_concept_list": []
+      }
     };
 };
 
 meaningcloud.topics = function(){
   return {
       "type": "topics",
-      "data": "{\"status\":{\"code\":\"0\",\"msg\":\"OK\",\"credits\":\"1\",\"remaining_credits\":\"39999\"},\"entity_list\":[],\"concept_list\":[],\"time_expression_list\":[],\"money_expression_list\":[],\"quantity_expression_list\":[],\"other_expression_list\":[],\"quotation_list\":[],\"relation_list\":[]}"
+      "data":{
+        "status": {
+          "code": "0",
+          "msg": "OK",
+          "credits": "1",
+          "remaining_credits": "39999"
+        },
+        "entity_list": [],
+        "concept_list": [
+          {
+            "form": "weight",
+            "id": "4cbf5e6040",
+            "sementity": {
+              "class": "class",
+              "fiction": "nonfiction",
+              "id": "ODENTITY_WEIGHT_UNIT",
+              "type": "Top>Unit>WeightUnit"
+            },
+            "semld_list": [
+              "sumo:UnitOfMass"
+            ],
+            "variant_list": [
+              {
+                "form": "weights",
+                "inip": "34",
+                "endp": "40"
+              }
+            ],
+            "relevance": "100"
+          },
+          {
+            "form": "weight",
+            "id": "d082b1c95f",
+            "sementity": {
+              "class": "class",
+              "fiction": "nonfiction",
+              "id": "ODENTITY_TOP",
+              "type": "Top"
+            },
+            "semld_list": [
+              "sumo:Entity"
+            ],
+            "semtheme_list": [
+              {
+                "id": "ODTHEME_SPORT",
+                "type": "Top>Sport"
+              }
+            ],
+            "variant_list": [
+              {
+                "form": "weights",
+                "inip": "34",
+                "endp": "40"
+              }
+            ],
+            "relevance": "100"
+          }
+        ],
+        "time_expression_list": [],
+        "money_expression_list": [],
+        "quantity_expression_list": [],
+        "other_expression_list": [],
+        "quotation_list": [],
+        "relation_list": []
+      }
     };
 };
 
