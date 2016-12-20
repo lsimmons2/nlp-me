@@ -22,7 +22,7 @@ class Chat extends React.Component {
     return (
       <div id="chat">
         < SelectionContainer
-          toggleView={this.props.actions.toggleView}
+          toggleView={this.props.actions.toggleDropdownView}
           viewChoices={viewChoices}
         />
         < DropdownContainer
@@ -31,6 +31,7 @@ class Chat extends React.Component {
         />
         < ConvoContainer
           messages={this.props.convo.messages}
+          toggleMessageView={this.props.actions.toggleMessageView}
         />
         < InputContainer
           chat={this.props.actions.chat}

@@ -12,7 +12,8 @@ export default function(convo={}, action){
     case 'CHAT_SUCCESS':
       let message = {
         api: action.api,
-        analyses: action.analyses
+        analyses: action.analyses,
+        viewJson: false
       }
       return Object.assign({}, convo, {
           isFetching: false,
@@ -21,6 +22,19 @@ export default function(convo={}, action){
 
     case 'CHAT_ERROR':
       return convo;
+
+    case 'TOGGLE_MESSAGE_VIEW':
+      return{
+        ...convo,
+        messages: convo.messages.map(message => {
+          if(message.id === action.id){
+            return {
+              ...message, viewJson: !message.viewJson
+            }
+          }
+          return message;
+        })
+      };
 
     default:
       return convo;

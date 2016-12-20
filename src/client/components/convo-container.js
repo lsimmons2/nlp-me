@@ -13,39 +13,50 @@ class ConvoContainer extends React.Component {
   render(){
 
     let messages;
-    let count = 0;
     if(this.props.messages.length){
-      messages = this.props.messages.map(message => {
-        count ++;
+      messages = this.props.messages.map((message, index) => {
+        message.id = index;
         if (message.api === 'aylien'){
           return (
             <AylienMessage
-              key={count}
+              key={index.toString()}
+              id={index}
               analyses={message.analyses}
+              viewJson={message.viewJson}
+              toggleMessageView={this.props.toggleMessageView}
             />
           )
         }
-        else if (message.api === 'rosette'){
+        if (message.api === 'rosette'){
           return (
             <RosetteMessage
-              key={count}
+              key={index.toString()}
+              id={index}
               analyses={message.analyses}
+              viewJson={message.viewJson}
+              toggleMessageView={this.props.toggleMessageView}
             />
           )
         }
-        else if (message.api === 'indico'){
+        if (message.api === 'indico'){
           return (
             <IndicoMessage
-              key={count}
+              key={index.toString()}
+              id={index}
               analyses={message.analyses}
+              viewJson={message.viewJson}
+              toggleMessageView={this.props.toggleMessageView}
             />
           )
         }
-        else {
+        if (message.api === 'meaningcloud'){
           return (
             <MeaningcloudMessage
-              key={count}
+              key={index.toString()}
+              id={index}
               analyses={message.analyses}
+              viewJson={message.viewJson}
+              toggleMessageView={this.props.toggleMessageView}
             />
           )
         }

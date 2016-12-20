@@ -3,6 +3,33 @@ import React from 'react';
 
 class AylienMessage extends React.Component {
 
+  toggleMessageView(){
+    this.props.toggleMessageView(this.props.id);
+  }
+
+  getHeader(){
+    if (this.props.analyses.successes.length && !this.props.viewJson){
+      return (
+        <div>
+          <strong>Hello! Here are my analyses of your input</strong>
+          <span className="json-link">
+            &nbsp;- <a onClick={this.toggleMessageView.bind(this)}>view in JSON</a>
+          </span>
+        </div>
+      )
+    }
+    if (this.props.analyses.successes.length && this.props.viewJson){
+      return (
+        <div>
+          <strong>Analyses of your input in JSON</strong>
+          <span className="json-link">
+            &nbsp;- <a onClick={this.toggleMessageView.bind(this)}>view in English</a>
+          </span>
+        </div>
+      )
+    }
+  }
+
   getPerc(confidence){
     return (confidence * 100).toFixed(2);
   }
@@ -159,29 +186,37 @@ class AylienMessage extends React.Component {
     )
   }
 
+  renderJson(analysis){
+    return (
+      <div key={analysis.type}>
+        <h5>{analysis.type.charAt(0).toUpperCase() + analysis.type.slice(1)}</h5>
+        <pre>{JSON.stringify(analysis.data, null, 2)}</pre>
+      </div>
+    )
+  }
+
   render(){
 
     let successes = null;
     if(this.props.analyses.successes.length){
 
-      successes = this.props.analyses.successes.map(success => {
-
-        if (success.type === 'classify'){
-          return this.renderClassify(success.data.categories);
-        }
-
-        if (success.type === 'sentiment'){
-          return this.renderSentiment(success.data);
-        }
-        if (success.type === 'concepts'){
-          return this.renderConcepts(success.data.concepts);
-        }
-        if (success.type === 'hashtags'){
-          return this.renderHashtags(success.data.hashtags);
-        }
-
-      })
-
+      if(!this.props.viewJson){
+        successes = this.props.analyses.successes.map(success => {
+          if (success.type === 'classify'){
+            return this.renderClassify(success.data.categories);
+          } else if (success.type === 'sentiment'){
+            return this.renderSentiment(success.data);
+          } else if (success.type === 'concepts'){
+            return this.renderConcepts(success.data.concepts);
+          } else if (success.type === 'hashtags'){
+            return this.renderHashtags(success.data.hashtags);
+          }
+        })
+      } else {
+        successes = this.props.analyses.successes.map(success => {
+          return this.renderJson(success);
+        })
+      }
     }
 
     let errors = null;
@@ -191,6 +226,10 @@ class AylienMessage extends React.Component {
 
         <span className="outer-triangle"> </span>
         <span className="inner-triangle"> </span>
+
+        <div className="message-header">
+          {this.getHeader()}
+        </div>
 
         <div>
           {successes}

@@ -2,7 +2,7 @@
 require('es6-promise').polyfill();
 import 'whatwg-fetch'
 
-function toggleView(api){
+function toggleDropdownView(api){
   let toggleViewType = api.toUpperCase() + '_TOGGLE_VIEW';
   return {
     type: toggleViewType
@@ -14,6 +14,13 @@ function toggleSelection(api, analysisType){
   return {
     type: toggleSelectionType,
     analysisType
+  }
+}
+
+function toggleMessageView(id){
+  return {
+    type: 'TOGGLE_MESSAGE_VIEW',
+    id
   }
 }
 
@@ -112,4 +119,4 @@ function chat(){
 }
 
 
-export { toggleView, toggleSelection, chat }
+export { toggleDropdownView, toggleSelection, toggleMessageView, chat }
