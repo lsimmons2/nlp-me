@@ -34,6 +34,18 @@ class RosetteMessage extends React.Component {
     return (confidence * 100).toFixed(2);
   }
 
+  getFullSentiment(sentiment){
+    if(sentiment === 'pos'){
+      return 'positive';
+    }
+    if(sentiment === 'neg'){
+      return 'negative';
+    }
+    if(sentiment === 'neu'){
+      return 'neutral';
+    }
+  }
+
   renderCategories(categories){
 
     let categoriesAnalysis = ['I\'m '];
@@ -63,9 +75,7 @@ class RosetteMessage extends React.Component {
     )
 
   }
-  renderSentiment(){
 
-  }
   renderEntities(entities){
 
     let entitiesAnalysis;
@@ -103,7 +113,85 @@ class RosetteMessage extends React.Component {
 
   }
 
-  renderRelationships(){
+  renderRelationships(relationships){
+
+    let length = relationships.length;
+    let relationshipsAnalysis;
+    if (!length){
+      relationshipsAnalysis = 'Woops. No relationships could be found in your input.'
+    } else {
+      relationshipsAnalysis = ['I\'m']
+      let i;
+      for (i = 0; i < length; i++) {
+        if(i === length - 1 && length > 1){
+          relationshipsAnalysis.push(' and');
+        }
+        relationshipsAnalysis.push(
+          <span key={i}>
+            <strong> {this.renderPercent(relationships[i].confidence)}%</strong>
+            <span> confident that the arguments</span>
+            <strong> {relationships[i].arg1}</strong>
+            <span> and</span>
+            <strong> {relationships[i].arg2}</strong>
+            <span> are related with the predicate</span>
+            <strong> {relationships[i].predicate}</strong>
+          </span>
+        )
+        if(length > 2 && i !== length -1){
+          relationshipsAnalysis.push(',');
+        }
+      }
+      relationshipsAnalysis.push('.');
+    }
+
+    return (
+      <div key='relationships'>
+        <h5>Relationships</h5>
+        <p>{relationshipsAnalysis}</p>
+      </div>
+    )
+
+  }
+
+  renderSentiment(sentiment){
+    let sentimentAnalysis = [
+      'I\'m',
+      <strong> {this.renderPercent(sentiment.document.confidence)}%</strong>,
+      ' confident that the overall sentiment of your input is',
+      <strong> {this.getFullSentiment(sentiment.document.label)}</strong>,
+      '.'
+    ];
+    let length = sentiment.entities.length;
+    if (length){
+      sentimentAnalysis.push(' I\'m also');
+      let entities = sentiment.entities;
+      let i;
+      for (i = 0; i < length; i++) {
+        if (i === length - 1 && length > 1){
+          sentimentAnalysis.push(' and');
+        }
+        sentimentAnalysis.push(
+          <span key={i}>
+            <strong> {this.renderPercent(entities[i].sentiment.confidence)}%</strong>
+            <span> that the entity</span>
+            <strong> {entities[i].mention}</strong>
+            <span> has a sentiment of</span>
+            <strong> {this.getFullSentiment(entities[i].sentiment.label)}</strong>
+          </span>
+        )
+        if(length > 2 && i !== length - 1){
+          sentimentAnalysis.push(',');
+        }
+      }
+      sentimentAnalysis.push('.');
+    }
+
+    return (
+      <div id='sentiment'>
+        <h5>Sentiment</h5>
+        <p>{sentimentAnalysis}</p>
+      </div>
+    )
 
   }
 
@@ -127,9 +215,9 @@ class RosetteMessage extends React.Component {
           } else if (success.type === 'entities'){
             return this.renderEntities(success.data.entities);
           } else if (success.type === 'relationships'){
-            return this.renderRelationships(success.data.entities);
+            return this.renderRelationships(success.data.relationships);
           } else if (success.type === 'sentiment'){
-            return this.renderSentiment(success.data.hashtags);
+            return this.renderSentiment(success.data);
           }
         })
       } else {

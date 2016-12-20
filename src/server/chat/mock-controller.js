@@ -186,6 +186,24 @@ rosette.relationships = function(){
               "assertion"
             ],
             "confidence": 0.6516253693330798
+          },
+          {
+            "predicate": "to",
+            "arg1": "balls",
+            "arg2": "walls",
+            "modalities": [
+              "assertion"
+            ],
+            "confidence": 0.6516253693330798
+          },
+          {
+            "predicate": "def",
+            "arg1": "sah",
+            "arg2": "bro",
+            "modalities": [
+              "assertion"
+            ],
+            "confidence": 0.6516253693330798
           }
         ]
       }
@@ -211,7 +229,19 @@ rosette.sentiment = function(){
               "label": "pos",
               "confidence": 0.5888354235094712
             }
+          },
+          {
+            "type": "PERSON",
+            "mention": "GW",
+            "normalized": "Malcolm X",
+            "count": 1,
+            "entityId": "Q43303",
+            "sentiment": {
+              "label": "neg",
+              "confidence": 0.3488354235094712
+            }
           }
+
         ]
       }
     }

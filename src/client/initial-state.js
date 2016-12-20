@@ -18,10 +18,10 @@ export default {
     aylien: {
       view: false,
       types: {
-        classify: true,
-        sentiment: true,
-        concepts: true,
-        hashtags: true
+        classify: false,
+        sentiment: false,
+        concepts: false,
+        hashtags: false
       },
     ready: ready
     },
