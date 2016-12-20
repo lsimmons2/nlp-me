@@ -32,6 +32,7 @@ class Chat extends React.Component {
         < ConvoContainer
           messages={this.props.convo.messages}
           toggleMessageView={this.props.actions.toggleMessageView}
+          toggleTexttagsView={this.props.actions.toggleTexttagsView}
         />
         < InputContainer
           chat={this.props.actions.chat}

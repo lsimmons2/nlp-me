@@ -28,22 +28,22 @@ export default {
     rosette: {
       view: false,
       types: {
-        categories: true,
-        sentiment: true,
-        entities: true,
-        relationships: true
+        categories: false,
+        sentiment: false,
+        entities: false,
+        relationships: false
       },
       ready: ready
     },
     indico: {
       view: false,
       types: {
-        texttags: false,
-        sentiment: false,
-        personality: false,
-        people: false,
-        political: false,
-        emotion: false
+        texttags: true,
+        sentiment: true,
+        personality: true,
+        people: true,
+        political: true,
+        emotion: true
       },
       ready: ready
     },

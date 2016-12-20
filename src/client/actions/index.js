@@ -24,6 +24,13 @@ function toggleMessageView(id){
   }
 }
 
+function toggleTexttagsView(id){
+  return {
+    type: 'TOGGLE_TEXTTAGS_VIEW',
+    id
+  }
+}
+
 function chatRequest(){
   return {
     type: 'CHAT_REQUEST'
@@ -119,4 +126,10 @@ function chat(){
 }
 
 
-export { toggleDropdownView, toggleSelection, toggleMessageView, chat }
+export {
+  toggleDropdownView,
+  toggleSelection,
+  toggleMessageView,
+  toggleTexttagsView,
+  chat
+}

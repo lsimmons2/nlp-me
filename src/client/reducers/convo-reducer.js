@@ -14,6 +14,9 @@ export default function(convo={}, action){
         api: action.api,
         analyses: action.analyses,
         viewJson: false
+      };
+      if (action.api === 'indico'){
+        message['viewTexttags'] = false;
       }
       return Object.assign({}, convo, {
           isFetching: false,
@@ -24,7 +27,7 @@ export default function(convo={}, action){
       return convo;
 
     case 'TOGGLE_MESSAGE_VIEW':
-      return{
+      return {
         ...convo,
         messages: convo.messages.map(message => {
           if(message.id === action.id){
@@ -35,6 +38,20 @@ export default function(convo={}, action){
           return message;
         })
       };
+
+      case 'TOGGLE_TEXTTAGS_VIEW':
+        let ttMessage;
+        let i;
+        return {
+          ...convo,
+          messages: convo.messages.map(message => {
+            if (message.id === action.id){
+              message.viewTexttags = !message.viewTexttags;
+            }
+            return message;
+          })
+        }
+
 
     default:
       return convo;

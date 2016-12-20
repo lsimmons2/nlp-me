@@ -43,7 +43,9 @@ class ConvoContainer extends React.Component {
               id={index}
               analyses={message.analyses}
               viewJson={message.viewJson}
+              viewTexttags={message.viewTexttags}
               toggleMessageView={this.props.toggleMessageView}
+              toggleTexttagsView={this.props.toggleTexttagsView}
             />
           )
         }

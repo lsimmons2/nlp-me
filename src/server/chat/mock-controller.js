@@ -269,38 +269,38 @@ indico.people = function(){
       "type": "people",
       "data": {
         "results": [
-          {
-            "text": "Adam Eve",
-            "confidence": 0.4032040834,
-            "position": [
-              28,
-              36
-            ]
-          },
-          {
-            "text": "Eve",
-            "confidence": 0.2177971303,
-            "position": [
-              33,
-              36
-            ]
-          },
-          {
-            "text": "Adam",
-            "confidence": 0.092138648,
-            "position": [
-              28,
-              32
-            ]
-          },
-          {
-            "text": "Prada",
-            "confidence": 0.0842634141,
-            "position": [
-              21,
-              26
-            ]
-          },
+          // {
+          //   "text": "Adam Eve",
+          //   "confidence": 0.4032040834,
+          //   "position": [
+          //     28,
+          //     36
+          //   ]
+          // },
+          // {
+          //   "text": "Eve",
+          //   "confidence": 0.2177971303,
+          //   "position": [
+          //     33,
+          //     36
+          //   ]
+          // },
+          // {
+          //   "text": "Adam",
+          //   "confidence": 0.092138648,
+          //   "position": [
+          //     28,
+          //     32
+          //   ]
+          // },
+          // {
+          //   "text": "Prada",
+          //   "confidence": 0.0842634141,
+          //   "position": [
+          //     21,
+          //     26
+          //   ]
+          // },
           {
             "text": "devil wear Prada",
             "confidence": 0.013975519700000001,
