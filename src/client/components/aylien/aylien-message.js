@@ -217,6 +217,7 @@ class AylienMessage extends React.Component {
           return this.renderJson(success);
         })
       }
+
     }
 
     let errors = null;

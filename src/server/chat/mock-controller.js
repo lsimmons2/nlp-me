@@ -125,9 +125,17 @@ rosette.categories = function(){
       "type": "categories",
       "data": {
         "categories": [
+          // {
+          //   "label": "TECHNOLOGY_AND_COMPUTING",
+          //   "confidence": 0.06990357074628932
+          // },
+          // {
+          //   "label": "sahhhh",
+          //   "confidence": 0.090357074628932
+          // },
           {
-            "label": "TECHNOLOGY_AND_COMPUTING",
-            "confidence": 0.06990357074628932
+            "label": "brooo?",
+            "confidence": 0.04545357074628932
           }
         ]
       }
@@ -142,6 +150,20 @@ rosette.entities = function(){
           {
             "type": "PERSON",
             "mention": "Malcolm X",
+            "normalized": "Malcolm X",
+            "count": 1,
+            "entityId": "Q43303"
+          },
+          {
+            "type": "PERSON",
+            "mention": "SAHHH",
+            "normalized": "Malcolm X",
+            "count": 1,
+            "entityId": "Q43303"
+          },
+          {
+            "type": "PERSON",
+            "mention": "SAboHHH",
             "normalized": "Malcolm X",
             "count": 1,
             "entityId": "Q43303"

@@ -38,21 +38,21 @@ export default {
     indico: {
       view: false,
       types: {
-        texttags: true,
-        sentiment: true,
-        personality: true,
-        people: true,
-        political: true,
-        emotion: true
+        texttags: false,
+        sentiment: false,
+        personality: false,
+        people: false,
+        political: false,
+        emotion: false
       },
       ready: ready
     },
     meaningcloud: {
       view: false,
       types: {
-        classification: true,
-        sentiment: true,
-        topics: true
+        classification: false,
+        sentiment: false,
+        topics: false
       },
       ready: ready
     }
