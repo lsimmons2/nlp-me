@@ -41,7 +41,7 @@ function chatSuccess(api, data){
   let analyses = {
     successes: [],
     errors: []
-  }
+  };
   data.forEach(analysis => {
     if(analysis.data !== 'error'){
       if (typeof analysis.data === 'string' || analysis.data instanceof String){

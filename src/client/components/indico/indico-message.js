@@ -158,6 +158,51 @@ class IndicoMessage extends React.Component {
     )
   }
 
+  renderErrors(){
+    let errors = this.props.analyses.errors;
+    if (!errors.length){
+      return null;
+    } else {
+
+      let errorList;
+
+      if (errors.length === 1){
+
+        errorList = [
+          'There was an error receiving your ',
+          <strong key='only'>{errors[0]}</strong>,
+          ' analysis.'
+        ];
+
+      } else {
+
+        errorList = ['There were errors retreiving your'];
+        let i;
+        for (i = 0; i < errors.length; i++) {
+          if(i === errors.length -1){
+            errorList.push(' and');
+          }
+          errorList.push(
+            <strong key={i}> {errors[i]}</strong>
+          )
+          if (errors.length > 2 && i !== errors.length -1){
+            errorList.push(',');
+          }
+        }
+        errorList.push(' analyses.');
+
+      }
+
+      return (
+        <div>
+          <h5>Errors</h5>
+          <p>{errorList}</p>
+        </div>
+      )
+
+    }
+  }
+
   render(){
 
     let successes = null;
@@ -185,7 +230,7 @@ class IndicoMessage extends React.Component {
       }
     }
 
-    let errors = null;
+    let errors = this.renderErrors();
 
     return (
       <div className="message indico">

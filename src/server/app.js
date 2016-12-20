@@ -6,7 +6,7 @@ import methodOverride from 'method-override'
 import cookieParser from 'cookie-parser'
 import path from 'path'
 
-import chat from './chat';
+import chat from './chat/mock-error-index';
 // import feedback from './feedback';
 
 

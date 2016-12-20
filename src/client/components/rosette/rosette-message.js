@@ -95,7 +95,7 @@ class RosetteMessage extends React.Component {
           entitiesAnalysis.push(' and')
         }
         entitiesAnalysis.push(
-          <strong key={entities[i].mention}> {entities[i].mention}</strong>
+          <strong key={i}> {entities[i].mention}</strong>
         )
         if(entities.length > 2 && i !== entities.length -1){
           entitiesAnalysis.push(',')
@@ -156,9 +156,9 @@ class RosetteMessage extends React.Component {
   renderSentiment(sentiment){
     let sentimentAnalysis = [
       'I\'m',
-      <strong> {this.renderPercent(sentiment.document.confidence)}%</strong>,
+      <strong key={sentiment.entities.length + 1}> {this.renderPercent(sentiment.document.confidence)}%</strong>,
       ' confident that the overall sentiment of your input is',
-      <strong> {this.getFullSentiment(sentiment.document.label)}</strong>,
+      <strong key={sentiment.entities.length + 2}> {this.getFullSentiment(sentiment.document.label)}</strong>,
       '.'
     ];
     let length = sentiment.entities.length;
@@ -187,7 +187,7 @@ class RosetteMessage extends React.Component {
     }
 
     return (
-      <div id='sentiment'>
+      <div key='sentiment'>
         <h5>Sentiment</h5>
         <p>{sentimentAnalysis}</p>
       </div>
@@ -204,6 +204,50 @@ class RosetteMessage extends React.Component {
     )
   }
 
+  renderErrors(){
+    let errors = this.props.analyses.errors;
+    if (!errors.length){
+      return null;
+    } else {
+
+      let errorList;
+
+      if (errors.length === 1){
+
+        errorList = [
+          'There was an error receiving your ',
+          <strong key='only'>{errors[0]}</strong>,
+          ' analysis.'
+        ];
+
+      } else {
+
+        errorList = ['There were errors retreiving your'];
+        let i;
+        for (i = 0; i < errors.length; i++) {
+          if(i === errors.length -1){
+            errorList.push(' and');
+          }
+          errorList.push(
+            <strong key={i}> {errors[i]}</strong>
+          )
+          if (errors.length > 2 && i !== errors.length -1){
+            errorList.push(',');
+          }
+        }
+        errorList.push(' analyses.');
+
+      }
+
+      return (
+        <div>
+          <h5>Errors</h5>
+          <p>{errorList}</p>
+        </div>
+      )
+
+    }
+  }
 
   render(){
     let successes = null;
@@ -211,12 +255,16 @@ class RosetteMessage extends React.Component {
       if(!this.props.viewJson){
         successes = this.props.analyses.successes.map(success => {
           if (success.type === 'categories'){
+            // return null;
             return this.renderCategories(success.data.categories);
           } else if (success.type === 'entities'){
+            // return null;
             return this.renderEntities(success.data.entities);
           } else if (success.type === 'relationships'){
+            // return null;
             return this.renderRelationships(success.data.relationships);
           } else if (success.type === 'sentiment'){
+            // return null;
             return this.renderSentiment(success.data);
           }
         })
@@ -227,7 +275,7 @@ class RosetteMessage extends React.Component {
       }
     }
 
-    let errors = null;
+    let errors = this.renderErrors();
 
     return (
       <div className="message rosette">
