@@ -52,6 +52,14 @@ function chatSuccess(api, data){
       analyses.errors.push(analysis.type);
     }
   })
+  if (!analyses.successes.length){
+    let error = new Error('No successful analyses.');
+    return {
+      type: 'CHAT_FAIL',
+      api,
+      errors: analyses.errors
+    }
+  }
   return {
     type: 'CHAT_SUCCESS',
     api,
@@ -59,10 +67,11 @@ function chatSuccess(api, data){
   }
 }
 
-function chatError(err){
+function chatError(api, error){
   return {
     type: 'CHAT_ERROR',
-    err
+    api,
+    error
   }
 }
 
@@ -91,13 +100,13 @@ function callApi(dispatch, api, input, types){
       dispatch(chatSuccess(api, data));
     })
     .catch(err => {
-      dispatch(chatError(err));
+      dispatch(chatError(api, err));
     })
 
 }
 
-function chat(){
 
+function chat(){
   return function(dispatch, getState){
 
     const input = getState().convo.input;
@@ -117,12 +126,9 @@ function chat(){
         callApi(dispatch, api, input, types);
         types = [];
       }
-
     }
 
   }
-
-
 }
 
 

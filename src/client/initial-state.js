@@ -18,10 +18,10 @@ export default {
     aylien: {
       view: false,
       types: {
-        classify: true,
-        sentiment: true,
-        concepts: true,
-        hashtags: true
+        classify: false,
+        sentiment: false,
+        concepts: false,
+        hashtags: false
       },
     ready: ready
     },
@@ -29,30 +29,30 @@ export default {
       view: false,
       types: {
         categories: false,
-        sentiment: true,
-        entities: true,
-        relationships: true
+        sentiment: false,
+        entities: false,
+        relationships: false
       },
       ready: ready
     },
     indico: {
       view: false,
       types: {
-        texttags: true,
-        sentiment: true,
-        personality: true,
-        people: true,
-        political: true,
-        emotion: true
+        texttags: false,
+        sentiment: false,
+        personality: false,
+        people: false,
+        political: false,
+        emotion: false
       },
       ready: ready
     },
     meaningcloud: {
       view: false,
       types: {
-        classification: true,
-        sentiment: true,
-        topics: true
+        classification: false,
+        sentiment: false,
+        topics: false
       },
       ready: ready
     }

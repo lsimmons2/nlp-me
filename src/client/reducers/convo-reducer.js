@@ -23,8 +23,21 @@ export default function(convo={}, action){
           messages: [...convo['messages'], message]
         });
 
+    // error in processing
     case 'CHAT_ERROR':
       return convo;
+
+    // no successful analyses from apis
+    case 'CHAT_FAIL':
+      let failMessage = {
+        api: action.api,
+        fail: true,
+        errors: action.errors
+      };
+      return Object.assign({}, convo, {
+          isFetching: false,
+          messages: [...convo['messages'], failMessage]
+        });
 
     case 'TOGGLE_MESSAGE_VIEW':
       return {
