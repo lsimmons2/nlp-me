@@ -124,6 +124,22 @@ describe('toggleSelection()', () => {
 
 
 
+describe('toggleMessageView()', () => {
+
+  it('should create action of type TOGGLE_MESSAGE_VIEW', () => {
+    let returnedAction = actions.toggleMessageView(5);
+    returnedAction.type.should.equal('TOGGLE_MESSAGE_VIEW');
+  })
+
+  it('should create action of with id property of id pass to it', () => {
+    let returnedAction = actions.toggleMessageView(5);
+    returnedAction.id.should.equal(5);
+  })
+
+})
+
+
+
 describe('toggleTexttagsView()', () => {
 
   it('should return action of type TOGGLE_TEXTTAGS_VIEW and the right id property', () => {
