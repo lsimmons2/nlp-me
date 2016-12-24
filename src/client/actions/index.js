@@ -137,5 +137,9 @@ export {
   toggleSelection,
   toggleMessageView,
   toggleTexttagsView,
+  chatRequest,
+  chatError,
+  chatSuccess,
+  callApi,
   chat
 }

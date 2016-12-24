@@ -1,3 +1,4 @@
+require('babel-core/register');
 var gulp = require('gulp');
 var Server = require('karma').Server;
 var sass = require('gulp-sass');
@@ -12,21 +13,19 @@ var forever = require('gulp-forever-monitor');
 
 // ============= test =============
 
-gulp.task('ft', function(done){
+gulp.task('test-front', function(){
 	process.env.NODE_ENV = 'test';
-  new Server({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, done).start();
+	gulp.src('test/client/actions/index.spec.js')
+		.pipe(babel())
+		.pipe(mocha())
+		.on('error', gutil.log)
 });
 
-gulp.task('wft', function(){
+gulp.task('test-front:watch', function(){
   gulp.watch([
-    'test/public/chatCtrl.spec.js',
-		'test/public/service.js',
-    'karma.conf.js',
-    'src/public/controllers/chatCtrl.js'
-  ], ['ft']);
+    'test/client/**/*.js',
+		'dist/client/**/*'
+  ], ['test-front']);
 });
 
 gulp.task('bt', function(){
