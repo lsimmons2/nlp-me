@@ -1,6 +1,16 @@
 
+import 'isomorphic-fetch'
+
 import * as actions from '../../../src/client/actions'
 import chai from 'chai'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import nock from 'nock'
+
+const middlewares = [ thunk ];
+const mockStore = configureMockStore(middlewares);
+
+import initialState from '../../../src/client/initial-state'
 const should = chai.should();
 
 
@@ -235,3 +245,127 @@ describe('chatError()', () => {
   })
 
 });
+
+
+
+describe('chat()', () => {
+
+  it('should create actions of type CHAT_REQUEST if api analyses selected', () => {
+
+    initialState.apis.aylien.types.classify = true;
+    let store = mockStore(initialState);
+
+    store.dispatch(actions.chat());
+
+    let returnedActions = store.getActions();
+    let expectedActions = [
+      {
+        type: 'CHAT_REQUEST'
+      }
+    ];
+
+    returnedActions.should.deep.equal(expectedActions);
+
+  })
+
+})
+
+
+
+describe('callApi()', () => {
+
+  it('should create actions of type CHAT_SUCCESS if successful analyses returned', () => {
+
+    afterEach( () => {
+      nock.cleanAll();
+    })
+
+    nock('http://localhost:8080/chat')
+      .post('/aylien')
+      .reply(200,
+        [
+          {
+            type: 'someAnalysis',
+            data: {
+              analysis: 'some successful analysis'
+            }
+          },
+          {
+            type: 'someOtherAnalysis',
+            data: 'error'
+          }
+        ])
+
+    initialState.apis.aylien.types.classify = true;
+    let store = mockStore(initialState);
+
+    actions.callApi(store.dispatch, 'aylien', 'sah?', ['classify'])
+      .then( () => {
+        let returnedActions = store.getActions();
+        let expectedActions = [
+          {
+            type: 'CHAT_SUCCESS',
+            api: 'aylien',
+            analyses: {
+              successes: [
+                {
+                  type: 'someAnalysis',
+                  data: {
+                    analysis: 'some successful analysis'
+                  }
+                }
+              ],
+              errors: ['someOtherAnalysis']
+            }
+          }
+        ];
+        returnedActions.should.deep.equal(expectedActions);
+      })
+      .catch( err => {
+        console.log(err);
+      })
+
+  })
+
+  it('should create actions of type CHAT_FAIL if no successful analyses returned', () => {
+
+    afterEach( () => {
+      nock.cleanAll();
+    })
+
+    nock('http://localhost:8080/chat')
+      .post('/aylien')
+      .reply(200,
+        [
+          {
+            type: 'someAnalysis',
+            data: 'error'
+          },
+          {
+            type: 'someOtherAnalysis',
+            data: 'error'
+          }
+        ])
+
+    initialState.apis.aylien.types.classify = true;
+    let store = mockStore(initialState);
+
+    actions.callApi(store.dispatch, 'aylien', 'sah?', ['classify'])
+      .then( () => {
+        let returnedActions = store.getActions();
+        let expectedActions = [
+          {
+            type: 'CHAT_FAIL',
+            api: 'aylien',
+            errors: ['someAnalysis', 'someOtherAnalysis']
+          }
+        ];
+        returnedActions.should.deep.equal(expectedActions);
+      })
+      .catch( err => {
+        console.log(err);
+      })
+
+  })
+
+})
