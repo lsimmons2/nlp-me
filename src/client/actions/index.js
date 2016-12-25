@@ -124,21 +124,23 @@ function chat(){
     let type;
     let types = [];
 
-    let clearedInput = false;
-    for(api in apis){
-      if(apis[api].ready()){
-        if (!clearedInput){
-          dispatch(clearInput(input));
-          clearedInput = true;
-        }
-        dispatch(chatRequest());
-        for(type in apis[api].types){
-          if (apis[api].types[type]){
-            types.push(type);
+    if (input.length){
+      let clearedInput = false;
+      for(api in apis){
+        if (apis[api].ready()){
+          if (!clearedInput){
+            dispatch(clearInput(input));
+            clearedInput = true;
           }
+          dispatch(chatRequest());
+          for(type in apis[api].types){
+            if (apis[api].types[type]){
+              types.push(type);
+            }
+          }
+          callApi(dispatch, api, input, types);
+          types = [];
         }
-        callApi(dispatch, api, input, types);
-        types = [];
       }
     }
 
