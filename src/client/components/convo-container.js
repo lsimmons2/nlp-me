@@ -1,6 +1,7 @@
 
 import React from 'react'
 
+import UserMessage from './user-message'
 import AylienMessage from './aylien/aylien-message'
 import RosetteMessage from './rosette/rosette-message'
 import IndicoMessage from './indico/indico-message'
@@ -21,6 +22,14 @@ class ConvoContainer extends React.Component {
               key={index.toString()}
               api={message.api}
               errors={message.errors}
+            />
+          )
+        }
+        if (message.user){
+          return (
+            <UserMessage
+              key={index.toString()}
+              text={message.text}
             />
           )
         }

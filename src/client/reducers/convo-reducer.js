@@ -3,10 +3,25 @@ export default function(convo={}, action){
 
   switch(action.type){
 
+    case 'UPDATE_INPUT':
+      return { ...convo,
+        input: action.input
+      }
+
+    case 'CLEAR_INPUT':
+      let userMessage = {
+        user: true,
+        text: action.input
+      }
+      return {
+        ...convo,
+        input: '',
+        messages: [...convo['messages'], userMessage]
+      }
+
     case 'CHAT_REQUEST':
       return { ...convo,
-        isFetching: true,
-        input: ''
+        isFetching: true
       };
 
     case 'CHAT_SUCCESS':

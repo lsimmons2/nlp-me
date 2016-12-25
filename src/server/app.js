@@ -34,24 +34,24 @@ app.all('*', (req, res) => {
 
 
 
-// let dbUri = 'mongodb://localhost:27017/nlpme-' + env;
-// mongoose.connect(dbUri);
-// mongoose.connection
-//   .on('error', (err) => {
-//     return console.log(err.message);
-//   })
-//   .once('connected', () => {
-//     return console.log('Connection to ', dbUri);
-//   })
-//   .once('disconnected', () => {
-//     return console.log('Disconnected from ', dbUri);
-//   });
-//
-// process.on('SIGINT', function(){
-//   mongoose.connection.close(function(){
-//     return process.exit(0);
-//   });
-// });
+let dbUri = 'mongodb://localhost:27017/nlpme-' + env;
+mongoose.connect(dbUri);
+mongoose.connection
+  .on('error', (err) => {
+    return console.log(err.message);
+  })
+  .once('connected', () => {
+    return console.log('Connection to ', dbUri);
+  })
+  .once('disconnected', () => {
+    return console.log('Disconnected from ', dbUri);
+  });
+
+process.on('SIGINT', function(){
+  mongoose.connection.close(function(){
+    return process.exit(0);
+  });
+});
 
 
 if(env === 'prod'){

@@ -31,6 +31,13 @@ function toggleTexttagsView(id){
   }
 }
 
+function clearInput(input){
+  return {
+    type: 'CLEAR_INPUT',
+    input
+  }
+}
+
 function chatRequest(){
   return {
     type: 'CHAT_REQUEST'
@@ -117,8 +124,13 @@ function chat(){
     let type;
     let types = [];
 
+    let clearedInput = false;
     for(api in apis){
       if(apis[api].ready()){
+        if (!clearedInput){
+          dispatch(clearInput(input));
+          clearedInput = true;
+        }
         dispatch(chatRequest());
         for(type in apis[api].types){
           if (apis[api].types[type]){
@@ -190,11 +202,19 @@ function sendFeedback(){
   }
 }
 
+function updateInput(input){
+  return {
+    type: 'UPDATE_INPUT',
+    input
+  }
+}
 export {
   toggleDropdownView,
   toggleSelection,
   toggleMessageView,
   toggleTexttagsView,
+  updateInput,
+  clearInput,
   chatRequest,
   chatError,
   chatSuccess,
