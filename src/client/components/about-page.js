@@ -1,4 +1,11 @@
-import React from 'react';
+
+import React from 'react'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import Feedback from './feedback.js'
+import * as actions from '../actions';
+
 
 class AboutPage extends React.Component {
   render(){
@@ -290,48 +297,11 @@ class AboutPage extends React.Component {
         </div>
 
 
-        <div id="feedback" className="row">
-
-          <div className="col-xs-12">
-
-            <h3>Feedback</h3>
-            <p>Would love to hear feedback anyone has for the app. Feel free to reach out below or on <a href="http://leosimmons.me" target="_blank">my website</a>. Source code <a href="https://github.com/lsimmons2/nlp-app" target="_blank">here</a>.
-            </p>
-
-          </div>
-
-          <div className="col-xs-12">
-
-            <form name="contactForm">
-              <div className="form-group">
-                <input className="form-control" placeholder="Name" type="text" />
-              </div>
-              <div className="form-group">
-                <input className="form-control" placeholder="Email" type="email" />
-              </div>
-              <div className="form-group">
-                <textarea className="form-control" placeholder="Message" required></textarea>
-              </div>
-              <div className="form-group">
-                <div id="submit-container">
-                  <input className="form-control btn" type="submit" value="Send" />
-                </div>
-              </div>
-            </form>
-
-            <p id="feedback-success" >
-              <span className="glyphicon glyphicon-ok"></span>
-              Thanks for submitting feedback. I appreciate it!
-            </p>
-
-            <p id="feedback-error" >
-              <span className="glyphicon glyphicon-remove"></span>
-              Woops! Something went wrong submitting your feedback. Would appreciate it if you could email me at leooscar.simmons@gmail.com. Thanks!
-            </p>
-
-          </div>
-
-        </div>
+        < Feedback
+          updateFeedback={this.props.actions.updateFeedback}
+          sendFeedback={this.props.actions.sendFeedback}
+          feedback={this.props.feedback}
+        />
 
 
       </div>
@@ -339,4 +309,14 @@ class AboutPage extends React.Component {
   }
 }
 
-export default AboutPage
+function mapStateToProps(state){
+  return state;
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AboutPage)

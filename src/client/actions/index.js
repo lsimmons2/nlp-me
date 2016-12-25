@@ -108,7 +108,6 @@ function callApi(dispatch, api, input, types){
 
 }
 
-
 function chat(){
   return function(dispatch, getState){
 
@@ -134,6 +133,62 @@ function chat(){
   }
 }
 
+function updateFeedback(data){
+  return {
+    type: 'UPDATE_FEEDBACK',
+    data
+  }
+}
+
+function feedbackRequest(){
+  return {
+    type: 'FEEDBACK_REQUEST'
+  };
+}
+
+function feedbackSuccess(){
+  return {
+    type: 'FEEDBACK_SUCCESS'
+  }
+}
+
+function feedbackError(){
+  return {
+    type: 'FEEDBACK_ERROR'
+  }
+}
+
+function sendFeedback(){
+  return function(dispatch, getState){
+
+    let data = getState().feedback.data;
+
+    dispatch(feedbackRequest());
+
+    let url = '/feedback';
+
+    if(process.env.NODE_ENV === 'test'){
+      url = 'http://localhost:8080' + url;
+    }
+
+    let req = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    };
+
+    return fetch(url, req)
+      .then(data => {
+        dispatch(feedbackSuccess());
+      })
+      .catch(err => {
+        dispatch(feedbackError());
+      })
+
+  }
+}
 
 export {
   toggleDropdownView,
@@ -144,5 +199,7 @@ export {
   chatError,
   chatSuccess,
   callApi,
-  chat
+  chat,
+  updateFeedback,
+  sendFeedback
 }

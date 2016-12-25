@@ -9,6 +9,16 @@ function ready(){
 }
 
 export default {
+  feedback: {
+    isFetching: false,
+    error: false,
+    success: false,
+    data: {
+      name: '',
+      email: '',
+      message: ''
+    }
+  },
   convo: {
     input: '',
     isFetching: false,

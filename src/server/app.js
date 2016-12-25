@@ -7,7 +7,7 @@ import cookieParser from 'cookie-parser'
 import path from 'path'
 
 import chat from './chat';
-// import feedback from './feedback';
+import feedback from './feedback';
 
 
 const env = process.env.NODE_ENV;
@@ -23,7 +23,7 @@ app.all('*', (req, res, next) => {
   next();
 })
 app.use('/chat', chat);
-// app.use('/feedback', feedback);
+app.use('/feedback', feedback);
 
 app.use('/vendor', express.static(path.join(__dirname, '../../node_modules')));
 app.use('/images', express.static(path.join(__dirname, '../../images')));
