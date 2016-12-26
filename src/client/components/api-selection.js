@@ -19,15 +19,23 @@ class ApiSelection extends React.Component {
     if (this.props.apiName === 'aylien'){
       apiSelectionElement = (
         <div className="api-selection" id={ this.props.apiName + "-selection" }>
-          <img className="api-logo" src={"images/aylien-icon.png"}/>
-          <span id="aylien-logo-text">AYLIEN</span>
+          <img className="selection-logo" src="images/aylien-icon.png"/>
+          <span className="selection-logo" id="aylien-logo-text">AYLIEN</span>
+          <img className="selection-icon" src="images/aylien-icon.png"/>
           {arrowElement}
         </div>
       )
     } else {
       apiSelectionElement = (
         <div className="api-selection" id={ this.props.apiName + "-selection" }>
-          <img className="api-logo" src={"images/" + this.props.apiName + "-logo.png"}/>
+          <img
+            className="selection-logo"
+            src={"images/" + this.props.apiName + "-logo.png"}
+          />
+          <img
+            className="selection-icon"
+            src={"images/" + this.props.apiName + "-icon.png"}
+          />
           {arrowElement}
         </div>
       )
@@ -36,6 +44,7 @@ class ApiSelection extends React.Component {
     return (
       <div
         className="api-selection-container"
+        id={this.props.apiName + "-selection-container"}
         onClick={this.toggleView.bind(this)}
       >
         {apiSelectionElement}
