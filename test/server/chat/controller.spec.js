@@ -26,8 +26,6 @@ describe('POST /chat/aylien', function(){
           'classify',
           'sentiment',
           'concepts',
-          'entities',
-          'summarize',
           'hashtags'
         ],
         text: 'yo bananas are flipping awesome, and I also love hiking. Calvin and hobbes are homies!'
@@ -36,7 +34,7 @@ describe('POST /chat/aylien', function(){
       .end(function(err, res){
         if(err) return done(err);
         res.body.should.be.an('array');
-        res.body.length.should.equal(6);
+        res.body.length.should.equal(4);
         for (var i = 0; i < res.body.length; i++) {
           res.body[i].type.should.be.a('string');
           res.body[i].data.should.be.a('string');
@@ -64,12 +62,15 @@ describe('POST /chat/aylien', function(){
         analysisData = JSON.parse(analyses[0].data);
         analysisData.text.should.be.a('string');
         analysisData.language.should.equal('en');
+        analysisData.taxonomy.should.equal('iab-qag');
         analysisData.categories.should.be.an('array');
         if(analysisData.categories.length > 0){
           for (var i = 0; i < analysisData.categories.length; i++) {
-            analysisData.categories[i].label.should.be.an('string');
-            analysisData.categories[i].code.should.be.a('string');
-            analysisData.categories[i].confidence.should.be.within(0,1);
+            analysisData.categories[i].label.should.be.a('string');
+            analysisData.categories[i].score.should.be.within(0,1);
+            analysisData.categories[i].confident.should.be.a('boolean');
+            analysisData.categories[i].label.should.be.a('string');
+            analysisData.categories[i].links.should.be.an('array');
           }
         }
         done();
@@ -89,6 +90,7 @@ describe('POST /chat/aylien', function(){
       .end(function(err, res){
         if(err) return done(err);
         analyses = res.body;
+        console.log(analyses);
         analyses.should.be.an('array');
         analyses.length.should.equal(1);
         analyses[0].type.should.equal('sentiment');
@@ -121,6 +123,7 @@ describe('POST /chat/aylien', function(){
         analyses.length.should.equal(1);
         analyses[0].type.should.equal('concepts');
         analysisData = JSON.parse(analyses[0].data);
+        analysisData.text.should.be.a('string');
         analysisData.concepts.should.be.an('object');
         if(Object.keys(analysisData.concepts).length > 0){
           for(var field in analysisData.concepts){
@@ -132,33 +135,6 @@ describe('POST /chat/aylien', function(){
       });
   });
 
-  it('entities', function(done){
-    agent
-      .post('/chat/aylien')
-      .send({
-        types: [
-          'entities'
-        ],
-        text: 'yo bananas are flipping awesome, and I also love hiking. Calvin and Hobbes are homies!'
-      })
-      .expect(200)
-      .end(function(err, res){
-        if(err) return done(err);
-        analyses = res.body;
-        analyses.should.be.an('array');
-        analyses.length.should.equal(1);
-        analyses[0].type.should.equal('entities');
-        analysisData = JSON.parse(analyses[0].data);
-        analysisData.entities.should.be.an('object');
-        analysisData.entities.keyword.should.be.an('array');
-        if(analysisData.entities.keyword.length > 0){
-          for (var i = 0; i < analysisData.entities.keyword.length; i++) {
-            analysisData.entities.keyword[i].should.be.a('string');
-          }
-        }
-        done();
-      });
-  });
 
   it('hashtags', function(done){
     agent
@@ -330,7 +306,6 @@ describe('POST /chat/rosette', function(){
         analyses[0].data.relationships.should.be.an('array');
         if(analyses[0].data.relationships.length > 0){
           for (var i = 0; i < analyses[0].data.relationships.length; i++) {
-            console.log(util.inspect(analyses[0].data.relationships, true, 5));
             analyses[0].data.relationships[i].arg1.should.be.a('string');
             analyses[0].data.relationships[i].arg2.should.be.a('string');
             analyses[0].data.relationships[i].confidence.should.be.within(0,1);

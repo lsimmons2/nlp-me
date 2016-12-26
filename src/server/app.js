@@ -55,7 +55,7 @@ process.on('SIGINT', function(){
 
 
 if(env === 'prod'){
-  app.listen(80, () => {
+  app.listen( process.ENV.PORT || 80, () => {
     console.log('app here in prod mode');
   })
 }

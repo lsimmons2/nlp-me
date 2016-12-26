@@ -12,13 +12,15 @@
 
     .api-selection-container {
 
+      float: left;
+      width: 25%;
+
       border-style: solid;
       border-top-width: 2px;
       border-bottom-width: 2px;
-      float: left;
-      width: 25%;
       text-align: center;
       cursor: pointer;
+
 
       &#aylien-selection-container {
         border-left-width: 2px;
@@ -49,7 +51,10 @@
         display: inline-block;
 
         .selection-logo {
+<<<<<<< HEAD:src/client/style/chat.scss
           margin-right: 5px;
+=======
+>>>>>>> master:src/public/style/chatStyle.scss
           @media only screen and (max-width: 679px){
             display: none;
           }
@@ -61,6 +66,10 @@
             display: none;
           }
         }
+<<<<<<< HEAD:src/client/style/chat.scss
+=======
+
+>>>>>>> master:src/public/style/chatStyle.scss
 
         &#aylien-selection {
 
@@ -83,8 +92,13 @@
         &#rosette-selection {
 
           img {
+<<<<<<< HEAD:src/client/style/chat.scss
             height: 37px;
             padding: 3px 0 0;
+=======
+            height: 40px;
+            padding: 4px 0 4px;
+>>>>>>> master:src/public/style/chatStyle.scss
           }
 
         }
@@ -154,11 +168,22 @@
       border-style: solid;
       text-align: center;
 
+      @media only screen and (max-width: 991px){
+        float: left;
+        width: 100%;
+      }
+
       .dropdown-header {
         color: #333;
         text-align: center;
         font-size: 22px;
+        .dropdown-api-name {
+          @media only screen and (min-width: 990px){
+            display: none;
+          }
+        }
       }
+
 
 
       .api-types-list {
@@ -198,17 +223,23 @@
 
       &#rosette-dropdown {
         border-color: #eb3e0f;
-        margin: 0 50% 0 25%;
+        @media only screen and (min-width: 992px){
+          margin: 0 50% 0 25%;
+        }
       }
 
       &#indico-dropdown {
         border-color: #333333;
-        margin: 0 25% 0 50%;
+        @media only screen and (min-width: 992px){
+          margin: 0 25% 0 50%;
+        }
       }
 
       &#meaningcloud-dropdown {
+        @media only screen and (min-width: 992px){
+          margin-left: 75%;
+        }
         border-color: #fe6601;
-        margin-left: 75%;
       }
 
     }
@@ -233,6 +264,11 @@
     #to-begin {
       text-align: center;
       margin: 20px 0;
+
+      @media only screen and (max-width: 991px){
+        padding: 0 20px;
+      }
+
     }
 
     .avatar {

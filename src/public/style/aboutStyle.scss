@@ -1,0 +1,207 @@
+
+#about {
+
+
+    text-align: center;
+    margin: 50px auto 80px;
+    width: 80%;
+
+
+  #summary {
+
+    #summary-header {
+
+      h1 {
+        color: #598bdc;
+      }
+
+      p {
+        max-width: 450px;
+        font-weight: 900;
+        margin: 0 auto 30px;
+      }
+
+    }
+
+    #summary-body {
+
+      p {
+        width: 75%;
+        margin: 0 auto 35px;
+        max-width: 700px;
+      }
+
+    }
+
+  }
+
+
+  #apis {
+
+    margin-top: 50px;
+
+    h3 {
+      color: #598bdc;
+      margin-bottom: 30px;
+    }
+
+    @media only screen and (min-width: 768px){
+      #top-api-row {
+        margin-bottom: 70px;
+      }
+    }
+
+    @media only screen and (max-width: 767px){
+      .api-container {
+        margin-bottom: 70px;
+      }
+    }
+
+    .api-container {
+
+
+      .api-header {
+        height: 65px;
+      }
+
+      .api-analyses {
+
+        text-align: left;
+
+        h4 {
+          text-align: center;
+        }
+
+        b {
+          text-align: center;
+          font-weight: bolder;
+        }
+
+      }
+
+      .api-brand {
+
+        margin-top: 30px;
+
+        .image-container {
+          display: inline-block;
+          margin: 0 5px 4px;
+          height: 30px;
+          img {
+            height: 100%;
+          }
+        }
+
+      }
+
+      &.aylien {
+
+        img {
+          height: 80%;
+        }
+
+        #aylien-logo-text {
+          display: inline-block;
+          color: #475672;
+          font-size: 52px;
+          font-weight: bold;
+          font-family: 'Oxygen', sans-serif;
+          vertical-align: middle;
+          margin-bottom: 5px;
+        }
+
+      }
+
+      &.rosette {
+
+        .api-header {
+          // padding-bottom: 2px;
+        }
+
+        img {
+          height: 110%;
+        }
+
+      }
+
+      &.indico {
+
+        img {
+          height: 90%;
+        }
+
+      }
+
+      &.meaningcloud {
+
+        img {
+          height: 100%;
+        }
+
+      }
+
+    }
+
+    #api-disclaimer {
+
+      margin-top: 40px;
+
+      h6 {
+        width: 80%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+    }
+
+
+  }
+
+
+  #feedback {
+
+    margin-top: 150px;
+
+    h3 {
+      color: #598bdc;
+    }
+
+    p {
+      width: 60%;
+      margin: 0 auto 30px;
+    }
+
+    form {
+
+      width: 80%;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+
+
+      #submit-container {
+        display: inline-block;
+        .btn {
+          color: white;
+          background-color: #598bdc;
+        }
+      }
+
+    }
+
+    #feedback-success {
+      span {
+        color: green;
+        margin-right: 3px;
+      }
+    }
+
+    #feedback-error {
+      span {
+        color: red;
+      }
+    }
+
+  }
+
+
+}

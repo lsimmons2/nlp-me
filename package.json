@@ -7,7 +7,11 @@
     "build": "babel --watch src/ --out-dir dist/ --source-maps --copy-files",
     "start": "webpack-dev-server",
     "debug": "node-debug --debug-brk dist/server/app.js",
+<<<<<<< HEAD
     "prod": "NODE_ENV=prod forever start dist/server/app.js"
+=======
+    "prod": "gulp prod && NODE_ENV=prod pm2 start dist/server/app.js"
+>>>>>>> master
   },
   "repository": {
     "type": "git",
@@ -62,6 +66,7 @@
     "angular": "^1.5.8",
     "angular-route": "^1.5.8",
     "angular-ui-bootstrap": "^2.2.0",
+    "aylien_textapi": "^0.6.0",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "connect": "^3.5.0",

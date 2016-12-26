@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+
+    <meta charset='UTF-8'>
+  	<meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>NLP ME</title>
+
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+
+    <script type='text/javascript' src='./vendor/jquery/dist/jquery.js'></script>
+  	<script type='text/javascript' src='./vendor/angular/angular.js'></script>
+  	<script type='text/javascript' src='./vendor/angular-route/angular-route.js'></script>
+    <script type='text/javascript' src='./vendor/bootstrap/dist/js/bootstrap.js'></script>
+	  <link rel='stylesheet' href='./vendor/bootstrap/dist/css/bootstrap.css'>
+    <script type='text/javascript' src='./vendor/angular-ui-bootstrap/dist/ui-bootstrap.js'></script>
+    <script type='text/javascript' src='./vendor/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js'></script>
+    <link rel='stylesheet' href='./vendor/angular-ui-bootstrap/dist/ui-bootstrap-csp.css'>
+
+
+
+    <script type='text/javascript' src='./controllers/navCtrl.js'></script>
+    <script type='text/javascript' src='./controllers/chatCtrl.js'></script>
+    <script type='text/javascript' src='./controllers/aboutCtrl.js'></script>
+
+
+    <script type='text/javascript' src='./routes.js'></script>
+    <script type='text/javascript' src='./app.js'></script>
+    <script type='text/javascript' src='./filters.js'></script>
+    <script type='text/javascript' src='./directives.js'></script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:normal,bolder" rel="stylesheet">
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/aboutStyle.css">
+    <link rel="stylesheet" href="./style/chatStyle.css">
+
+
+  </head>
+
+  <body ng-app="App">
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#/about">
+            NLP ME
+          </a>
+          <a class="navbar-brand" id="brand-extension">
+            -- chat with NLP APIs
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#/about">About</a></li>
+            <li><a href="#/chat">Chat with APIs</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container fill" ng-view> </div>
+
+  </body>
+</html>
