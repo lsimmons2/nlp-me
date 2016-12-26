@@ -1,8 +1,12 @@
 
 #chat {
 
-  height: 100%;
-  position: relative;
+  position: absolute;
+  top: 6px;
+  bottom: 0;
+  right: 0;
+  left: 0;
+
 
   #selection-container {
 
@@ -190,7 +194,12 @@
 
   #convo-container {
 
-    height: 87%;
+    position: absolute;
+    top: 44px;
+    bottom: 26px;
+    right: 0;
+    left: 0;
+
     background-color: #989898;
     overflow: scroll;
 
@@ -381,10 +390,16 @@
   #input-container {
 
     border: 2px solid;
+    background-color: red;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 10px;
 
     form {
 
-      position: relative;
+      margin: 0;
 
       input {
         width: 100%;

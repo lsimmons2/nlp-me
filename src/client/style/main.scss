@@ -9,10 +9,15 @@
     font-family: 'Montserrat', sans-serif;
 }
 
-html body {
-  height: 100%;
+#app {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
 }
 
-.fill {
-  height: 87%;
+html, body {
+  height: 100%;
+  margin: 0;
 }
