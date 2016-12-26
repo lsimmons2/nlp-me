@@ -32,7 +32,7 @@ class RosetteDropdown extends React.Component {
         <ul className="api-types-list">
           <li>
             <div className="analysis-type-label" data-tip data-for="rosette-categories-tooltip">Categories</div>
-            < Tooltip id="rosette-categories-tooltip" >
+            < Tooltip class="tooltip-class" id="rosette-categories-tooltip" >
               Extracts different categories from your input.
             </ Tooltip >
             <div className="api-checkbox cb2">
@@ -47,7 +47,7 @@ class RosetteDropdown extends React.Component {
           </li>
           <li>
             <div className="analysis-type-label" data-tip data-for="rosette-entities-tooltip">Entities</div>
-            < Tooltip id="rosette-entities-tooltip" >
+            < Tooltip class="tooltip-class" id="rosette-entities-tooltip" >
               Extracts different entities from your input.
             </ Tooltip >
             <div className="api-checkbox cb2">
@@ -62,7 +62,7 @@ class RosetteDropdown extends React.Component {
           </li>
           <li>
             <div className="analysis-type-label" data-tip data-for="rosette-sentiment-tooltip">Sentiment</div>
-            < Tooltip id="rosette-sentiment-tooltip" >
+            < Tooltip class="tooltip-class" id="rosette-sentiment-tooltip" >
               Produces a confidence score for whether the overall sentiment of your input is positive or negative and individual confidence scores for whether each detected entity is correlated with positive or negative sentiment.
             </ Tooltip >
             <div className="api-checkbox cb2">
@@ -77,7 +77,7 @@ class RosetteDropdown extends React.Component {
           </li>
           <li>
             <div className="analysis-type-label" data-tip data-for="rosette-relationships-tooltip">Relationships</div>
-            < Tooltip id="rosette-relationships-tooltip" >
+            < Tooltip class="tooltip-class" id="rosette-relationships-tooltip" >
               Detects relationships between different entities in your input.
             </ Tooltip >
             <div className="api-checkbox cb2">

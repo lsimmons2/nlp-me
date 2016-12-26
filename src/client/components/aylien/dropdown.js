@@ -1,7 +1,6 @@
 
-import React from 'react';
-import Tooltip from 'react-tooltip';
-
+import React from 'react'
+import Tooltip from 'react-tooltip'
 
 class AylienDropdown extends React.Component {
 
@@ -32,7 +31,7 @@ class AylienDropdown extends React.Component {
         <ul className="api-types-list">
           <li>
             <div className="analysis-type-label" data-tip data-for="aylien-classify-tooltip" >Classify</div>
-            < Tooltip id="aylien-classify-tooltip" place="right" >
+            < Tooltip class="tooltip-class" id="aylien-classify-tooltip" place="right" >
               Produces confidence scores for different categories in your input.
             </ Tooltip >
             <div className="api-checkbox cb1">
@@ -47,7 +46,7 @@ class AylienDropdown extends React.Component {
           </li>
           <li>
             <div className="analysis-type-label" data-tip data-for="aylien-sentiment-tooltip">Sentiment</div>
-            < Tooltip id="aylien-sentiment-tooltip" place="right" >
+            < Tooltip class="tooltip-class" id="aylien-sentiment-tooltip" place="right" >
               Produces scores for the polarity and subjectivity your input expresses.
             </ Tooltip >
             <div className="api-checkbox cb1">
@@ -62,7 +61,7 @@ class AylienDropdown extends React.Component {
           </li>
           <li>
             <div className="analysis-type-label" data-tip data-for="aylien-concepts-tooltip">Concepts</div>
-            < Tooltip id="aylien-concepts-tooltip" place="right" >
+            < Tooltip class="tooltip-class" id="aylien-concepts-tooltip" place="right" >
               Extracts different concepts from your input.
             </ Tooltip >
             <div className="api-checkbox cb1">
@@ -77,7 +76,7 @@ class AylienDropdown extends React.Component {
           </li>
           <li>
             <div className="analysis-type-label" data-tip data-for="aylien-hashtags-tooltip">Hashtags</div>
-            < Tooltip id="aylien-hashtags-tooltip" place="right" >
+            < Tooltip class="tooltip-class" id="aylien-hashtags-tooltip" place="right" >
               Extracts different hashtags from your input.
             </ Tooltip >
             <div className="api-checkbox cb1">

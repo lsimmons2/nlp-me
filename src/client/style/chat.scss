@@ -136,7 +136,13 @@
 
   #dropdown-container {
 
+    .tooltip-class {
+      width: 350px;
+    }
+
     clear: left;
+    z-index: 3;
+    position: relative;
 
     .dropdown {
       position: absolute;
@@ -147,7 +153,6 @@
       background-color: white;
       border-style: solid;
       text-align: center;
-      z-index: 3;
 
       .dropdown-header {
         color: #333;
@@ -157,6 +162,7 @@
 
 
       .api-types-list {
+
         -moz-column-count: 2;
         -webkit-column-count: 2;
         column-count: 2;
