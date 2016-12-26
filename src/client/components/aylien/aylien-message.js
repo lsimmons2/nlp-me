@@ -53,7 +53,7 @@ class AylienMessage extends React.Component {
         category = categories[i];
         classifyAnalysis.push(
           <span key={i}>
-            <strong> {this.getPerc(category.confidence)}%</strong>
+            <strong> {this.getPerc(category.score)}%</strong>
             <span> confident that</span>
             <strong> {category.label}</strong>
             <span> is a category</span>
