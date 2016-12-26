@@ -17,6 +17,20 @@ function toggleSelection(api, analysisType){
   }
 }
 
+function selectAll(api){
+  let selectAllType = api.toUpperCase() + '_SELECT_ALL';
+  return {
+    type: selectAllType
+  }
+}
+
+function unselectAll(api){
+  let unselectAllType = api.toUpperCase() + '_UNSELECT_ALL';
+  return {
+    type: unselectAllType
+  }
+}
+
 function toggleMessageView(id){
   return {
     type: 'TOGGLE_MESSAGE_VIEW',
@@ -213,6 +227,8 @@ function updateInput(input){
 export {
   toggleDropdownView,
   toggleSelection,
+  selectAll,
+  unselectAll,
   toggleMessageView,
   toggleTexttagsView,
   updateInput,

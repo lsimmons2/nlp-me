@@ -4,9 +4,17 @@ import Tooltip from 'react-tooltip';
 
 
 class MeaningcloudDropdown extends React.Component {
-  
+
+  selectAll(){
+    this.props.selectAll('meaningcloud');
+  }
+
+  unselectAll(){
+    this.props.unselectAll('meaningcloud');
+  }
+
   toggleSelection(type){
-    this.props.toggleSelection(this.props.apiName, type)
+    this.props.toggleSelection('meaningcloud', type)
   }
 
   render(){
@@ -32,7 +40,7 @@ class MeaningcloudDropdown extends React.Component {
                   type="checkbox"
                   id="mccb-classification"
                   onChange={this.toggleSelection.bind(this, 'classification')}
-                  ref="classification"
+                  checked={this.props.api.types.classification}
                 />
                 <label htmlFor="mccb-classification"></label>
              </div>
@@ -47,7 +55,7 @@ class MeaningcloudDropdown extends React.Component {
                   type="checkbox"
                   id="mccb-sentiment"
                   onChange={this.toggleSelection.bind(this, 'sentiment')}
-                  ref="sentiment"
+                  checked={this.props.api.types.sentiment}
                 />
                 <label htmlFor="mccb-sentiment"></label>
              </div>
@@ -62,7 +70,7 @@ class MeaningcloudDropdown extends React.Component {
                   type="checkbox"
                   id="mccb-topics"
                   onChange={this.toggleSelection.bind(this, 'topics')}
-                  ref="topics"
+                  checked={this.props.api.types.topics}
                 />
                 <label htmlFor="mccb-topics"></label>
              </div>
@@ -73,10 +81,10 @@ class MeaningcloudDropdown extends React.Component {
             </div>
           </li>
         </ul>
-        <div className="un-select-all">
+        <div className="un-select-all" onClick={this.selectAll.bind(this)}>
           Select all
         </div>
-        <div className="un-select-all">
+        <div className="un-select-all" onClick={this.unselectAll.bind(this)}>
           Unselect all
         </div>
       </div>

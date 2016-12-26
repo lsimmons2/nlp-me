@@ -5,8 +5,16 @@ import Tooltip from 'react-tooltip';
 
 class IndicoDropdown extends React.Component {
 
+  selectAll(){
+    this.props.selectAll('indico');
+  }
+
+  unselectAll(){
+    this.props.unselectAll('indico');
+  }
+
   toggleSelection(type){
-    this.props.toggleSelection(this.props.apiName, type)
+    this.props.toggleSelection('indico', type)
   }
 
   render(){
@@ -32,6 +40,7 @@ class IndicoDropdown extends React.Component {
                 type="checkbox"
                 id="icb-texttags"
                 onChange={this.toggleSelection.bind(this, "texttags")}
+                checked={this.props.api.types.texttags}
               />
               <label htmlFor="icb-texttags"></label>
              </div>
@@ -46,6 +55,7 @@ class IndicoDropdown extends React.Component {
                 type="checkbox"
                 id="icb-sentiment"
                 onChange={this.toggleSelection.bind(this, "sentiment")}
+                checked={this.props.api.types.sentiment}
               />
               <label htmlFor="icb-sentiment"></label>
              </div>
@@ -60,6 +70,7 @@ class IndicoDropdown extends React.Component {
                 type="checkbox"
                 id="icb-personality"
                 onChange={this.toggleSelection.bind(this, "personality")}
+                checked={this.props.api.types.personality}
               />
               <label htmlFor="icb-personality"></label>
              </div>
@@ -74,6 +85,7 @@ class IndicoDropdown extends React.Component {
                 type="checkbox"
                 id="icb-people"
                 onChange={this.toggleSelection.bind(this, "people")}
+                checked={this.props.api.types.people}
               />
               <label htmlFor="icb-people"></label>
              </div>
@@ -88,6 +100,7 @@ class IndicoDropdown extends React.Component {
                 type="checkbox"
                 id="icb-political"
                 onChange={this.toggleSelection.bind(this, "political")}
+                checked={this.props.api.types.political}
               />
               <label htmlFor="icb-political"></label>
              </div>
@@ -102,15 +115,16 @@ class IndicoDropdown extends React.Component {
                 type="checkbox"
                 id="icb-emotion"
                 onChange={this.toggleSelection.bind(this, "emotion")}
+                checked={this.props.api.types.emotion}
               />
               <label htmlFor="icb-emotion"></label>
              </div>
           </li>
         </ul>
-        <div className="un-select-all">
+        <div className="un-select-all" onClick={this.selectAll.bind(this)}>
           Select all
         </div>
-        <div className="un-select-all">
+        <div className="un-select-all" onClick={this.unselectAll.bind(this)}>
           Unselect all
         </div>
       </div>

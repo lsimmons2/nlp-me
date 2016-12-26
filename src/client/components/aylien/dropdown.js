@@ -5,8 +5,16 @@ import Tooltip from 'react-tooltip';
 
 class AylienDropdown extends React.Component {
 
+  selectAll(){
+    this.props.selectAll('aylien');
+  }
+
+  unselectAll(){
+    this.props.unselectAll('aylien');
+  }
+
   toggleSelection(type){
-    this.props.toggleSelection(this.props.apiName, type)
+    this.props.toggleSelection('aylien', type)
   }
 
   render(){
@@ -32,6 +40,7 @@ class AylienDropdown extends React.Component {
                 type="checkbox"
                 id="acb-classify"
                 onChange={this.toggleSelection.bind(this, 'classify')}
+                checked={this.props.api.types.classify}
               />
               <label htmlFor="acb-classify"></label>
              </div>
@@ -46,6 +55,7 @@ class AylienDropdown extends React.Component {
                 type="checkbox"
                 id="acb-sentiment"
                 onChange={this.toggleSelection.bind(this, 'sentiment')}
+                checked={this.props.api.types.sentiment}
               />
               <label htmlFor="acb-sentiment"></label>
              </div>
@@ -60,6 +70,7 @@ class AylienDropdown extends React.Component {
                 type="checkbox"
                 id="acb-concepts"
                 onChange={this.toggleSelection.bind(this, 'concepts')}
+                checked={this.props.api.types.concepts}
               />
               <label htmlFor="acb-concepts"></label>
              </div>
@@ -74,15 +85,16 @@ class AylienDropdown extends React.Component {
                 type="checkbox"
                 id="acb-hashtags"
                 onChange={this.toggleSelection.bind(this, 'hashtags')}
+                checked={this.props.api.types.hashtags}
               />
               <label htmlFor="acb-hashtags"></label>
-             </div>
+            </div>
           </li>
         </ul>
-        <div className="un-select-all">
+        <div className="un-select-all" onClick={this.selectAll.bind(this)} >
           Select all
         </div>
-        <div className="un-select-all">
+        <div className="un-select-all" onClick={this.unselectAll.bind(this)} >
           Unselect all
         </div>
       </div>

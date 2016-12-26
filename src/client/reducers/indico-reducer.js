@@ -15,6 +15,27 @@ export default function indicoReducer(indico = {}, action){
         }
       }
 
+    case 'INDICO_SELECT_ALL':
+      let selectedTypes = {};
+      for(let type in indico.types){
+        selectedTypes[type] = true;
+      }
+      return {
+        ...indico,
+        types: selectedTypes
+      }
+
+    case 'INDICO_UNSELECT_ALL':
+      let unselectedTypes = {};
+      for(let type in indico.types){
+        unselectedTypes[type] = false;
+      }
+      return {
+        ...indico,
+        types: unselectedTypes
+      }
+
+
     default:
       return indico
 

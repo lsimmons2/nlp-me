@@ -15,6 +15,26 @@ export default function aylienReducer(aylien = {}, action){
         }
       }
 
+    case 'AYLIEN_SELECT_ALL':
+      let selectedTypes = {};
+      for(let type in aylien.types){
+        selectedTypes[type] = true;
+      }
+      return {
+        ...aylien,
+        types: selectedTypes
+      }
+
+    case 'AYLIEN_UNSELECT_ALL':
+      let unselectedTypes = {};
+      for(let type in aylien.types){
+        unselectedTypes[type] = false;
+      }
+      return {
+        ...aylien,
+        types: unselectedTypes
+      }
+
     default:
       return aylien
 

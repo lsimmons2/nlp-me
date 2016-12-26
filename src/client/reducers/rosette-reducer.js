@@ -15,6 +15,27 @@ export default function rosetteReducer(rosette = {}, action){
         }
       }
 
+    case 'ROSETTE_SELECT_ALL':
+      let selectedTypes = {};
+      for(let type in rosette.types){
+        selectedTypes[type] = true;
+      }
+      return {
+        ...rosette,
+        types: selectedTypes
+      }
+
+    case 'ROSETTE_UNSELECT_ALL':
+      let unselectedTypes = {};
+      for(let type in rosette.types){
+        unselectedTypes[type] = false;
+      }
+      return {
+        ...rosette,
+        types: unselectedTypes
+      }
+
+
     default:
       return rosette
 

@@ -26,6 +26,8 @@ class Chat extends React.Component {
           viewChoices={viewChoices}
         />
         < DropdownContainer
+          selectAll={this.props.actions.selectAll}
+          unselectAll={this.props.actions.unselectAll}
           toggleSelection={this.props.actions.toggleSelection}
           apis={this.props.apis}
         />

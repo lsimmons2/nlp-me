@@ -15,6 +15,27 @@ export default function meaningcloudReducer(meaningcloud = {}, action){
         }
       }
 
+    case 'MEANINGCLOUD_SELECT_ALL':
+      let selectedTypes = {};
+      for(let type in meaningcloud.types){
+        selectedTypes[type] = true;
+      }
+      return {
+        ...meaningcloud,
+        types: selectedTypes
+      }
+
+    case 'MEANINGCLOUD_UNSELECT_ALL':
+      let unselectedTypes = {};
+      for(let type in meaningcloud.types){
+        unselectedTypes[type] = false;
+      }
+      return {
+        ...meaningcloud,
+        types: unselectedTypes
+      }
+
+
     default:
       return meaningcloud
 
