@@ -278,22 +278,28 @@ class RosetteMessage extends React.Component {
     let errors = this.renderErrors();
 
     return (
-      <div className="message rosette">
+      <div>
 
-        <span className="outer-triangle"> </span>
-        <span className="inner-triangle"> </span>
+        <img className="avatar" src="images/rosette-icon.png"/>
 
-        <div className="message-header">
-          {this.getHeader()}
-        </div>
+        <div className="message rosette">
+
+          <span className="outer-triangle"> </span>
+          <span className="inner-triangle"> </span>
+
+          <div className="message-header">
+            {this.getHeader()}
+          </div>
 
 
-        <div>
-          {successes}
-        </div>
+          <div>
+            {successes}
+          </div>
 
-        <div>
-          {errors}
+          <div>
+            {errors}
+          </div>
+
         </div>
 
       </div>

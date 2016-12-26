@@ -268,21 +268,27 @@ class AylienMessage extends React.Component {
     let errors = this.renderErrors();
 
     return (
-      <div className="message aylien">
+      <div>
 
-        <span className="outer-triangle"> </span>
-        <span className="inner-triangle"> </span>
+        <img className="avatar" src="images/aylien-icon.png"/>
 
-        <div className="message-header">
-          {this.getHeader()}
-        </div>
+        <div className="message aylien">
 
-        <div>
-          {successes}
-        </div>
+          <span className="outer-triangle"> </span>
+          <span className="inner-triangle"> </span>
 
-        <div>
-          {errors}
+          <div className="message-header">
+            {this.getHeader()}
+          </div>
+
+          <div>
+            {successes}
+          </div>
+
+          <div>
+            {errors}
+          </div>
+
         </div>
 
       </div>

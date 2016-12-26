@@ -233,22 +233,28 @@ class IndicoMessage extends React.Component {
     let errors = this.renderErrors();
 
     return (
-      <div className="message indico">
+      <div>
 
-        <span className="outer-triangle"> </span>
-        <span className="inner-triangle"> </span>
+        <img className="avatar" src="images/indico-icon.png"/>
 
-        <div className="message-header">
-          {this.getHeader()}
-        </div>
+        <div className="message indico">
+
+          <span className="outer-triangle"> </span>
+          <span className="inner-triangle"> </span>
+
+          <div className="message-header">
+            {this.getHeader()}
+          </div>
 
 
-        <div>
-          {successes}
-        </div>
+          <div>
+            {successes}
+          </div>
 
-        <div>
-          {errors}
+          <div>
+            {errors}
+          </div>
+
         </div>
 
       </div>
