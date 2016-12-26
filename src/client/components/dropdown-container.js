@@ -12,28 +12,24 @@ class DropdownContainer extends React.Component {
     return (
       <div id="dropdown-container">
         < AylienDropdown
-          apiName='aylien'
           api={this.props.apis.aylien}
           selectAll={this.props.selectAll}
           unselectAll={this.props.unselectAll}
           toggleSelection={this.props.toggleSelection}
         />
         < RosetteDropdown
-          apiName='rosette'
           api={this.props.apis.rosette}
           selectAll={this.props.selectAll}
           unselectAll={this.props.unselectAll}
           toggleSelection={this.props.toggleSelection}
         />
         < IndicoDropdown
-          apiName='indico'
           api={this.props.apis.indico}
           selectAll={this.props.selectAll}
           unselectAll={this.props.unselectAll}
           toggleSelection={this.props.toggleSelection}
         />
         < MeaningcloudDropdown
-          apiName='meaningcloud'
           api={this.props.apis.meaningcloud}
           selectAll={this.props.selectAll}
           unselectAll={this.props.unselectAll}

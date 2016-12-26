@@ -31,7 +31,7 @@ class MeaningcloudDropdown extends React.Component {
         <h3 className="dropdown-header">Analysis Options</h3>
         <ul className="api-types-list">
           <li>
-            <div  data-tip data-for="meaningcloud-classification-tooltip">Classification</div>
+            <div className="analysis-type-label" data-tip data-for="meaningcloud-classification-tooltip">Classification</div>
             < Tooltip id="meaningcloud-classification-tooltip" place="left" >
              Extracts categories in your input.
            </ Tooltip >
@@ -46,7 +46,7 @@ class MeaningcloudDropdown extends React.Component {
              </div>
           </li>
           <li>
-            <div data-tip data-for="meaningcloud-sentiment-tooltip">Sentiment</div>
+            <div className="analysis-type-label" data-tip data-for="meaningcloud-sentiment-tooltip">Sentiment</div>
             < Tooltip id="meaningcloud-sentiment-tooltip" place="left" >
              Detects the polarity, subjectivity, irony, and emotional agreement in your input.
            </ Tooltip >
@@ -61,7 +61,7 @@ class MeaningcloudDropdown extends React.Component {
              </div>
           </li>
           <li>
-            <div data-tip data-for="meaningcloud-topics-tooltip">Topics</div>
+            <div className="analysis-type-label" data-tip data-for="meaningcloud-topics-tooltip">Topics</div>
             < Tooltip id="meaningcloud-topics-tooltip" place="left" >
              Extracts the topics in your input.
            </ Tooltip >

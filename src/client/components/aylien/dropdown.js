@@ -31,7 +31,7 @@ class AylienDropdown extends React.Component {
         <h3 className="dropdown-header">Analysis Options</h3>
         <ul className="api-types-list">
           <li>
-            <div data-tip data-for="aylien-classify-tooltip" >Classify</div>
+            <div className="analysis-type-label" data-tip data-for="aylien-classify-tooltip" >Classify</div>
             < Tooltip id="aylien-classify-tooltip" place="right" >
               Produces confidence scores for different categories in your input.
             </ Tooltip >
@@ -46,7 +46,7 @@ class AylienDropdown extends React.Component {
              </div>
           </li>
           <li>
-            <div data-tip data-for="aylien-sentiment-tooltip">Sentiment</div>
+            <div className="analysis-type-label" data-tip data-for="aylien-sentiment-tooltip">Sentiment</div>
             < Tooltip id="aylien-sentiment-tooltip" place="right" >
               Produces scores for the polarity and subjectivity your input expresses.
             </ Tooltip >
@@ -61,7 +61,7 @@ class AylienDropdown extends React.Component {
              </div>
           </li>
           <li>
-            <div data-tip data-for="aylien-concepts-tooltip">Concepts</div>
+            <div className="analysis-type-label" data-tip data-for="aylien-concepts-tooltip">Concepts</div>
             < Tooltip id="aylien-concepts-tooltip" place="right" >
               Extracts different concepts from your input.
             </ Tooltip >
@@ -76,7 +76,7 @@ class AylienDropdown extends React.Component {
              </div>
           </li>
           <li>
-            <div data-tip data-for="aylien-hashtags-tooltip">Hashtags</div>
+            <div className="analysis-type-label" data-tip data-for="aylien-hashtags-tooltip">Hashtags</div>
             < Tooltip id="aylien-hashtags-tooltip" place="right" >
               Extracts different hashtags from your input.
             </ Tooltip >

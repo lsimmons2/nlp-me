@@ -31,7 +31,7 @@ class IndicoDropdown extends React.Component {
         <h3 className="dropdown-header">Analysis Options</h3>
         <ul className="api-types-list">
           <li>
-            <div data-tip data-for="indico-texttags-tooltip">Text Tags</div>
+            <div className="analysis-type-label" data-tip data-for="indico-texttags-tooltip">Text Tags</div>
             < Tooltip id="indico-texttags-tooltip" >
               Produces confidence scores for the correlation between 111 text tags (similar to categories) and your input.
             </ Tooltip >
@@ -46,7 +46,7 @@ class IndicoDropdown extends React.Component {
              </div>
           </li>
           <li>
-            <div data-tip data-for="indico-sentiment-tooltip">Sentiment</div>
+            <div className="analysis-type-label" data-tip data-for="indico-sentiment-tooltip">Sentiment</div>
             < Tooltip id="indico-sentiment-tooltip" >
               Produces a sentiment score between 0 and 1 for your input. Above 0.5 indicates positive sentiment, below 0.5 indicates negative sentiment.
             </ Tooltip >
@@ -61,7 +61,7 @@ class IndicoDropdown extends React.Component {
              </div>
           </li>
           <li>
-            <div data-tip data-for="indico-personality-tooltip">Personality</div>
+            <div className="analysis-type-label" data-tip data-for="indico-personality-tooltip">Personality</div>
             < Tooltip id="indico-personality-tooltip" >
               Produces scores for how strongly your input expresses openness, extraversion, agreeableness, and conscientiousness.
             </ Tooltip >
@@ -76,7 +76,7 @@ class IndicoDropdown extends React.Component {
              </div>
           </li>
           <li>
-            <div data-tip data-for="indico-people-tooltip">People</div>
+            <div className="analysis-type-label" data-tip data-for="indico-people-tooltip">People</div>
             < Tooltip id="indico-people-tooltip" >
               Extracts the people referenced in your input.
             </ Tooltip >
@@ -91,7 +91,7 @@ class IndicoDropdown extends React.Component {
              </div>
           </li>
           <li>
-            <div data-tip data-for="indico-political-tooltip">Political</div>
+            <div className="analysis-type-label" data-tip data-for="indico-political-tooltip">Political</div>
             < Tooltip id="indico-political-tooltip" >
               Produces scores that represent the likelihood that your input expresses a leaning to the liberal, green, conservative, and libertarian political affiliations.
             </ Tooltip >
@@ -106,7 +106,7 @@ class IndicoDropdown extends React.Component {
              </div>
           </li>
           <li>
-            <div data-tip data-for="indico-emotion-tooltip">Emotion</div>
+            <div className="analysis-type-label" data-tip data-for="indico-emotion-tooltip">Emotion</div>
             < Tooltip id="indico-emotion-tooltip" >
               Produces scores for how much your input expresses anger, joy, fear, surprise, and sadness.
             </ Tooltip >

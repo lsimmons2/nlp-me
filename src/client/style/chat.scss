@@ -162,6 +162,14 @@
         column-count: 2;
         list-style-type: none;
         padding-left: 0;
+
+        li {
+          margin-bottom: 10px;
+        }
+
+        .analysis-type-label {
+          margin-bottom: 4px;
+        }
       }
 
       .un-select-all {
