@@ -3,11 +3,6 @@ import React from 'react';
 
 class InputContainer extends React.Component {
 
-  // constructor(props){
-  //   super(props);
-  //   this.props.chat();
-  // }
-
   handleChange(event){
     this.props.updateInput(event.target.value);
   }

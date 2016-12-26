@@ -10,6 +10,18 @@ import FailMessage from './fail-message'
 
 class ConvoContainer extends React.Component {
 
+  componentWillUpdate() {
+    let node = this.refs.convo;
+    this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+  }
+
+  componentDidUpdate() {
+    if (this.shouldScrollBottom) {
+      let node = this.refs.convo;
+      node.scrollTop = node.scrollHeight
+    }
+  }
+
   render(){
 
     let messages;
@@ -86,7 +98,7 @@ class ConvoContainer extends React.Component {
     }
 
     return (
-      <div id="convo-container">
+      <div id="convo-container" ref="convo">
         {messages}
       </div>
     )
