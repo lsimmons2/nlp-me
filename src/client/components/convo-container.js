@@ -11,15 +11,22 @@ import FailMessage from './fail-message'
 class ConvoContainer extends React.Component {
 
   componentWillUpdate() {
-    let node = this.refs.convo;
-    this.shouldScrollBottom = node.scrollTop + node.offsetHeight === node.scrollHeight;
+    this.convoLength = this.props.messages.length;
   }
 
   componentDidUpdate() {
-    if (this.shouldScrollBottom) {
+    if (this.convoLength < this.props.messages.length) {
       let node = this.refs.convo;
       node.scrollTop = node.scrollHeight
     }
+  }
+
+  onMouseOver(){
+    document.body.style.overflow='hidden';
+  }
+
+  onMouseOut(){
+    document.body.style.overflow='auto';
   }
 
   render(){
@@ -98,7 +105,11 @@ class ConvoContainer extends React.Component {
     }
 
     return (
-      <div id="convo-container" ref="convo">
+      <div
+        id="convo-container"
+        ref="convo"
+        onMouseOver={this.onMouseOver.bind(this)}
+        onMouseOut={this.onMouseOut.bind(this)}>
         {messages}
       </div>
     )
