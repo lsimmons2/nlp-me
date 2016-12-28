@@ -1,7 +1,14 @@
-import React from 'react';
+
+import React from 'react'
+import greetings from '../../greetings'
+
 
 class MeaningcloudMessage extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.greeting = greetings[(Math.random() * greetings.length).toFixed()];
+  }
 
   toggleMessageView(){
     this.props.toggleMessageView(this.props.id);
@@ -11,7 +18,7 @@ class MeaningcloudMessage extends React.Component {
     if (this.props.analyses.successes.length && !this.props.viewJson){
       return (
         <div>
-          <strong>Hello! Here are my analyses of your input</strong>
+          <strong>{this.greeting} Here are my analyses of your input</strong>
           <span className="json-link">
             &nbsp;- <a onClick={this.toggleMessageView.bind(this)}>view in JSON</a>
           </span>
