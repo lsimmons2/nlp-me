@@ -14,7 +14,7 @@ class AylienMessage extends React.Component {
     this.props.toggleMessageView(this.props.id);
   }
 
-  getHeader(){
+  renderHeader(){
     if (this.props.analyses.successes.length && !this.props.viewJson){
       return (
         <div>
@@ -285,7 +285,7 @@ class AylienMessage extends React.Component {
           <span className="inner-triangle"> </span>
 
           <div className="message-header">
-            {this.getHeader()}
+            {this.renderHeader()}
           </div>
 
           <div>

@@ -3,7 +3,7 @@ import React from 'react'
 
 class FailMessage extends React.Component {
 
-  getHeader(){
+  renderHeader(){
     return (
       <div>
         <strong>Woops!</strong>
@@ -32,7 +32,7 @@ class FailMessage extends React.Component {
         <span className="inner-triangle"> </span>
 
         <div className="message-header">
-          {this.getHeader()}
+          {this.renderHeader()}
         </div>
 
         <div>
