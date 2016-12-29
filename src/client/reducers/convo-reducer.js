@@ -67,18 +67,18 @@ export default function(convo={}, action){
         })
       };
 
-      case 'TOGGLE_TEXTTAGS_VIEW':
-        let ttMessage;
-        let i;
-        return {
-          ...convo,
-          messages: convo.messages.map(message => {
-            if (message.id === action.id){
-              message.viewTexttags = !message.viewTexttags;
-            }
-            return message;
-          })
-        }
+    case 'TOGGLE_TEXTTAGS_VIEW':
+      let ttMessage;
+      let i;
+      return {
+        ...convo,
+        messages: convo.messages.map(message => {
+          if (message.id === action.id){
+            message.viewTexttags = !message.viewTexttags;
+          }
+          return message;
+        })
+      }
 
 
     default:
