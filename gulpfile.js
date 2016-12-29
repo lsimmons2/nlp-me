@@ -15,13 +15,13 @@ var forever = require('gulp-forever-monitor');
 
 gulp.task('test-front', function(){
 	process.env.NODE_ENV = 'test';
-	gulp.src('test/client/actions/index.spec.js')
+	gulp.src('test/client/**/*.js')
 		.pipe(babel())
 		.pipe(mocha())
 		.on('error', gutil.log)
 });
 
-gulp.task('test-front:watch', function(){
+gulp.task('test-front:watch', ['test-front'], function(){
   gulp.watch([
     'test/client/**/*.js',
 		'dist/client/**/*'
