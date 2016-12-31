@@ -264,30 +264,6 @@ describe('chatError()', () => {
 
 
 
-describe('chat()', () => {
-
-  it('should create actions of type CHAT_REQUEST if api analyses selected', () => {
-
-    initialState.apis.aylien.types.classify = true;
-    let store = mockStore(initialState);
-
-    store.dispatch(actions.chat());
-
-    let returnedActions = store.getActions();
-    let expectedActions = [
-      {
-        type: 'CHAT_REQUEST'
-      }
-    ];
-
-    returnedActions.should.deep.equal(expectedActions);
-
-  })
-
-})
-
-
-
 describe('callApi()', () => {
 
   it('should create actions of type CHAT_SUCCESS if successful analyses returned', () => {
