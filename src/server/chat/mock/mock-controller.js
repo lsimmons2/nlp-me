@@ -13,23 +13,65 @@ aylien.classify = function(){
   return {
     "type": "classify",
     "data": {
-      "text": "So if the devil wear Prada, Adam Eve wear Nada, I'm in between, but way more fresher.",
+      "text": "Everybody seeks happiness! Not me, though! That’s the difference between me and the rest of the world. Happiness isn’t good enough for me! I demand euphoria!",
+      "taxonomy": "iab-qag",
       "language": "en",
       "categories": [
         {
-          "label": "arts, culture and entertainment - nightclub",
-          "code": "01023000",
-          "confidence": 0.744709946314386
+          "confident": false,
+          "score": 0.20307317735938205,
+          "label": "Profane Content",
+          "links": [
+            {
+              "rel": "self",
+              "link": "https://api.aylien.com/api/v1/classify/taxonomy/iab-qag/IAB25-4"
+            },
+            {
+              "rel": "parent",
+              "link": "https://api.aylien.com/api/v1/classify/taxonomy/iab-qag/IAB25"
+            }
+          ],
+          "id": "IAB25-4"
         },
         {
-          "label": "arts, culturrtainment - nightclub",
-          "code": "01023000",
-          "confidence": 0.9744709946314386
+          "confident": false,
+          "score": 0.06747632945320585,
+          "label": "Non-Standard Content",
+          "links": [
+            {
+              "rel": "self",
+              "link": "https://api.aylien.com/api/v1/classify/taxonomy/iab-qag/IAB25"
+            }
+          ],
+          "id": "IAB25"
         },
         {
-          "label": "arts, culture and entertnment - nightclub",
-          "code": "01023000",
-          "confidence": 0.9744709946314386
+          "confident": false,
+          "score": 0.05711595460090077,
+          "label": "Hobbies & Interests",
+          "links": [
+            {
+              "rel": "self",
+              "link": "https://api.aylien.com/api/v1/classify/taxonomy/iab-qag/IAB9"
+            }
+          ],
+          "id": "IAB9"
+        },
+        {
+          "confident": false,
+          "score": 0.04979189435830272,
+          "label": "Screenwriting",
+          "links": [
+            {
+              "rel": "self",
+              "link": "https://api.aylien.com/api/v1/classify/taxonomy/iab-qag/IAB9-28"
+            },
+            {
+              "rel": "parent",
+              "link": "https://api.aylien.com/api/v1/classify/taxonomy/iab-qag/IAB9"
+            }
+          ],
+          "id": "IAB9-28"
         }
       ]
     }
