@@ -7,6 +7,7 @@
     "build": "babel --watch src/ --out-dir dist/ --source-maps --copy-files",
     "start": "webpack-dev-server",
     "debug": "node-debug --debug-brk dist/server/app.js",
+    "build-front": "gulp build-front && webpack --progress --config webpack.production.config.js",
     "prod": "gulp prod && NODE_ENV=prod pm2 start dist/server/app.js"
   },
   "repository": {

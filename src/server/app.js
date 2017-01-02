@@ -22,6 +22,10 @@ app.all('*', (req, res, next) => {
   console.log(req.method, req.url);
   next();
 })
+
+app.get('/bundle.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/bundle.js'));
+});
 app.use('/chat', chat);
 app.use('/feedback', feedback);
 
