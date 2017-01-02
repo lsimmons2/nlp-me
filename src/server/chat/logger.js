@@ -5,6 +5,10 @@ const tsFormat = () => (new Date()).toLocaleTimeString();
 const env = process.env.NODE_ENV || 'dev';
 const logDir = 'logs/' + env;
 
+if (env === 'prod'){
+  logDir = `/home/${username}/nlp-me/` + logDir
+}
+
 if(!fs.existsSync(logDir)){
   fs.mkdirSync(logDir);
 }

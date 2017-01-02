@@ -1,0 +1,36 @@
+
+upstream node_server {
+  server 127.0.0.1:5000 fail_timeout=0;
+  server 127.0.0.1:5001 fail_timeout=0;
+}
+
+server {
+
+  listen 80 default_server;
+  listen [::]:80 default_server;
+
+  index index.html index.htm;
+
+  server_name _;
+
+  location / {
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_redirect off;
+    proxy_buffering off;
+    proxy_pass http://node_server;
+  }
+
+  location /vendor {
+    alias /home/<user>/nlpme/node_modules;
+  }
+
+  location /images {
+    alias /home/<user>/nlpme/images;
+  }
+
+  location /bundle.js {
+    alias /home/<user>/nlp-me/dist/client/bundle.js;
+  }
+
+}

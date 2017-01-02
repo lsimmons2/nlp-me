@@ -23,14 +23,16 @@ app.all('*', (req, res, next) => {
   next();
 })
 
-app.get('/bundle.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/bundle.js'));
-});
 app.use('/chat', chat);
 app.use('/feedback', feedback);
 
-app.use('/vendor', express.static(path.join(__dirname, '../../node_modules')));
-app.use('/images', express.static(path.join(__dirname, '../../images')));
+if (env !== 'prod'){
+  app.get('/bundle.js', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/bundle.js'));
+  });
+  app.use('/vendor', express.static(path.join(__dirname, '../../node_modules')));
+  app.use('/images', express.static(path.join(__dirname, '../../images')));
+}
 
 app.all('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../../src/client/index.html'));
