@@ -3,10 +3,10 @@ import fs from 'fs';
 require('winston-daily-rotate-file');
 const tsFormat = () => (new Date()).toLocaleTimeString();
 const env = process.env.NODE_ENV || 'dev';
-const logDir = 'logs/' + env;
+let logDir = 'logs/' + env;
 
 if (env === 'prod'){
-  logDir = `/home/${username}/nlp-me/` + logDir
+    logDir = `/home/${process.env.USER}/nlp-me/` + logDir;
 }
 
 if(!fs.existsSync(logDir)){
