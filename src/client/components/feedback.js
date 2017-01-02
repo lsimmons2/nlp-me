@@ -37,7 +37,7 @@ class Feedback extends React.Component {
         <div className="col-xs-12">
 
           <h3>Feedback</h3>
-          <p>Would love to hear feedback anyone has for the app. Feel free to reach out below or on <a href="http://leosimmons.me" target="_blank">my website</a>. Source code <a href="https://github.com/lsimmons2/nlp-app" target="_blank">here</a>.
+          <p>Would love to hear feedback anyone has for the app. Feel free to reach out below or on <a href="http://leosimmons.me" target="_blank">my website</a>. Source code <a href="https://github.com/lsimmons2/nlp-me" target="_blank">here</a>.
           </p>
 
         </div>
