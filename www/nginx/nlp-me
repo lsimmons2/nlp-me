@@ -33,4 +33,8 @@ server {
     alias /home/<user>/nlp-me/dist/client/bundle.js;
   }
 
+  location /nav-style.css {
+    alias /home/nlp-me/dist/style/nav.css;
+  }
+
 }

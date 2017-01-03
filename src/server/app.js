@@ -27,6 +27,9 @@ app.use('/chat', chat);
 app.use('/feedback', feedback);
 
 if (env !== 'prod'){
+  app.get('/nav-style.css', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/style/nav.css'));
+  })
   app.get('/bundle.js', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/bundle.js'));
   });
