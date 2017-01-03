@@ -35,7 +35,7 @@ if (env !== 'prod'){
 }
 
 app.all('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../src/client/index.html'));
+  res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
 

@@ -8,7 +8,7 @@ var mocha = require('gulp-mocha');
 var babel = require('gulp-babel');
 var nodemon = require('gulp-nodemon');
 var forever = require('gulp-forever-monitor');
-
+var webpack = require('webpack-stream');
 
 
 // ============= test =============
@@ -64,7 +64,7 @@ gulp.task('wbt', function(){
 gulp.task('nav-sass', function(){
   gulp.src('./src/client/style/nav.scss')
   .pipe(sass().on('error', gutil.log))
-  .pipe(gulp.dest('./dist/client/style/nav.css'))
+  .pipe(gulp.dest('./dist/client/style'))
 });
 
 gulp.task('nav-sass:watch', ['nav-sass'], function(){
@@ -88,7 +88,13 @@ gulp.task('html', function(){
 });
 
 gulp.task('html:watch', ['html'], function(){
-	gulp.watch(['src/client/**/*.html'], ['html']);
+	gulp.watch(['src/client/index.html'], ['html']);
+});
+
+gulp.task('webpack', function(){
+	return gulp.src('src/client/index.js')
+		.pipe(webpack(require('./webpack.production.config.js')))
+		.pipe(gulp.dest('dist/client'))
 });
 
 gulp.task('server', ['nav-sass:watch', 'babel:watch'], function(){
@@ -113,7 +119,6 @@ gulp.task('server:debug', ['nav-sass:watch', 'babel:watch'], function(){
 	})
 });
 
-gulp.task('build-front', ['nav-sass', 'html']);
-gulp.task('prod', ['babel']);
+gulp.task('build', ['nav-sass', 'html', 'webpack', 'babel']);
 
 gulp.task('default', ['server']);
