@@ -2,7 +2,6 @@
 require('babel-core/register');
 import gulp from 'gulp'
 const Server = require('karma').Server;
-import sass from 'gulp-sass'
 import livereload from 'gulp-livereload'
 import gutil from 'gulp-util'
 import mocha from 'gulp-mocha'
@@ -62,17 +61,6 @@ gulp.task('wbt', () => {
 
 // ============= prod and dev =============
 
-gulp.task('nav-sass', () => {
-  gulp.src('./src/client/style/nav.scss')
-  .pipe(sass().on('error', gutil.log))
-  .pipe(gulp.dest('./dist/client/style'))
-});
-
-gulp.task('nav-sass:watch', ['nav-sass'], () => {
-  livereload.listen();
-  gulp.watch(['src/client/style/nav.scss'], ['nav-sass']);
-});
-
 gulp.task('babel', () => {
 	return gulp.src('src/server/**/*.js')
 		.pipe(babel())
@@ -98,7 +86,7 @@ gulp.task('webpack', () => {
 		.pipe(gulp.dest('dist/client'))
 });
 
-gulp.task('server', ['nav-sass:watch', 'babel:watch'], () => {
+gulp.task('server', ['babel:watch'], () => {
 	nodemon({
 		script: 'dist/server/app.js',
 		watch: ['dist/server/**/*'],
@@ -108,7 +96,7 @@ gulp.task('server', ['nav-sass:watch', 'babel:watch'], () => {
 	})
 });
 
-gulp.task('server:debug', ['nav-sass:watch', 'babel:watch'], () => {
+gulp.task('server:debug', ['babel:watch'], () => {
 	return nodemon({
 		script: 'dist/server/app.js',
 		verbose: true,
@@ -120,6 +108,6 @@ gulp.task('server:debug', ['nav-sass:watch', 'babel:watch'], () => {
 	})
 });
 
-gulp.task('build', ['nav-sass', 'html', 'webpack', 'babel']);
+gulp.task('build', ['html', 'webpack', 'babel']);
 
 gulp.task('default', ['server']);
