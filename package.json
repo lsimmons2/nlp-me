@@ -6,9 +6,7 @@
   "scripts": {
     "build": "babel --watch src/ --out-dir dist/ --source-maps --copy-files",
     "start": "webpack-dev-server",
-    "debug": "node-debug --debug-brk dist/server/app.js",
-    "build-front": "gulp build-front && webpack --progress --config webpack.production.config.js",
-    "prod": "gulp prod && NODE_ENV=prod pm2 start dist/server/app.js"
+    "debug": "node-debug --debug-brk dist/server/app.js"
   },
   "repository": {
     "type": "git",
@@ -57,7 +55,8 @@
     "webpack": "^1.13.3",
     "webpack-dev-middleware": "^1.8.4",
     "webpack-dev-server": "^1.16.2",
-    "webpack-hot-middleware": "^2.13.2"
+    "webpack-hot-middleware": "^2.13.2",
+    "webpack-stream": "^3.2.0"
   },
   "dependencies": {
     "angular": "^1.5.8",
