@@ -1,7 +1,6 @@
 
 upstream node_server {
   server 127.0.0.1:5000 fail_timeout=0;
-    server 127.0.0.1:5001 fail_timeout=0;
     }
 
 server {
@@ -29,9 +28,5 @@ server {
       alias /home/ubuntu/nlp-me/images;
         }
 
-
-  location /nav-style.css {
-    alias /home/nlp-me/dist/style/nav.css;
-  }
 
 }
