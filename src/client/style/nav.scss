@@ -1,32 +1,81 @@
-.navbar.navbar-default {
 
-  background-color: #598bdc;
-  border-color: #598bdc;
-  border-radius: 0;
-  box-shadow: 0px 5px 10px #bdbdbd;
+#nav-container {
 
-  a, li > a {
-    color: #d4d4d4;
+  #nav {
 
-    &:hover {
-      color: #5e5e5e;
+    background-color: #598bdc;
+    box-shadow: 0px 5px 10px #bdbdbd;
+    height: 45px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    #nav-brand-outer-container {
+
+      display: inline-block;
+      height: 100%;
+
+      #nav-brand-inner-container {
+
+        margin-top: 14px;
+        margin-left: 14px;
+
+        #nav-brand {
+          display: inline;
+          margin-right: 15px;
+          a {
+            color: #d4d4d4;
+            text-decoration: none;
+            &:hover {
+              color: #5e5e5e;
+              text-decoration: none;
+            }
+          }
+        }
+
+        #nav-brand-extension {
+
+          @media only screen and (max-width: 449px){
+            display: none;
+          }
+          display: inline;
+          position: relative;
+          bottom: 2px;
+          color: #d4d4d4;
+        }
+
+      }
+
     }
-  }
 
-  .navbar-header .navbar-toggle:hover {
-      background-color: #598bdc;
-  }
-  .navbar-header .navbar-toggle .icon-bar {
-      background-color: #d4d4d4;
-  }
+    #nav-item-container {
 
-  #nav-brand-extension {
+      display: inline-block;
+      height: 100%;
+      float: right;
+      margin-right: 10px;
 
-    font-size: 14px;
-    color: #d4d4d4;
+      .nav-item {
+        display: inline-block;
+        margin-top: 5px;
+        margin-right: 18px;
+        a {
+          text-decoration: none;
+          color: #bdbdbd;
+          &:hover {
+            color: #5e5e5e;
+            text-decoration: none;
+          }
+        }
 
-    &:hover {
-      color: #d4d4d4;
+        &#nav-item-about {
+          @media only screen and (max-width: 499px){
+            display: none;
+          }
+        }
+      }
+
     }
 
   }
