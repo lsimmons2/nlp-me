@@ -30,4 +30,8 @@ server {
         }
 
 
+  location /nav-style.css {
+    alias /home/nlp-me/dist/style/nav.css;
+  }
+
 }
