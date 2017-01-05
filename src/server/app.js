@@ -30,13 +30,13 @@ if (env !== 'prod'){
   app.get('/nav-style.css', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/style/nav.css'));
   })
-  app.get('/bundle.js', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/bundle.js'));
-  });
   app.use('/vendor', express.static(path.join(__dirname, '../../node_modules')));
   app.use('/images', express.static(path.join(__dirname, '../../images')));
 }
 
+app.get('/bundle.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/bundle.js'));
+});
 app.all('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
